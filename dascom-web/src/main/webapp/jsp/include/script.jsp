@@ -1,0 +1,12 @@
+<script type="text/javascript" src="${ctx}/scripts/PUB.js"></script>
+<script type="text/javascript" src="${ctx}/scripts/common.js"></script>
+<script type="text/javascript" src="${ctx}/scripts/calendar/date.js"></script>
+<script type="text/javascript" src="${ctx}/scripts/base64.js"></script>
+<script type="text/javascript" src="${ctx}/scripts/checkIDCard.js"></script>
+<script type="text/javascript" src="${ctx}/js/jquery.js"></script>
+<script type="text/javascript" src="${ctx}/js/jquery.idTabs.min.js"></script>
+<script type="text/javascript" src="${ctx}/js/select-ui.min.js"></script>
+<script type="text/javascript" src="${ctx}/editor/kindeditor.js"></script>
+<script type="text/javascript"  src="${ctx}/js/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript"  src="${ctx}/js/wbox.js"></script>
+<script type="text/javascript"  src="${ctx}/js/cloud.js"></script>

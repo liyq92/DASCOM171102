@@ -1,0 +1,169 @@
+BODY
+{
+    MARGIN-TOP: 0px;
+    MARGIN-LEFT: 0px;
+    LINE-HEIGHT: 20px;
+    MARGIN-RIGHT: 0px
+}
+BODY
+{
+    FONT-SIZE: 12px
+}
+TD
+{
+    FONT-SIZE: 12px
+}
+TH
+{
+    FONT-SIZE: 14px
+}
+.t1
+{
+    BORDER-TOP: #eaeaea 1px solid;
+    COLOR: #ffffff;
+    BACKGROUND-COLOR: #006699;
+    TEXT-DECORATION: none
+}
+.t6
+{
+    BORDER-TOP: #dcdbec 1px solid;
+    BORDER-LEFT: #dcdbec 1px solid;
+    WIDTH: 80px;
+    TEXT-INDENT: 40px;
+    HEIGHT: 30px
+}
+.s1
+{
+    WIDTH: 150px
+}
+.t8
+{
+    background-color: #e3edf0;
+	font-weight:bolder;
+	height: 28px;
+	color: #575757;
+	text-align: center;
+}
+.t9
+{
+	height: 23px;
+	text-align: center;
+}
+.t7
+{
+    BORDER-RIGHT: #dcdbec 1px solid;
+    BORDER-TOP: #dcdbec 1px solid;
+    PADDING-LEFT: 10px;
+    BORDER-LEFT: #dcdbec 1px solid;
+    TEXT-ALIGN: left;
+}
+.ls1
+{
+    BORDER-RIGHT: #dcdbec 1px solid;
+    BORDER-TOP: #dcdbec 1px solid;
+    PADDING-LEFT: 20px;
+    BORDER-LEFT: #dcdbec 1px solid;
+    BORDER-BOTTOM: #dcdbec 5px solid
+}
+A:link
+{
+    COLOR: #000000;
+    TEXT-DECORATION: none
+}
+A:visited
+{
+    COLOR: #000000;
+    TEXT-DECORATION: none
+}
+A:hover
+{
+    COLOR: #cc0000;
+    TEXT-DECORATION: none
+}
+A:active
+{
+    COLOR: #000000;
+    TEXT-DECORATION: none
+}
+A.link1:link
+{
+    COLOR: #ffffff;
+    TEXT-DECORATION: none
+}
+A.link1:visited
+{
+    COLOR: #ffffff;
+    TEXT-DECORATION: none
+}
+A.link1:hover
+{
+    COLOR: #ffcc00;
+    TEXT-DECORATION: none
+}
+A.link1:active
+{
+    COLOR: #ffffff;
+    TEXT-DECORATION: none
+}
+.t2
+{
+    BORDER-RIGHT: #cccccc 1px solid;
+    BORDER-TOP: #cccccc 1px solid;
+    BORDER-LEFT: #cccccc 1px solid;
+    BORDER-BOTTOM: #cccccc 1px solid
+}
+.t3
+{
+    BORDER-BOTTOM: #d0cee6 1px solid
+}
+.t4
+{
+    BORDER-BOTTOM: #666666 1px dashed;
+    HEIGHT: 29px
+}
+.f1
+{
+    COLOR: #e4008e
+}
+.t5
+{
+    BORDER-RIGHT: #d0cee6 1px solid;
+    BACKGROUND-COLOR: #efedf6
+}
+
+/*��ť��ʽ*/
+.btnstyle {
+	background: url(../images/btnbg.png); 
+	border: 0px; 
+	width: 58px; 
+	height: 28px;
+	cursor: pointer;
+	padding:0px 0px 5px 0px; 
+}
+/*����ť��ʽ��6����*/
+.btnstyle_6 {
+	background: url(../images/btnbg_6.png); 
+	border: 0px; 
+	width: 119px; 
+	height: 28px;
+	cursor: pointer;
+	padding:0px 0px 5px 0px; 
+}
+.btn
+{
+BORDER-RIGHT: #7b9ebd 1px solid; PADDING-RIGHT: 2px; BORDER-TOP: #7b9ebd 1px solid; PADDING-LEFT: 2px; FONT-SIZE: 12px;
+FILTER: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr=#ffffff, EndColorStr=#cecfde);
+BORDER-LEFT: #7b9ebd 1px solid; CURSOR: hand; COLOR: black; PADDING-TOP: 2px; BORDER-BOTTOM: #7b9ebd 1px solid
+}
+.t11
+{
+    background-color: #ffffff;
+	height: 24px;
+	text-align: center;
+}
+.t12
+{
+    background-color: #F7F7FB;
+	height: 24px;
+	text-align: center;
+}

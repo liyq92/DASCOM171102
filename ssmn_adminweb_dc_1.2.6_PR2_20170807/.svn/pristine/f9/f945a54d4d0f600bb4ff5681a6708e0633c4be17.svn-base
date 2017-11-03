@@ -1,0 +1,39 @@
+-- 1.创建两个测试级别
+insert into ssmn_zy_level t values(SEQ_SSMN_ZY_LEVEL.NEXTVAL,'测试','测试','','','','');
+
+insert into ssmn_zy_level t values(SEQ_SSMN_ZY_LEVEL.NEXTVAL,'测试','测试','测试','测试','测试','测试');
+
+-- 2.创建测试账号
+
+insert into tyadmin_operators t values('test',50,'b53ce8fa3ddc5cd198b993318e3787ad',(select id from tyadmin_groups t where t.group_name='超级管理员1'),
+'system',sysdate,'admin','',(select t.id  from ssmn_zy_level t where t.provincecity='测试' and t.company='测试' and t.businessdepartment is null));
+
+
+--3.创建测试渠道
+
+insert into ssmn_zy_channel values(SEQ_SSMN_ZY_LEVEL.NEXTVAL,'测试',sysdate);
+
+insert into ssmn_zy_channel values(SEQ_SSMN_ZY_LEVEL.NEXTVAL,'新浪网',sysdate);
+
+insert into ssmn_zy_channel values(SEQ_SSMN_ZY_LEVEL.NEXTVAL,'58同城',sysdate);
+
+insert into ssmn_zy_channel values(SEQ_SSMN_ZY_LEVEL.NEXTVAL,'搜房帮',sysdate);
+
+
+
+-- 4.导副号码的sql (测试的)
+
+insert into ssmn_zy_enablenumber values( '副号码' ,0,'区号',(select t.id  from ssmn_zy_level t where t.provincecity='测试' and t.company='测试' and t.businessdepartment is null));
+
+
+-------------南京中原
+
+insert into ssmn_zy_level t values(SEQ_SSMN_ZY_LEVEL.NEXTVAL,'南京','中原','','','','');
+
+
+insert into ssmn_zy_enablenumber values( '副号码' ,0,'区号',(select t.id  from ssmn_zy_level t where t.provincecity='南京' and t.company='中原' and t.businessdepartment is null));
+
+
+----把所有的副号码都转到　北京　中原　下面
+
+update  ssmn_zy_enablenumber t set t.levelid= (select id from ssmn_zy_level t where t.provincecity='北京' and t.company='中原' and t.businessdepartment is null) ;

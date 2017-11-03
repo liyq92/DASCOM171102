@@ -1,0 +1,1718 @@
+/**--------地产版管理系统 --20140903对应DB PC32------**/
+
+-- 一、创建表
+
+--1. 地产用户副号码信息表
+-- drop table SSMN_ZY_USER;
+-- Create table
+create table SSMN_ZY_USER
+(
+  ID                 NUMBER(10) not null,
+  NAME               VARCHAR2(20) not null,
+  MSISDN             VARCHAR2(20) not null,
+  SSMNNUMBER         VARCHAR2(20) not null,
+  GROUPNAME          VARCHAR2(50) not null,
+  CHANNELID          NUMBER(10) not null,
+  INTIME             DATE not null,
+  LEVELID            NUMBER(10) not null,
+  EMPNO              VARCHAR2(32),
+  MANNER             NUMBER(1) default 0,
+  MODEID     				 NUMBER(10),
+  ssmnnumber_type    NUMBER(1) default 0,
+  REMARK		         VARCHAR2(512) default '' ,
+  SECONDMSISDN       VARCHAR2(20)
+)
+tablespace SSMN_DATA
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 1M
+    next 512K
+    minextents 1
+    maxextents unlimited
+    pctincrease 0
+  );
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table SSMN_ZY_USER
+  add constraint PK_SSMN_ZY_USER primary key (ID)
+  using index 
+  tablespace SSMN_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 256K
+    next 256K
+    minextents 1
+    maxextents unlimited
+    pctincrease 0
+  );
+-- Create/Recreate indexes 
+create index PK_SSMN_ZY_USER1 on SSMN_ZY_USER (CHANNELID)
+  tablespace SSMN_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 512K
+    next 512K
+    minextents 1
+    maxextents unlimited
+    pctincrease 0
+  );
+create index PK_SSMN_ZY_USER2 on SSMN_ZY_USER (LEVELID)
+  tablespace SSMN_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 512K
+    next 512K
+    minextents 1
+    maxextents unlimited
+    pctincrease 0
+  );
+create index PK_SSMN_ZY_USER3 on SSMN_ZY_USER (MSISDN)
+  tablespace SSMN_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 512K
+    next 512K
+    minextents 1
+    maxextents unlimited
+    pctincrease 0
+  );
+create index PK_SSMN_ZY_USER4 on SSMN_ZY_USER (SSMNNUMBER)
+  tablespace SSMN_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 512K
+    next 512K
+    minextents 1
+    maxextents unlimited
+    pctincrease 0
+  );
+create index PK_SSMN_ZY_USER5 on SSMN_ZY_USER (NAME)
+  tablespace SSMN_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 512K
+    next 512K
+    minextents 1
+    maxextents unlimited
+    pctincrease 0
+  );
+
+--地产用户副号码信息序列
+-- Create sequence 
+create sequence SEQ_SSMN_ZY_USER
+minvalue 1
+maxvalue 9999999998
+start with 1000030726
+increment by 2
+cache 10
+cycle;
+
+
+--2. 添加注销用户表
+-- Create table
+create table SSMN_ZY_CANCEL_USER
+(
+  USERID             NUMBER(10) not null,
+  NAME               VARCHAR2(20) not null,
+  MSISDN             VARCHAR2(20) not null,
+  SSMNNUMBER         VARCHAR2(20) not null,
+  GROUPNAME          VARCHAR2(50) not null,
+  CHANNELID          NUMBER(10) not null,
+  SUB_DATE           DATE not null,
+  CANCEL_DATE        DATE not null,
+  LEVELID            NUMBER(10) not null,
+  EMPNO              VARCHAR2(32),
+  MANNER             NUMBER(1) default 0,
+  OPERATYPE          NUMBER(1) default 0,
+  MODEID     				 NUMBER(10),
+  ssmnnumber_type    NUMBER(1) default 0,
+  REMARK		         VARCHAR2(512) ,
+  SECONDMSISDN       VARCHAR2(20)
+)
+tablespace SSMN_DATA
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 1M
+    next 512K
+    minextents 1
+    maxextents unlimited
+    pctincrease 0
+  );
+
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table SSMN_ZY_CANCEL_USER
+  add constraint PK_SSMN_ZY_CANCEL_USER primary key (USERID,CANCEL_DATE)
+  using index 
+  tablespace SSMN_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 512K
+    next 512K
+    minextents 1
+    maxextents unlimited
+    pctincrease 0
+  );
+-- Create/Recreate indexes 
+create index PK_SSMN_ZY_CANCEL_USER1 on SSMN_ZY_CANCEL_USER (USERID)
+  tablespace SSMN_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 512K
+    next 512K
+    minextents 1
+    maxextents unlimited
+    pctincrease 0
+  );
+create index PK_SSMN_ZY_CANCEL_USER2 on SSMN_ZY_CANCEL_USER (CHANNELID)
+  tablespace SSMN_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 512K
+    next 512K
+    minextents 1
+    maxextents unlimited
+    pctincrease 0
+  );
+create index PK_SSMN_ZY_CANCEL_USER3 on SSMN_ZY_CANCEL_USER (LEVELID)
+  tablespace SSMN_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 512K
+    next 512K
+    minextents 1
+    maxextents unlimited
+    pctincrease 0
+  );
+create index PK_SSMN_ZY_CANCEL_USER4 on SSMN_ZY_CANCEL_USER (MSISDN)
+  tablespace SSMN_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 512K
+    next 512K
+    minextents 1
+    maxextents unlimited
+    pctincrease 0
+  );
+create index PK_SSMN_ZY_CANCEL_USER5 on SSMN_ZY_CANCEL_USER (SSMNNUMBER)
+  tablespace SSMN_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 512K
+    next 512K
+    minextents 1
+    maxextents unlimited
+    pctincrease 0
+  );
+create index PK_SSMN_ZY_CANCEL_USER6 on SSMN_ZY_CANCEL_USER (NAME)
+  tablespace SSMN_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 512K
+    next 512K
+    minextents 1
+    maxextents unlimited
+    pctincrease 0
+  );
+  
+
+--3. 地产用户渠道表
+-- Create table
+create table SSMN_ZY_CHANNEL
+(
+  ID         NUMBER(10) not null,
+  NAME       VARCHAR2(20) not null,
+  CREATETIME DATE not null,
+  AUTHORITY number(1) default 0
+)
+tablespace SSMN_DATA
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 512K
+    next 512K
+    minextents 1
+    maxextents unlimited
+    pctincrease 0
+  );
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table SSMN_ZY_CHANNEL
+  add constraint PK_SSMN_ZY_CHANNEL primary key (ID)
+  using index 
+  tablespace SSMN_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 256K
+    next 256K
+    minextents 1
+    maxextents unlimited
+    pctincrease 0
+  );
+
+-- 地产用户渠道序列
+-- Create sequence 
+create sequence SEQ_SSMN_ZY_CHANNEL
+minvalue 1
+maxvalue 9999999998
+start with 1000000100
+increment by 2
+cache 10
+cycle; 
+
+--4.　地产用户级别表
+-- Create table
+create table SSMN_ZY_LEVEL
+(
+  ID                 NUMBER(10) not null,
+  PROVINCECITY       VARCHAR2(32),
+  COMPANY            VARCHAR2(32),
+  BUSINESSDEPARTMENT VARCHAR2(32),
+  WARZONE            VARCHAR2(32),
+  AREA               VARCHAR2(32),
+  BRANCHACTIONGROUP  VARCHAR2(32)
+)
+tablespace SSMN_DATA
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 512K
+    next 512K
+    minextents 1
+    maxextents unlimited
+    pctincrease 0
+  );
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table SSMN_ZY_LEVEL
+  add constraint PK_SSMN_ZY_LEVEL primary key (ID)
+  using index 
+  tablespace SSMN_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 256K
+    next 256K
+    minextents 1
+    maxextents unlimited
+    pctincrease 0
+  );
+-- Create/Recreate indexes 
+create index PK_SSMN_ZY_LEVEL1 on SSMN_ZY_LEVEL (PROVINCECITY,COMPANY,BUSINESSDEPARTMENT,WARZONE,AREA,BRANCHACTIONGROUP)
+  tablespace SSMN_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 512K
+    next 512K
+    minextents 1
+    maxextents unlimited
+    pctincrease 0
+  );
+  
+-- 地产用户级别序列  
+-- Create sequence 
+create sequence SEQ_SSMN_ZY_LEVEL
+minvalue 1
+maxvalue 9999999998
+start with 1000001320
+increment by 2
+cache 10
+cycle;
+
+
+--5. 创建副号码池: SSMN_ZY_ENABLENUMBER
+-- Create table
+create table SSMN_ZY_ENABLENUMBER
+(
+  ENABLENUMBER VARCHAR2(18) not null,
+  STATUS       NUMBER(1) not null,
+  AREA_ID      VARCHAR2(10),
+  LEVELID      NUMBER(10) not null,
+   type         NUMBER(1) default 0
+)
+tablespace SSMN_DATA
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 512K
+    next 512K
+    minextents 1
+    maxextents unlimited
+    pctincrease 0
+  );
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table SSMN_ZY_ENABLENUMBER
+  add constraint PK_SSMN_ZY_ENABLENUMBER primary key (ENABLENUMBER)
+  using index 
+  tablespace SSMN_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 512K
+    next 512K
+    minextents 1
+    maxextents unlimited
+    pctincrease 0
+  );
+-- Create/Recreate indexes 
+create index IDX_SSMN_ZY_ENABLENUMBER on SSMN_ZY_ENABLENUMBER (STATUS)
+  tablespace SSMN_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 512K
+    next 512K
+    minextents 1
+    maxextents unlimited
+    pctincrease 0
+  );
+
+
+--6. 添加信息反馈表
+-- Create table
+create table SSMN_ZY_FEEDBACK
+(
+  ID              NUMBER(10) not null,
+  MSISDN          VARCHAR2(20) not null,
+  FEEDBACKDATE    DATE not null,
+  FEEDBACKCONTENT VARCHAR2(1024) not null,
+  NAME            VARCHAR2(32) not null,
+  OPENO           VARCHAR2(32) not null
+)
+tablespace SSMN_DATA
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 512K
+    next 512K
+    minextents 1
+    maxextents unlimited
+    pctincrease 0
+  );
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table SSMN_ZY_FEEDBACK
+  add constraint PK_SSMN_ZY_FEEDBACK primary key (ID)
+  using index 
+  tablespace SSMN_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 512K
+    next 512K
+    minextents 1
+    maxextents unlimited
+    pctincrease 0
+  );
+
+
+-- Create sequence 
+create sequence SEQ_SSMN_ZY_FEEDBACK
+minvalue 1
+maxvalue 9999999998
+start with 1
+increment by 2
+cache 10
+cycle;
+
+
+--7. 添加表 SSMN_ZY_CDRSMS_USER
+-- Create table
+create table SSMN_ZY_CDRSMS_USER
+(
+  ID        NUMBER(10) not null,
+  USER_ID   NUMBER(10),
+  CDRSMS_ID NUMBER(10),
+  TYPE      NUMBER(1)
+)
+tablespace SSMN_DATA
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 512K
+    next 512K
+    minextents 1
+    maxextents unlimited
+    pctincrease 0
+  );
+-- Add comments to the columns 
+comment on column SSMN_ZY_CDRSMS_USER.TYPE
+  is '0:语音 1:短信';
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table SSMN_ZY_CDRSMS_USER
+  add constraint PK_SSNN_ZY_CDRSMS_USER primary key (ID)
+  using index 
+  tablespace SSMN_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 512K
+    next 512K
+    minextents 1
+    maxextents unlimited
+    pctincrease 0
+  );
+-- Create/Recreate indexes 
+create index PK_SSMN_ZY_CDRSMS_USER1 on SSMN_ZY_CDRSMS_USER (CDRSMS_ID)
+  tablespace SSMN_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 512K
+    next 512K
+    minextents 1
+    maxextents unlimited
+    pctincrease 0
+  );
+create index PK_SSMN_ZY_CDRSMS_USER2 on SSMN_ZY_CDRSMS_USER (USER_ID)
+  tablespace SSMN_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 512K
+    next 512K
+    minextents 1
+    maxextents unlimited
+    pctincrease 0
+  );
+
+  
+--创建序列
+  -- Create sequence 
+create sequence SEQ_SSNN_ZY_CDRSMS_USER
+minvalue 1
+maxvalue 99999999999
+start with 1
+increment by 1
+cache 20;
+
+
+--8.检查是否这个表，如果没有，创建上
+-- Create table
+create table SSMN_RECORD
+(
+  STREAMNUMBER   NUMBER not null,
+  CALLINGMSGHIGH NUMBER not null,
+  CALLINGMSGLOW  NUMBER not null,
+  MSGLEN         NUMBER not null,
+  CALLEDMSGHIGH  NUMBER not null,
+  CALLEDMSGLOW   NUMBER not null,
+  RECORD_TIME    DATE not null,
+  HANDLE_FLAG    NUMBER not null,
+  HANDLE_TIME    DATE,
+  FILEPATH       VARCHAR2(512),
+  STATUS         NUMBER(1)
+)
+tablespace SSMN_DATA
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 29184K
+    next 512K
+    minextents 1
+    maxextents unlimited
+    pctincrease 0
+  );
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table SSMN_RECORD
+  add constraint PK_SSMN_RECORD primary key (STREAMNUMBER)
+  using index 
+  tablespace SSMN_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 3584K
+    next 256K
+    minextents 1
+    maxextents unlimited
+    pctincrease 0
+  );
+
+
+--9. 给操作员表tyadmin_operators 添加级别字段 
+ALTER TABLE tyadmin_operators  ADD  LEVELID NUMBER(10) ;
+
+--10. 创建表ssmn_dcmapping (呼叫用)
+-- Create table
+create table SSMN_DCMAPPING
+(
+  CALLINGNUMBER VARCHAR2(20),
+  SSMNNUMBER    VARCHAR2(20),
+  MSISDN        VARCHAR2(20),
+  INTIME        DATE,
+  INTYPE        VARCHAR2(4)
+)
+tablespace SSMN_DATA
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 16M
+    next 512K
+    minextents 1
+    maxextents unlimited
+    pctincrease 0
+  );
+
+
+--11. 创建表SSMN_ZY_USEROPERATION(北京需要创建，其他地方不需要创建)
+-- Create table
+create table SSMN_ZY_USEROPERATION
+(
+  ID              NUMBER(10) not null,
+  OPETYPE         NUMBER(1) not null,
+  MSISDN          VARCHAR2(20) not null,
+  CHANGEMSISDN    VARCHAR2(20),
+  SSMNNUMBER      VARCHAR2(18) not null,
+  STATUS          NUMBER(1) not null,
+  INTIME          DATE not null,
+  BLACKCALLNUMBER VARCHAR2(20)
+)
+tablespace SSMN_DATA
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 16K
+    next 512K
+    minextents 1
+    maxextents unlimited
+    pctincrease 0
+  );
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table SSMN_ZY_USEROPERATION
+  add constraint PK_SSMN_ZY_USEROPERATION primary key (ID)
+  using index 
+  tablespace SSMN_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 512K
+    next 512K
+    minextents 1
+    maxextents unlimited
+    pctincrease 0
+  );
+
+  
+--创建序列
+-- Create sequence 
+create sequence SEQ_SSMN_ZY_USEROPERATIO
+minvalue 1
+maxvalue 99999999999
+start with 1
+increment by 1
+cache 20;
+
+--12 创建SSMN_ZY_LEVEL_MODE表，放音标识与区域对应关系的表 目前只适合在天津-2016-02-18
+-- Create table
+create table SSMN_ZY_LEVEL_MODE
+(
+  ID      NUMBER(10) not null,
+  MODELOW NUMBER(10) default -1 ,
+  LEVELID NUMBER(10) 
+)
+tablespace DASCOM_DATA
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 512K
+    next 512K
+    minextents 1
+    maxextents unlimited
+    pctincrease 0
+  );
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table SSMN_ZY_LEVEL_MODE
+  add constraint PK_SSMN_ZY_LEVEL_MODE primary key (ID)
+  using index 
+  tablespace DASCOM_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 512K
+    next 512K
+    minextents 1
+    maxextents unlimited
+    pctincrease 0
+  );
+  
+--序列
+-- Create sequence 
+create sequence SEQ_SSMN_ZY_LEVEL_MODE
+minvalue 1
+maxvalue 9999999999
+start with 1
+increment by 1
+cache 10;
+
+--13 创建表　SSMN_ZY_LEVEL_CHANNEL　目前只适用在天津
+-- Create table
+create table SSMN_ZY_LEVEL_CHANNEL
+(
+  ID        NUMBER(10) not null,
+  CHANNELID NUMBER(10),
+  LEVELID   NUMBER(10)
+)
+tablespace DASCOM_DATA
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 512K
+    next 512K
+    minextents 1
+    maxextents unlimited
+    pctincrease 0
+  );
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table SSMN_ZY_LEVEL_CHANNEL
+  add constraint PK_SSMN_ZY_LEVEL_CHANNEL primary key (ID)
+  using index 
+  tablespace DASCOM_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 512K
+    next 512K
+    minextents 1
+    maxextents unlimited
+    pctincrease 0
+  );
+ --序列
+ -- Create sequence 
+create sequence SEQ_SSMN_ZY_LEVEL_CHANNEL
+minvalue 1
+maxvalue 9999999998
+start with 1
+increment by 2
+cache 10;
+
+--14 送号记录备份表
+-- drop table SSMN_TransferNum_Bak;
+create table SSMN_TransferNum_Bak
+(
+	id			Number(10)        		NOT NULL,
+	msisdn		        Varchar2(25)			NOT NULL,
+	calledNumber		Varchar2(25)			NOT NULL,
+	ostype			Varchar2(10),
+	inTime		        Date			        NOT NULL
+) tablespace DASCOM_DATA;
+alter table SSMN_TransferNum_Bak add constraint PK_SSMN_TransferNum_Bak primary key(id)
+using index tablespace SSMN_IDX;
+commit;
+
+CREATE SEQUENCE SEQ_SSMN_TransferNum_Bak INCREMENT BY 2  START WITH 1000000001  MAXVALUE 9999999999 CYCLE CACHE 10;
+commit;
+
+--15 创建渠道与级别对应表
+-- Create table
+create table SSMN_GS_LEVEL_CHANNEL
+(
+  ID        NUMBER(10) not null,
+  CHANNELID NUMBER(10),
+  LEVELID   NUMBER(10)
+)
+tablespace DASCOM_DATA
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 512K
+    next 512K
+    minextents 1
+    maxextents unlimited
+    pctincrease 0
+  );
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table SSMN_GS_LEVEL_CHANNEL
+  add constraint PK_SSMN_GS_LEVEL_CHANNEL primary key (ID)
+  using index 
+  tablespace DASCOM_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 512K
+    next 512K
+    minextents 1
+    maxextents unlimited
+    pctincrease 0
+  );
+
+-- Create sequence 
+create sequence SEQ_SSMN_GS_LEVEL_CHANNEL
+minvalue 1
+maxvalue 9999999998
+start with 21
+increment by 2
+cache 10;
+
+---16级别与放音标识对应表
+-- Create table
+create table SSMN_GS_LEVEL_MODE
+(
+  ID      NUMBER(10) not null,
+  MODELOW NUMBER(10) default -1,
+  LEVELID NUMBER(10)
+)
+tablespace DASCOM_DATA
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 512K
+    next 512K
+    minextents 1
+    maxextents unlimited
+    pctincrease 0
+  );
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table SSMN_GS_LEVEL_MODE
+  add constraint PK_SSMN_GS_LEVEL_MODE primary key (ID)
+  using index 
+  tablespace DASCOM_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 512K
+    next 512K
+    minextents 1
+    maxextents unlimited
+    pctincrease 0
+  );
+
+  -- Create sequence 
+create sequence SEQ_SSMN_GS_LEVEL_MODE
+minvalue 1
+maxvalue 9999999999
+start with 1
+increment by 1
+cache 10;
+
+
+----17 SSMN_ZY_CDR表（把ssmn_cdr信息集合到该表）
+-- Create table
+create table SSMN_ZY_CDR
+(
+  STREAMNUMBER  NUMBER(10) not null,
+  MSISDN        VARCHAR2(20),
+  SSMNNUMBER    VARCHAR2(18),
+  USERNAME      VARCHAR2(20),
+  EMPNO         VARCHAR2(32),
+  CALLTYPE      NUMBER(1),
+  CALLSTARTTIME NUMBER,
+  CALLSTOPTIME  NUMBER,
+  CALLDURATION  NUMBER(6),
+  ENDREASON     NUMBER(2),
+  INCOMING_CIN  VARCHAR2(32),
+  OUTGOING_CPN  VARCHAR2(32),
+  MANNER        NUMBER(1),
+  USERTYPE      NUMBER(1),
+  AGENTID       NUMBER(10),
+  OWNERD        NUMBER(10),
+  DC_CALLTYPE   NUMBER(1),
+  LEVELID       NUMBER(10),
+  CHANNELID     NUMBER(10),
+  USERID        NUMBER(10),
+  CLIENTNUMBER  VARCHAR2(32),
+  FIRSTMSISDN		VARCHAR2(20),
+  REMARK        Varchar2(256)
+)
+tablespace TEST_DATA
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 512K
+    next 512K
+    minextents 1
+    maxextents unlimited
+    pctincrease 0
+  );
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table SSMN_ZY_CDR
+  add constraint PK_SSMN_ZY_CDR primary key (STREAMNUMBER)
+  using index 
+  tablespace TEST_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 512K
+    next 256K
+    minextents 1
+    maxextents unlimited
+    pctincrease 0
+  );
+-- Create/Recreate indexes 
+create index IDX1_SSMN_ZY_CDR on SSMN_ZY_CDR (CALLSTARTTIME)
+  tablespace TEST_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 512K
+    next 512K
+    minextents 1
+    maxextents unlimited
+    pctincrease 0
+  );
+create index IDX2_SSMN_ZY_CDR on SSMN_ZY_CDR (LEVELID)
+  tablespace TEST_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 512K
+    next 512K
+    minextents 1
+    maxextents unlimited
+    pctincrease 0
+  );
+
+
+----18)创建客户电话表 SSMN_ZY_CLIENTNUM
+		-- Create table
+create table SSMN_ZY_CLIENTNUM
+(
+  id         NUMBER(10) not null,
+  clientnum  VARCHAR2(20) not null,
+  clientname VARCHAR2(20),
+  intime     DATE not null,
+  calltime   DATE not null,
+  remark     VARCHAR2(512),
+  usermsisdn VARCHAR2(20) not null,
+  username   VARCHAR2(20) not null,
+  status     NUMBER(1) default 0 not null,
+  updatetime DATE
+)
+tablespace TEST_DATA
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 512K
+    next 512K
+    minextents 1
+    maxextents unlimited
+    pctincrease 0
+  );
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table SSMN_ZY_CLIENTNUM
+  add constraint PK_SSMN_ZY_CLIENTNUM primary key (ID)
+  using index 
+  tablespace TEST_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 512K
+    next 512K
+    minextents 1
+    maxextents unlimited
+    pctincrease 0
+  );
+  
+  --创建序列
+  -- Create sequence 
+create sequence SEQ_SSMN_ZY_CLIENTNUM
+minvalue 1
+maxvalue 9999999998
+start with 101
+increment by 1
+cache 10;
+  
+------------------------------------------------------------------------------------------------------------------------------------
+
+------添加字段sql:
+ --------2016-07-19 添加群组管理功能，需要给表：　TYADMIN_AUTHORITIES　添加字段：PARENTID,ORDERID,SECTIONID (三个字段代表级联关系，排序)
+ alter table tyadmin_authorities add PARENTID NUMBER(11);
+alter table tyadmin_authorities add ORDERID NUMBER(11);
+alter table tyadmin_authorities add SECTIONID NUMBER(11);
+
+--------2016-08-20 渠道表添加字段　type，默认0
+alter table ssmn_zy_channel add  type NUMBER(1) default 0;
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+----- 二、创建触发器
+
+--1. 添加ssmn_zy_level的触发器,保证表中行动组必须唯一-------------------------------------------------
+
+CREATE OR REPLACE TRIGGER "SSMNR".TRG_INSERT_SSMNZYLEVEL BEFORE
+ INSERT  ON SSMN_ZY_LEVEL FOR EACH ROW
+
+declare 
+v_cnt NUMBER;
+v_branchactiongroup char(32);
+v_area char(32);
+v_warzone char(32);
+v_businessdepartment char(32);
+v_company char(32);
+v_provincecity char(32);
+
+begin
+
+v_branchactiongroup := :NEW.branchactiongroup;
+v_area := :NEW.area;
+v_warzone := :NEW.warzone;
+v_businessdepartment := :NEW.businessdepartment;
+v_company := :NEW.company;
+v_provincecity := :NEW.provincecity;
+
+--所有的都为空，则不能添加
+IF (v_provincecity is null and v_company is null  and v_businessdepartment is null   and v_warzone is null and v_area is null and  v_branchactiongroup is null  )
+THEN
+   
+     RAISE_APPLICATION_ERROR(-20001,'数据值无效,请至少填写省名称!');
+   
+END IF; 
+
+--行动组是否存在
+IF ( v_branchactiongroup is not null )
+THEN
+    select count(*) into v_cnt from ssmn_zy_level where branchactiongroup =:NEW.branchactiongroup and branchactiongroup is not null;
+
+    IF v_cnt >0 
+       THEN RAISE_APPLICATION_ERROR(-20001,'该行动组已经存在!');
+    END IF;
+END IF;  
+--片区是否存在
+IF ( v_area is not null  and v_branchactiongroup is null )
+THEN
+    select count(*) into v_cnt from ssmn_zy_level where area =:NEW.area and area is not null  and branchactiongroup is  null ;
+
+    IF v_cnt >0 
+       THEN RAISE_APPLICATION_ERROR(-20001,'该片区已经存在!');
+    END IF;
+END IF;  
+--战区是否存在
+ IF ( v_warzone is not null  and v_area is null and  v_branchactiongroup is null )
+THEN
+    select count(*) into v_cnt from ssmn_zy_level where warzone =:NEW.warzone and warzone is not null and area is  null  and branchactiongroup is  null ;
+
+    IF v_cnt >0 
+       THEN RAISE_APPLICATION_ERROR(-20001,'该战区已经存在!');
+    END IF;
+END IF; 
+--事业部
+ IF ( v_businessdepartment is not null  and v_warzone is null and v_area is null and  v_branchactiongroup is null )
+THEN
+    select count(*) into v_cnt from ssmn_zy_level where businessdepartment =:NEW.businessdepartment and businessdepartment is not null  and warzone is null and area is  null  and branchactiongroup is  null ;
+
+    IF v_cnt >0 
+       THEN RAISE_APPLICATION_ERROR(-20001,'该事业部已经存在!');
+    END IF;
+END IF; 
+--公司
+ IF ( v_company is not null and v_businessdepartment is null   and v_warzone is null and v_area is null and  v_branchactiongroup is null )
+THEN
+    select count(*) into v_cnt from ssmn_zy_level where company =:NEW.company and company is not null  and businessdepartment is null  and warzone is null and area is  null  and branchactiongroup is  null ;
+
+    IF v_cnt >0 
+       THEN RAISE_APPLICATION_ERROR(-20001,'该公司已经存在!');
+    END IF;
+END IF; 
+--省市
+IF ( v_provincecity is not null and v_company is null  and v_businessdepartment is null   and v_warzone is null and v_area is null and  v_branchactiongroup is null )
+THEN
+    select count(*) into v_cnt from ssmn_zy_level where provincecity =:NEW.provincecity and provincecity is not null  and company is null  and businessdepartment is null  and warzone is null and area is  null  and branchactiongroup is  null ;
+
+    IF v_cnt >0 
+       THEN RAISE_APPLICATION_ERROR(-20001,'该省已经存在!');
+    END IF;
+END IF;
+  
+end;
+
+
+  
+--2.给ssmn_cdr表添加触发器
+CREATE OR REPLACE TRIGGER "SSMNR".TRG_INSERT_SSMNCDR BEFORE
+ INSERT  ON SSMN_CDR FOR EACH ROW
+
+declare 
+v_msisdn char(32);
+v_ssmnnumber char(32);
+v_uid NUMBER;
+v_num NUMBER;
+
+begin
+
+v_msisdn := :NEW.msisdn;
+v_ssmnnumber := :NEW.ssmnnumber;
+
+--插入到通话记录与用户对应表中
+IF ( v_msisdn is not null and v_ssmnnumber is not null )
+THEN
+    select count(*) into v_num  from ssmn_zy_user where msisdn= :NEW.msisdn and ssmnnumber =:NEW.ssmnnumber ;
+    
+    IF (v_num >0 )
+    THEN
+       select id into v_uid from ssmn_zy_user where msisdn= :NEW.msisdn and ssmnnumber =:NEW.ssmnnumber and rownum=1;
+       insert into ssmn_zy_cdrsms_user (id, user_id,cdrsms_id,type ) values(SEQ_SSNN_ZY_CDRSMS_USER.NEXTVAL, v_uid, :NEW.streamnumber ,0);
+    
+    END IF;
+END IF;  
+  
+end;
+
+
+--3.给ssmn_sms_tomi添加触发器 ----短信取消,这个不需要创建
+CREATE OR REPLACE TRIGGER "SSMNR".TRG_INSERT_SSMNSMSTOMI BEFORE
+ INSERT  ON SSMN_SMS_TOMI FOR EACH ROW
+
+declare 
+v_msisdn char(32);
+v_ssmnnumber char(32);
+v_uid NUMBER;
+v_num NUMBER;
+
+begin
+
+v_msisdn := :NEW.destno;
+v_ssmnnumber := :NEW.ssmnnumber;
+
+--插入到通话记录与用户对应表中
+IF ( v_msisdn is not null and v_ssmnnumber is not null )
+THEN
+    select count(*) into v_num  from ssmn_zy_user where msisdn= :NEW.destno and ssmnnumber =:NEW.ssmnnumber ;
+    
+    IF (v_num >0 )
+    THEN
+       select id into v_uid from ssmn_zy_user where msisdn= :NEW.destno and ssmnnumber =:NEW.ssmnnumber and rownum=1;
+       insert into ssmn_zy_cdrsms_user (id, user_id,cdrsms_id,type ) values(SEQ_SSNN_ZY_CDRSMS_USER.NEXTVAL, v_uid, :NEW.id ,1);
+    END IF;
+END IF;  
+  
+end;
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+
+--三、创建组别 tyadmin_groups表
+
+----1. 添加 超级管理员 组
+insert into TYADMIN_GROUPS (ID, GROUP_NAME, DESCRIPTION, SERVICEKEY, CREATE_DATE, OPERATOR_ID, RANK) values (SEQ_TYAdmin_GROUP.Nextval, '超级管理员', '具有全部系统权限', '50', sysdate,'system', 0);
+
+---2. 地产版，组别分为： 分行行动组，片区组，　战区组（级别权限同片区组），事业部组（级别权限同片区组），　sql如下，id为片区组的groupid
+
+insert into tyadmin_groups t (t.id, t.group_name, t.description, t.servicekey, t.create_date,t.operator_id,t.rank ) values
+(SEQ_TYAdmin_GROUP.Nextval,'分行行动组','分行行动组','50',sysdate,'system',0 );
+
+insert into tyadmin_groups t (t.id, t.group_name, t.description, t.servicekey, t.create_date,t.operator_id,t.rank ) values
+(SEQ_TYAdmin_GROUP.Nextval,'片区组','片区组','50',sysdate,'system',0 );
+
+insert into tyadmin_groups t (t.id, t.group_name, t.description, t.servicekey, t.create_date,t.operator_id,t.rank ) values
+(SEQ_TYAdmin_GROUP.Nextval,'战区组','战区组','50',sysdate,'system',0 );
+
+insert into tyadmin_groups t (t.id, t.group_name, t.description, t.servicekey, t.create_date,t.operator_id,t.rank ) values
+(SEQ_TYAdmin_GROUP.Nextval,'事业部组','事业部组','50',sysdate,'system',0 );
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+--四、创建权限
+
+--------------------------------------------------------------------
+delete from TYADMIN_GROUP_AUTHS t where t.auth_id =(select id from tyadmin_authorities t where t.servicekey=50   and t.auth_method='managessmnnumbers');
+
+delete from TYADMIN_GROUP_AUTHS t where t.auth_id =(select id from tyadmin_authorities t where t.servicekey=50   and t.auth_method='operatorSearchManage');
+
+delete from TYADMIN_GROUP_AUTHS t where t.auth_id =(select id from tyadmin_authorities t where t.servicekey=50   and t.auth_method='downloadinfo');
+
+delete from TYADMIN_GROUP_AUTHS t where t.auth_id =(select id from tyadmin_authorities t where t.servicekey=50   and t.auth_method='downloadSMS');
+
+delete from tyadmin_authorities t where t.servicekey=50   and t.auth_method='managessmnnumbers';
+ 
+delete from tyadmin_authorities t where t.servicekey=50   and t.auth_method='operatorSearchManage' ; 
+
+delete from tyadmin_authorities t where t.servicekey=50   and t.auth_method='downloadinfo';
+
+delete from tyadmin_authorities t where t.servicekey=50   and t.auth_method='downloadSMS';
+
+----------------------------------------------------------------------------------
+
+--1. 添加 经纪人管理(信息管理) 权限
+insert into tyadmin_authorities (id,authority, auth_method, servicekey, rank ) values( SEQ_TYADMIN_AUTH.NEXTVAL,'经纪人管理(信息管理)', 'manageagent','50',1);
+
+--2. 添加 经纪人管理(编辑,绑定等) 权限
+insert into tyadmin_authorities (id,authority, auth_method, servicekey, rank ) values( SEQ_TYADMIN_AUTH.NEXTVAL,'经纪人管理(编辑,绑定)', 'manageUsers','50',1);
+
+--3. 添加 经纪人管理(换绑、查看用户详情) 权限
+insert into tyadmin_authorities(id,authority, auth_method, servicekey, rank ) values(SEQ_TYAdmin_AUTH.Nextval,'经纪人管理(换绑、查看用户详情)' , 'queryssmn', 50, 1);
+
+--4.添加 副号码管理(信息管理) 权限 
+insert into tyadmin_authorities (id,authority, auth_method, servicekey, rank ) values( SEQ_TYADMIN_AUTH.NEXTVAL,'副号码管理(信息管理)', 'modifyssmnnumber','50',1);
+
+--5. 添加 语音查询(副号码通讯信息) 权限
+insert into tyadmin_authorities (id,authority, auth_method, servicekey, rank ) values(SEQ_TYADMIN_AUTH.NEXTVAL,'语音查询(副号码通讯信息)', 'queryssmninfo','50',1);
+
+--6.添加　在线收听(语音查询) 权限
+insert into tyadmin_authorities (id,authority, auth_method, servicekey, rank ) values(SEQ_TYADMIN_AUTH.NEXTVAL,'在线收听(语音查询)', 'listenOnline','50',1);
+
+--7.添加　录音下载(语音查询)权限
+insert into tyadmin_authorities (id,authority, auth_method, servicekey, rank ) values(SEQ_TYADMIN_AUTH.NEXTVAL,'录音下载(语音查询)', 'cdrDownload','50',1);
+
+--8.添加　隐藏业主号码(语音查询)权限
+insert into tyadmin_authorities (id,authority, auth_method, servicekey, rank ) values(SEQ_TYADMIN_AUTH.NEXTVAL,'隐藏业主号码(语音查询)', 'hideOwnerNumber','50',1);
+
+--9.添加 渠道统计(副号码通讯信息) 权限
+insert into tyadmin_authorities (id,authority, auth_method, servicekey, rank ) values(SEQ_TYADMIN_AUTH.NEXTVAL,'渠道统计(副号码通讯信息)', 'statchannelcallin','50',1);
+
+--10. 添加 统计报表下载 权限
+insert into tyadmin_authorities (id,authority, auth_method, servicekey, rank ) values(SEQ_TYADMIN_AUTH.NEXTVAL,'统计报表下载', 'queryinfo','50',1);
+
+--11. 添加 录音下载(统计报表下载) 权限
+insert into tyadmin_authorities (id,authority, auth_method, servicekey, rank ) values(SEQ_TYADMIN_AUTH.NEXTVAL,'录音下载(统计报表下载)', 'downloadCDRStatis','50',1);
+
+---12.添加　报表下载(统计报表下载)
+insert into tyadmin_authorities (id,authority, auth_method, servicekey, rank ) values(SEQ_TYADMIN_AUTH.NEXTVAL,'报表下载(统计报表下载)', 'reportDownloadStatis','50',1);
+
+--13. 添加 通话统计 权限
+insert into tyadmin_authorities (id,authority, auth_method, servicekey, rank ) values( SEQ_TYADMIN_AUTH.NEXTVAL,'通话统计', 'downloadCDRinfo','50',1);
+
+--14. 添加 密码修改(我的信息) 权限
+insert into tyadmin_authorities (id,authority, auth_method, servicekey, rank ) values( SEQ_TYADMIN_AUTH.NEXTVAL,'密码修改(我的信息)', 'modifyoperatorinfo','50',1);
+
+--15. 添加 信息反馈(我的信息) 权限
+insert into tyadmin_authorities (id,authority, auth_method, servicekey, rank ) values( SEQ_TYADMIN_AUTH.NEXTVAL,'信息反馈(我的信息)', 'searchfeedback','50',1);
+
+--16. 添加 登录详情查询(操作员管理)  权限
+insert into tyadmin_authorities (id,authority, auth_method, servicekey, rank ) values( SEQ_TYADMIN_AUTH.NEXTVAL,'登录详情查询(操作员管理)', 'operatorloginsearch','50',1);
+
+--17 添加 操作员管理(操作员管理) 权限
+insert into tyadmin_authorities (id,authority, auth_method, servicekey, rank ) values( SEQ_TYADMIN_AUTH.NEXTVAL,'操作员管理(操作员管理)', 'operatorSearch','50',1);
+
+--18.添加 架构管理(操作员管理)  权限
+insert into tyadmin_authorities (id,authority, auth_method, servicekey, rank ) values( SEQ_TYADMIN_AUTH.NEXTVAL,'架构管理(操作员管理)', 'levelManage','50',1);
+
+--19. 添加　密码重置(操作员管理)　权限　
+insert into tyadmin_authorities (id,authority, auth_method, servicekey, rank ) values(SEQ_TYADMIN_AUTH.NEXTVAL,'密码重置(操作员管理)', 'resetpassword','50',1);
+
+--20. 添加　添加黑名单(操作员管理)　权限
+insert into tyadmin_authorities (id,authority, auth_method, servicekey, rank ) values(SEQ_TYADMIN_AUTH.NEXTVAL,'添加黑名单(操作员管理)', 'addblackcallnumber','50',1);
+
+--21. 添加 添加操作员(操作员管理) 权限
+insert into tyadmin_authorities (id,authority, auth_method, servicekey, rank ) values( SEQ_TYADMIN_AUTH.NEXTVAL,'添加操作员(操作员管理)', 'operatorAdd','50',1);
+
+--22. 添加　修改操作员(操作员管理) 权限
+insert into tyadmin_authorities (id,authority, auth_method, servicekey, rank ) values( SEQ_TYADMIN_AUTH.NEXTVAL,'修改操作员(操作员管理)', 'operatorModify','50',1);
+
+--23. 添加　'删除操作员(操作员管理) 权限
+insert into tyadmin_authorities (id,authority, auth_method, servicekey, rank ) values( SEQ_TYADMIN_AUTH.NEXTVAL,'删除操作员(操作员管理)', 'operatorDelete','50',1);
+
+--24.添加 权限组管理(操作员管理) 权限
+insert into tyadmin_authorities (id,authority, auth_method, servicekey, rank ) values( SEQ_TYADMIN_AUTH.NEXTVAL,'权限组管理(操作员管理)', 'OPgroupSearch','50',1);
+
+--25.添加 权限组添加(权限组管理) 权限
+insert into tyadmin_authorities (id,authority, auth_method, servicekey, rank ) values( SEQ_TYADMIN_AUTH.NEXTVAL,'权限组添加(权限组管理)', 'OPgroupAdd','50',1);
+ 
+--26.添加 权限组修改(权限组管理) 权限
+insert into tyadmin_authorities (id,authority, auth_method, servicekey, rank ) values( SEQ_TYADMIN_AUTH.NEXTVAL,'权限组修改(权限组管理)', 'OPgroupModify','50',1);
+
+--27.添加 权限组删除(权限组管理) 权限
+insert into tyadmin_authorities (id,authority, auth_method, servicekey, rank ) values( SEQ_TYADMIN_AUTH.NEXTVAL,'权限组删除(权限组管理)', 'OPgroupDelete','50',1);
+
+--28.添加 呼叫管理（通讯管理[以前叫副号码通讯信息]）权限
+insert into tyadmin_authorities (id,authority, auth_method, servicekey, rank,parentid,orderid,sectionid ) values( SEQ_TYADMIN_AUTH.NEXTVAL,'呼叫管理(通讯管理)', 'callManage','50',1,null,9,3);
+
+
+-------------------------------------------------------------------------------------------------------------------
+
+--创建权限与组别的关联
+
+--1. 添加 经纪人管理(信息管理) 权限
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='超级管理员' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='manageagent'   and t.servicekey=50 ) ) ;
+
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='分行行动组' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='manageagent'   and t.servicekey=50 ) ) ;
+
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='片区组' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='manageagent'   and t.servicekey=50 ) ) ;
+
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='战区组' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='manageagent'   and t.servicekey=50 ) ) ;
+
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='事业部组' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='manageagent'   and t.servicekey=50 ) ) ;
+
+--2. 添加 经纪人管理(编辑,绑定等) 权限
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='超级管理员' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='manageUsers'   and t.servicekey=50 ) ) ;
+
+--3. 添加 副号码信息查询 权限
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='超级管理员' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='queryssmn'  and t.servicekey=50 ) ) ;
+
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='分行行动组' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='queryssmn'   and t.servicekey=50 ) ) ;
+
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='片区组' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='queryssmn'  and t.servicekey=50 ) ) ;
+
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='战区组' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='queryssmn'  and t.servicekey=50 ) ) ;
+
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='事业部组' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='queryssmn'  and t.servicekey=50 ) ) ;
+
+--4.添加 副号码管理(信息管理) 权限 
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='超级管理员' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='modifyssmnnumber'   and t.servicekey=50 ) ) ;
+
+--5. 添加 语音查询(副号码通讯信息) 权限
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='超级管理员' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='queryssmninfo'   and t.servicekey=50 ) ) ;
+
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='分行行动组' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='queryssmninfo'   and t.servicekey=50 ) ) ;
+
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='片区组' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='queryssmninfo'   and t.servicekey=50 ) ) ;
+
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='战区组' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='queryssmninfo'   and t.servicekey=50 ) ) ;
+
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='事业部组' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='queryssmninfo'   and t.servicekey=50 ) ) ;
+
+--6.添加　在线收听（语音查询）权限
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='超级管理员' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='listenOnline'   and t.servicekey=50 ) ) ;
+
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='分行行动组' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='listenOnline'   and t.servicekey=50 ) ) ;
+
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='片区组' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='listenOnline'   and t.servicekey=50 ) ) ;
+
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='战区组' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='listenOnline'   and t.servicekey=50 ) ) ;
+
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='事业部组' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='listenOnline'   and t.servicekey=50 ) ) ;
+
+--7.添加　录音下载（语音查询）权限
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='超级管理员' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='cdrDownload'   and t.servicekey=50 ) ) ;
+
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='分行行动组' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='cdrDownload'   and t.servicekey=50 ) ) ;
+
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='片区组' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='cdrDownload'   and t.servicekey=50 ) ) ;
+
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='战区组' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='cdrDownload'   and t.servicekey=50 ) ) ;
+
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='事业部组' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='cdrDownload'   and t.servicekey=50 ) ) ;
+
+--8.添加 渠道统计(副号码通讯信息) 权限
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='超级管理员' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='statchannelcallin'  and t.servicekey=50 ) ) ;
+
+
+
+--9. 添加 统计报表下载 权限
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='超级管理员' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='queryinfo'  and t.servicekey=50 ) ) ;
+
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='分行行动组' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='queryinfo'  and t.servicekey=50 ) ) ;
+
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='片区组' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='queryinfo'   and t.servicekey=50 ) ) ;
+
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='战区组' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='queryinfo'  and t.servicekey=50 ) ) ;
+
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='事业部组' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='queryinfo'   and t.servicekey=50 ) ) ;
+
+--10. 添加 录音下载(统计报表下载) 权限
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='超级管理员' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='downloadCDRStatis'  and t.servicekey=50 ) ) ;
+
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='片区组' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='downloadCDRStatis'  and t.servicekey=50 ) ) ;
+
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='战区组' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='downloadCDRStatis'   and t.servicekey=50 ) ) ;
+
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='事业部组' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='downloadCDRStatis'   and t.servicekey=50 ) ) ;
+
+--11. 添加 报表下载(统计报表下载) 权限
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='超级管理员' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='reportDownloadStatis'  and t.servicekey=50 ) ) ;
+
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='片区组' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='reportDownloadStatis'  and t.servicekey=50 ) ) ;
+
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='战区组' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='reportDownloadStatis'   and t.servicekey=50 ) ) ;
+
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='事业部组' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='reportDownloadStatis'   and t.servicekey=50 ) ) ;
+
+--12. 添加 通话统计 权限
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='分行行动组' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='downloadCDRinfo'   and t.servicekey=50 ) ) ;
+
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='片区组' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='downloadCDRinfo'   and t.servicekey=50 ) ) ;
+
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='战区组' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='downloadCDRinfo'   and t.servicekey=50 ) ) ;
+
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='事业部组' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='downloadCDRinfo'   and t.servicekey=50 ) ) ;
+
+--13. 添加 密码修改(我的信息) 权限
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='超级管理员' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='modifyoperatorinfo'   and t.servicekey=50 ) ) ;
+
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='分行行动组' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='modifyoperatorinfo'   and t.servicekey=50 ) ) ;
+
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='片区组' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='modifyoperatorinfo'   and t.servicekey=50 ) ) ;
+
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='战区组' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='modifyoperatorinfo'   and t.servicekey=50 ) ) ;
+
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='事业部组' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='modifyoperatorinfo'   and t.servicekey=50 ) ) ;
+
+
+--14. 添加 信息反馈(我的信息) 权限
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='超级管理员' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='searchfeedback'   and t.servicekey=50 ) ) ;
+
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='分行行动组' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='searchfeedback'   and t.servicekey=50 ) ) ;
+
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='片区组' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='searchfeedback'   and t.servicekey=50 ) ) ;
+
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='战区组' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='searchfeedback'   and t.servicekey=50 ) ) ;
+
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='事业部组' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='searchfeedback'   and t.servicekey=50 ) ) ;
+
+--15. 添加 登录详情查询(操作员管理)  权限
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='超级管理员' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='operatorloginsearch'   and t.servicekey=50 ) ) ;
+
+--16 添加 操作员管理(操作员管理) 权限
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='超级管理员' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='operatorSearch'   and t.servicekey=50 ) ) ;
+
+--17.添加 架构管理(操作员管理)  权限
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='超级管理员' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='levelManage'   and t.servicekey=50 ) ) ;
+
+--18. 添加　密码重置(操作员管理)　权限　
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='超级管理员' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='resetpassword'   and t.servicekey=50 ) ) ;
+
+--19. 添加　添加黑名单(操作员管理)　权限
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='超级管理员' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='addblackcallnumber'   and t.servicekey=50 ) ) ;
+
+
+--20. 添加 添加操作员(操作员管理) 权限
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='超级管理员' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='operatorAdd'  and t.servicekey=50  ) ) ;
+
+
+--21. 添加　修改操作员(操作员管理) 权限
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='超级管理员' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='operatorModify'   and t.servicekey=50 ) ) ;
+
+--22. 添加　'删除操作员(操作员管理) 权限
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='超级管理员' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='operatorDelete'   and t.servicekey=50 ) ) ;
+
+--23.添加 权限组管理(操作员管理) 权限
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='超级管理员' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='OPgroupSearch'   and t.servicekey=50 ) ) ;
+
+--24.添加 权限组添加(权限组管理) 权限
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='超级管理员' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='OPgroupAdd'   and t.servicekey=50 ) ) ;
+
+--25.添加 权限组修改(权限组管理) 权限
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='超级管理员' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='OPgroupModify'   and t.servicekey=50 ) ) ;
+
+--26.添加 权限组删除(权限组管理) 权限
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='超级管理员' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='OPgroupDelete'   and t.servicekey=50 ) ) ;
+
+--27.  隐藏业主号码分配权限
+update tyadmin_authorities t set t.authority='隐藏业主号码(语音查询)',t.sectionid=3,t.rank=2 ,T.PARENTID=(select id from tyadmin_authorities  where auth_method='queryssmninfo' and servicekey=50 ) where t.auth_method='hideOwnerNumber' and t.servicekey=50;
+
+--28.添加 呼叫管理（通讯管理[以前叫副号码通讯信息]）权限
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='超级管理员' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='callManage'   and t.servicekey=50 ) ) ;
+
+
+-----------------------------------------------------------
+----修改名字
+
+update tyadmin_authorities t set t.authority='权限组管理(操作员管理)' where t.auth_method='OPgroupSearch' and t.servicekey=50;
+
+update tyadmin_authorities t set t.authority='权限组添加(权限组管理)' where t.auth_method='OPgroupAdd' and t.servicekey=50;
+
+update tyadmin_authorities t set t.authority='权限组修改(权限组管理)' where t.auth_method='OPgroupModify' and t.servicekey=50 ;
+
+update tyadmin_authorities t set t.authority='权限组删除(权限组管理)' where t.auth_method='OPgroupDelete' and t.servicekey=50;
+
+
+---权限改名sql: 
+------------section:菜单中的每一组(1,3,5..,方便中间添加)  
+------------rank:权限级别， (rank=2的是rank=1的子级,rank=2的parentid代表父类的id) ,
+----------- orderid:表示排序(1,3,5..,方便中间添加)
+--1
+update tyadmin_authorities t set t.authority='经纪人管理(信息管理)',t.sectionid=1 ,t.rank=1 ,T.ORDERID=1  where t.auth_method='manageagent' and t.servicekey=50 ;
+--2
+update tyadmin_authorities t set t.authority='经纪人管理(编辑,绑定)' , t.sectionid=1, t.rank=2, T.PARENTID=(select id from tyadmin_authorities  where auth_method='manageagent' and servicekey=50) where t.auth_method='manageUsers' and t.servicekey=50 ;
+----3
+update tyadmin_authorities t set t.authority='经纪人管理(换绑、查看用户详情)',t.sectionid=1,t.rank=2 ,T.PARENTID=(select id from tyadmin_authorities  where auth_method='manageagent' and servicekey=50 ) where t.auth_method='queryssmn' and t.servicekey=50;
+--4
+update tyadmin_authorities t set t.authority='副号码管理(信息管理)' ,t.sectionid=1, t.rank=1 ,T.ORDERID=3 where t.auth_method='modifyssmnnumber' and t.servicekey=50;
+
+---5
+update tyadmin_authorities t set t.authority='语音查询(副号码通讯信息)' ,t.sectionid=3,t.rank=1 ,T.ORDERID=5 where t.auth_method='queryssmninfo' and t.servicekey=50;
+
+---6
+update tyadmin_authorities t set t.authority='在线收听(语音查询)',t.sectionid=3,t.rank=2 ,T.PARENTID=(select id from tyadmin_authorities  where auth_method='queryssmninfo' and servicekey=50 ) where t.auth_method='listenOnline' and t.servicekey=50;
+
+---7
+update tyadmin_authorities t set t.authority='录音下载(语音查询)',t.sectionid=3,t.rank=2 ,T.PARENTID=(select id from tyadmin_authorities  where auth_method='queryssmninfo' and servicekey=50 ) where t.auth_method='cdrDownload' and t.servicekey=50;
+
+--8
+update tyadmin_authorities t set t.authority='隐藏业主号码(语音查询)',t.sectionid=3,t.rank=2 ,T.PARENTID=(select id from tyadmin_authorities  where auth_method='queryssmninfo' and servicekey=50 ) where t.auth_method='hideOwnerNumber' and t.servicekey=50;
+
+---8
+update tyadmin_authorities t set t.authority='渠道统计(副号码通讯信息)',t.sectionid=3,t.rank=1 ,T.ORDERID=7 where t.auth_method= 'statchannelcallin' and t.servicekey=50;
+
+----9
+update tyadmin_authorities t set t.authority='统计报表下载' ,t.sectionid=5,t.rank=1 ,T.ORDERID=9 where t.auth_method='queryinfo' and t.servicekey=50;
+
+----10
+update tyadmin_authorities t set t.authority='录音下载(统计报表下载)',t.sectionid=5,t.rank=2 ,T.PARENTID=(select id from tyadmin_authorities  where auth_method='queryinfo' and servicekey=50 ) where t.auth_method='downloadCDRStatis' and t.servicekey=50;
+ 
+----11 
+ update tyadmin_authorities t set t.authority='报表下载(统计报表下载)',t.sectionid=5,t.rank=2 ,T.PARENTID=(select id from tyadmin_authorities  where auth_method='queryinfo' and servicekey=50 ) where t.auth_method='reportDownloadStatis' and t.servicekey=50;
+ 
+
+----12
+update tyadmin_authorities t set t.authority='通话统计' ,t.sectionid=7,t.rank=1,T.ORDERID=11 where t.auth_method='downloadCDRinfo' and t.servicekey=50 ;
+
+----13
+update tyadmin_authorities t set t.authority='密码修改(我的信息)' ,t.sectionid=9,t.rank=1,T.ORDERID=13 where t.auth_method='modifyoperatorinfo' and t.servicekey=50 ;
+----14
+update tyadmin_authorities t set t.authority='信息反馈(我的信息)',t.sectionid=9,t.rank=1, T.ORDERID=15 where t.auth_method='searchfeedback' and t.servicekey=50 ;
+
+----15
+update tyadmin_authorities t set t.authority='登录详情查询(操作员管理)' ,t.sectionid=11,t.rank=1,T.ORDERID=17  where t.auth_method='operatorloginsearch' and t.servicekey=50 ;
+---16
+update tyadmin_authorities t set t.authority='操作员管理(操作员管理)' ,t.sectionid=11,t.rank=1,T.ORDERID=19 where t.auth_method='operatorSearch' and t.servicekey=50 ;
+---17
+update tyadmin_authorities t set t.authority='架构管理(操作员管理)' ,t.sectionid=11,t.rank=1,T.ORDERID=21 where t.auth_method='levelManage' and t.servicekey=50 ;
+----18
+update tyadmin_authorities t set t.authority='密码重置(操作员管理)' ,t.sectionid=11,t.rank=1,T.ORDERID=23 where t.auth_method='resetpassword' and t.servicekey=50 ;
+----19
+update tyadmin_authorities t set t.authority='添加黑名单(操作员管理)' ,t.sectionid=11,t.rank=1,T.ORDERID=25 where t.auth_method='addblackcallnumber' and t.servicekey=50 ;
+---20
+update tyadmin_authorities t set t.authority='添加操作员(操作员管理)' ,t.sectionid=11,t.rank=2, T.PARENTID=(select id from tyadmin_authorities  where auth_method='operatorSearch' and servicekey=50 ) where t.auth_method='operatorAdd' and t.servicekey=50 ;
+---21
+update tyadmin_authorities t set t.authority='修改操作员(操作员管理)' ,t.sectionid=11,t.rank=2, T.PARENTID=(select id from tyadmin_authorities  where auth_method='operatorSearch' and  servicekey=50 )  where t.auth_method='operatorModify' and t.servicekey=50 ;
+----22
+update tyadmin_authorities t set t.authority='删除操作员(操作员管理)' ,t.sectionid=11,t.rank=2 ,T.PARENTID=(select id from tyadmin_authorities  where auth_method='operatorSearch' and  servicekey=50 ) where t.auth_method='operatorDelete' and t.servicekey=50 ;
+----23
+update tyadmin_authorities t set t.authority='权限组管理(操作员管理)' ,t.sectionid=11 ,t.rank=1 ,T.ORDERID=27 where t.auth_method='OPgroupSearch' and t.servicekey=50 ;
+----24
+update tyadmin_authorities t set t.authority='权限组添加(权限组管理)' ,t.sectionid=11 ,t.rank=2 ,T.PARENTID=(select id from tyadmin_authorities  where auth_method='OPgroupSearch' and servicekey=50 ) where t.auth_method='OPgroupAdd' and t.servicekey=50 ;
+----25
+update tyadmin_authorities t set t.authority='权限组修改(权限组管理)',t.sectionid=11,t.rank=2 ,T.PARENTID=(select id from tyadmin_authorities  where auth_method='OPgroupSearch' and servicekey=50 )  where t.auth_method='OPgroupModify' and t.servicekey=50 ;
+--26
+update tyadmin_authorities t set t.authority='权限组删除(权限组管理)',t.sectionid=11 ,t.rank=2 ,T.PARENTID=(select id from tyadmin_authorities  where auth_method='OPgroupSearch' and servicekey=50 )  where t.auth_method='OPgroupDelete' and t.servicekey=50 ;
+
+
+
+----------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+
+--五、附加
+
+---1. 初始ssmn_zy_cdrsms_user表 (如果不需要对此表做初始化，则不需要执行 , 天津联通需要做初始化)  
+
+insert into ssmn_zy_cdrsms_user (id,user_id,cdrsms_id,type) select SEQ_SSNN_ZY_CDRSMS_USER.NEXTVAL, z.id ,c.streamnumber ,0 from ssmn_cdr c,ssmn_zy_user z where c.msisdn=z.msisdn and c.ssmnnumber=z.ssmnnumber and c.callstarttime>z.intime;
+insert into ssmn_zy_cdrsms_user (id,user_id,cdrsms_id,type) select SEQ_SSNN_ZY_CDRSMS_USER.NEXTVAL, z.id ,c.id ,1 from ssmn_sms_tomi c,ssmn_zy_user z where c.destNo=z.msisdn and c.ssmnnumber=z.ssmnnumber and c.intime>z.intime ;
+
+--2. 给ssmn_cdr表加索引
+create index IDX9_SSMN_CDR on SSMN_CDR (CALLSTARTTIME)
+  tablespace SSMN_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 8M
+    next 512K
+    minextents 1
+    maxextents unlimited
+    pctincrease 0
+  );
+  
+--3.给　TYADMIN_LOGS　表添加索引
+-- Create/Recreate indexes 
+create index PK_TYADMIN_LOGS1 on TYADMIN_LOGS (OPENO)
+  tablespace SSMN_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 1M
+    next 512K
+    minextents 1
+    maxextents unlimited
+    pctincrease 0
+  );
+  
+  
+--4.做初始化SSMN_ZY_LEVEL_CHANNEL表(江苏和北京需要把　“天津”修改一下)sql: 
+
+	insert into ssmn_zy_level_channel select seq_ssmn_zy_level_channel.nextval, id ,(select id from ssmn_zy_level where provincecity='天津' 
+		and company='中原' and businessdepartment is null ) from ssmn_zy_channel
+
+--5.天津的做初始化ssmn_zy_level_mode表,其他地方不需要初始化(江苏和北京需要把　“天津”修改一下)
+	insert into ssmn_zy_level_mode values(SEQ_ssmn_zy_level_mode.Nextval,9001,(select id from ssmn_zy_level where provincecity='天津' 
+		and company='中原' and businessdepartment is null ))
+		
+--6.初始化　ssmn_zy_user表的　modeid字段值
+update ssmn_zy_user set modeid = (select id from ssmn_zy_level_mode where modelow=9001 )
+-------------------------------------------------------------------------------------------------------------
+
+-- 1.创建两个测试级别
+insert into ssmn_zy_level t values(SEQ_SSMN_ZY_LEVEL.NEXTVAL,'测试','测试','','','','');
+
+insert into ssmn_zy_level t values(SEQ_SSMN_ZY_LEVEL.NEXTVAL,'测试','测试','测试','测试','测试','测试');
+
+-- 2.创建测试账号
+
+insert into tyadmin_operators t values('test',50,'b53ce8fa3ddc5cd198b993318e3787ad',(select id from tyadmin_groups t where t.group_name='超级管理员'),
+'system',sysdate,'admin','',(select t.id  from ssmn_zy_level t where t.provincecity='测试' and t.company='测试' and t.businessdepartment is null));
+
+
+-------10.创建超级管理员(dascom)的账号
+
+insert into tyadmin_operators t (t.openo, t.servicekey,t.opepwd, t.group_id ,t.create_user, t.create_time,t.agent_info, t.note,  t.levelid) 
+ values ('dascom','50','b53ce8fa3ddc5cd198b993318e3787ad',(select g.id from tyadmin_groups g where g.servicekey='50' and 
+ g.group_name='超级管理员'), 'system',sysdate,'admin', '',  
+ ( select id from ssmn_zy_level l where l.provincecity='天津' and l.company='中原' and l.businessdepartment is null and l.warzone is null  and l.area is null  and l.branchactiongroup is null) );
+ 

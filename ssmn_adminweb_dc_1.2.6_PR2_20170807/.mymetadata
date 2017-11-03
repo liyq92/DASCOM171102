@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="ssmn_adminweb_dc_1.2.6_PR2_20170807"
+  id="myeclipse.1409127174443"
+  context-root="/ssmn_adminweb_dc"
+  j2ee-spec="5.0"
+  archive="ssmn_adminweb_dc_1.2.6_PR2_20170807.war">
+  <attributes>
+    <attribute name="webrootdir" value="/WebRoot" />
+  </attributes>
+</project-module>
+

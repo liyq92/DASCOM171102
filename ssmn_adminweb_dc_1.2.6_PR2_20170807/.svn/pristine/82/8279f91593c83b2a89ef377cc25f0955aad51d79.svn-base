@@ -1,0 +1,85 @@
+迁移到移动，语音查询，需要的表，以下是说明：
+
+1）因为迁移时候，解绑所有的用户，所以Ssmn_Zy_User 这个表为空，不需要迁移。
+
+2）Ssmn_Zy_Channel只要移动库中存在就可以,id不需要对应。
+
+3) Ssmn_Zy_Level ，移动库中的id要与 联通库中的id对应起来,因为ssmn_zy_cancel_user表中的levelid已经存在，联合查询，（可以整表迁移）
+
+4)Ssmn_Zy_cancel_User ，这个表整表迁移，保留userid值
+
+5)Ssmn_CDR  ,这个需要做数据,使用insert语句插入，保留原来streamnumber 值
+
+6)ssmn_zy_cdrsms_user  整表迁移
+
+7)ssmn_record  ，这个需要做数据,使用insert语句插入，保留原来streamnumber 值
+
+8)SSMN_SMS_toMI ,短信表，这个需要做数据,使用insert语句插入，保留原来id值
+
+
+
+另外： 系统用到的其他的表，如果没有也要创建(表结构见数据库设计文档)：
+1) SSMN_ZY_USER
+
+2)SSMN_ZY_ENABLENUMBER
+
+3)SSMN_ZY_FEEDBACK
+
+4)SSMN_ZY_USEROPERATION
+
+5)SSMN_ZY_LEVEL_MODE
+
+6)SSMN_ZY_LEVEL_CHANNEL 
+
+7)SSMN_USER
+
+8)SSMN_CANCEL_USER
+
+9)SSMN_NUMBER
+
+10)SSMN_CANCEL_NUM
+
+11)SSMN_DCMAPPING (呼叫表)
+
+12)SSMN_TransferNum_Bak 送号记录备份表
+
+注：所有表需要的索引，序列，也都要创建上
+
+
+
+------------------------------------------------------
+
+
+select  a.*
+ from Ssmn_Zy_Cancel_User b,Ssmn_CDR a,
+ ssmn_zy_cdrsms_user u 
+  where a.streamnumber=u.cdrsms_id and u.user_id=b.userid and 
+    a.callType in (1,2) and u.type=0  and  a.callStartTime >= to_date('2016-02-16','YYYY-MM-DD') 
+    and a.endreason in (1,2,3,4)  and b.levelid in ( select le.id from Ssmn_Zy_Level le where 1=1  and 
+    le.provincecity = '天津'  and le.company ='中原'  and le.businessdepartment is not null and le.warzone is not null and 
+    le.area is not null  and le.branchactiongroup is not null  ) 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

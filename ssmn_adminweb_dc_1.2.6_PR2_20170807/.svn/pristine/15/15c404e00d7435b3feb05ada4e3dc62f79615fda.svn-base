@@ -1,0 +1,544 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FlowViewLayout Version="1.2">
+  <StrutsActivity path="/index.do" location="50,50" dimension="79,70" />
+  <StrutsActivity path="/frameTop.do" location="350,50" dimension="105,70" />
+  <StrutsActivity path="/frameBottom.do" location="650,50" dimension="125,70" />
+  <StrutsActivity path="/frameMain.do" location="950,50" dimension="111,70" />
+  <StrutsActivity path="/frameMainTop.do" location="1250,50" dimension="134,70" />
+  <StrutsActivity path="/frame.do" location="2150,50" dimension="82,70" />
+  <StrutsActivity path="/leftMenu.do" location="1550,50" dimension="282,104" />
+  <StrutsActivity path="/queryssmn.do" location="1850,1150" dimension="342,104" />
+  <StrutsActivity path="/selectlevel.do" location="950,1450" dimension="261,104" />
+  <StrutsActivity path="/manageagent.do" location="1550,1350" dimension="324,104" />
+  <StrutsActivity path="/modifyssmnnumber.do" location="3350,1250" dimension="315,104" />
+  <StrutsActivity path="/queryinfo.do" location="2750,1150" dimension="261,104" />
+  <StrutsActivity path="/queryssmninfo.do" location="2450,50" dimension="284,104" />
+  <StrutsActivity path="/downloadCDRinfo.do" location="350,1350" dimension="273,104" />
+  <StrutsActivity path="/modifyoperatorinfo.do" location="3050,50" dimension="308,104" />
+  <StrutsActivity path="/searchfeedback.do" location="3350,1450" dimension="285,104" />
+  <StrutsActivity path="/addblackcallnumber.do" location="2450,1550" dimension="314,104" />
+  <StrutsActivity path="/statchannelcallin.do" location="650,250" dimension="290,104" />
+  <StrutsActivity path="/operatorSearch.do" location="3050,250" dimension="342,104" />
+  <StrutsActivity path="/operatorAdd.do" location="50,450" dimension="327,104" />
+  <StrutsActivity path="/operatorModify.do" location="50,250" dimension="331,104" />
+  <StrutsActivity path="/operatorDelete.do" location="1250,450" dimension="322,104" />
+  <StrutsActivity path="/OPgroupSearch.do" location="1850,450" dimension="325,104" />
+  <StrutsActivity path="/OperatorLoginSearch.do" location="1850,1550" dimension="338,104" />
+  <StrutsActivity path="/OPgroupDelete.do" location="2450,450" dimension="305,104" />
+  <StrutsActivity path="/OPgroupAdd.do" location="3050,450" dimension="310,104" />
+  <StrutsActivity path="/OPgroupModify.do" location="50,650" dimension="314,104" />
+  <StrutsActivity path="/operatorLogin.do" location="650,650" dimension="335,104" />
+  <StrutsActivity path="/operatorLogout.do" location="1250,650" dimension="344,104" />
+  <StrutsActivity path="/mylogSearch.do" location="1850,650" dimension="328,104" />
+  <StrutsActivity path="/logSearch.do" location="2450,650" dimension="310,104" />
+  <StrutsActivity path="/reginfoModify.do" location="3050,650" dimension="322,104" />
+  <StrutsActivity path="/OPexportFile.do" location="50,850" dimension="306,104" />
+  <StrutsActivity path="/myexportFile.do" location="650,850" dimension="324,104" />
+  <StrutsActivity path="/levelmanage.do" location="2450,250" dimension="267,104" />
+  <StrutsActivity path="/version.do" location="1250,850" dimension="255,104" />
+  <StrutsActivity path="indexView;6" location="1250,1850" dimension="119,87" />
+  <StrutsActivity path="timeOutView;6" location="1550,1850" dimension="134,87" />
+  <StrutsActivity path="autherrorView;6" location="1850,1850" dimension="131,87" />
+  <StrutsActivity path="/jsp/login.jsp" location="2150,1850" dimension="108,53" />
+  <StrutsActivity path="/jsp/frame/top-main.jsp" location="2450,1850" dimension="171,53" />
+  <StrutsActivity path="/jsp/frame/botton-main.jsp" location="2750,1850" dimension="190,53" />
+  <StrutsActivity path="/jsp/frame/main.jsp" location="3050,1850" dimension="146,53" />
+  <StrutsActivity path="/jsp/frame/mainTop.jsp" location="3350,1850" dimension="169,53" />
+  <StrutsActivity path="/jsp/frame/frame.jsp" location="950,2250" dimension="152,53" />
+  <StrutsActivity path="/jsp/frame/leftmain_ssmn_dc.jsp" location="1550,1150" dimension="218,53" />
+  <StrutsActivity path="/jsp/zydc/zydc_user_list.jsp" location="2450,1150" dimension="187,53" />
+  <StrutsActivity path="/jsp/zydc/zydc_user_add.jsp" location="2750,1350" dimension="194,53" />
+  <StrutsActivity path="/jsp/zydc/zydc_agent_add.jsp" location="2450,1350" dimension="202,53" />
+  <StrutsActivity path="/jsp/zydc/zydc_agent_list.jsp" location="2150,1350" dimension="195,53" />
+  <StrutsActivity path="/jsp/zydc/zydc_owner_relation_list.jsp" location="650,450" dimension="247,53" />
+  <StrutsActivity path="/jsp/zydc/zydc_number_list.jsp" location="3050,850" dimension="207,53" />
+  <StrutsActivity path="/jsp/zydc/communicat_list.jsp" location="50,1250" dimension="201,53" />
+  <StrutsActivity path="/jsp/zydc/zydc_sms_list.jsp" location="1850,850" dimension="185,53" />
+  <StrutsActivity path="/jsp/zydc/zydc_CDR_list.jsp" location="2150,850" dimension="187,53" />
+  <StrutsActivity path="/jsp/zydc/communicat_CDR_list.jsp" location="2450,850" dimension="231,53" />
+  <StrutsActivity path="/jsp/zydc/zydc_resetpassword.jsp" location="2750,850" dimension="227,53" />
+  <StrutsActivity path="/jsp/zydc/zydc_modiOperator.jsp" location="950,1250" dimension="225,53" />
+  <StrutsActivity path="/jsp/zydc/zydc_feedback_list.jsp" location="50,1550" dimension="216,53" />
+  <StrutsActivity path="/jsp/zydc/zydc_feedback_add.jsp" location="350,1550" dimension="223,53" />
+  <StrutsActivity path="/jsp/zydc/backcallnumber_add.jsp" location="3350,850" dimension="230,53" />
+  <StrutsActivity path="/jsp/zydc/zydc_statChannelCallIn_list.jsp" location="650,1050" dimension="261,53" />
+  <StrutsActivity path="/jsp/operator/operator_search.jsp" location="2750,2050" dimension="231,53" />
+  <StrutsActivity path="/jsp/operator/operator_add.jsp" location="3050,2050" dimension="216,53" />
+  <StrutsActivity path="/jsp/operator/operator_modify.jsp" location="3350,2050" dimension="233,53" />
+  <StrutsActivity path="/jsp/operator/group_search.jsp" location="50,2250" dimension="215,53" />
+  <StrutsActivity path="/jsp/operator/opLog_search_detail.jsp" location="950,1650" dimension="254,53" />
+  <StrutsActivity path="/jsp/operator/opLog_search.jsp" location="650,1550" dimension="217,53" />
+  <StrutsActivity path="/jsp/operator/group_add.jsp" location="350,2250" dimension="200,53" />
+  <StrutsActivity path="/jsp/operator/group_modify.jsp" location="650,2250" dimension="217,53" />
+  <StrutsActivity path="/jsp/frame/frameCover.jsp" location="3050,1550" dimension="186,53" />
+  <StrutsActivity path="/jsp/operator/mylog.jsp" location="1250,2250" dimension="172,53" />
+  <StrutsActivity path="/jsp/operator/log_search.jsp" location="1550,2250" dimension="198,53" />
+  <StrutsActivity path="/jsp/operator/reginfomod.jsp" location="1850,2250" dimension="205,53" />
+  <StrutsActivity path="/jsp/zydc/level_add.jsp" location="350,1050" dimension="164,53" />
+  <StrutsActivity path="/jsp/zydc/level_list.jsp" location="50,1050" dimension="157,53" />
+  <StrutsActivity path="/jsp/version.jsp" location="2150,2250" dimension="121,53" />
+  <StrutsActivity path="/jsp/timeout.jsp" location="2750,3450" dimension="123,53" />
+  <StrutsActivity path="/jsp/error.jsp" location="3050,3450" dimension="109,53" />
+  <StrutsActivity path="/jsp/club/giftList.jsp" location="3050,2250" dimension="146,53" />
+  <StrutsActivity path="/jsp/club/showgift.jsp" location="3350,2250" dimension="157,53" />
+  <StrutsActivity path="/jsp/club/modmagazine.jsp" location="3050,2450" dimension="191,53" />
+  <StrutsActivity path="/jsp/club/magazinelist.jsp" location="3350,2450" dimension="180,53" />
+  <StrutsActivity path="/jsp/club/modquestion.jsp" location="3050,2650" dimension="185,53" />
+  <StrutsActivity path="/jsp/club/suveyquestion.jsp" location="3350,2650" dimension="190,53" />
+  <StrutsActivity path="/jsp/club/showdiscount.jsp" location="3050,2850" dimension="187,53" />
+  <StrutsActivity path="/jsp/club/addpastactivity.jsp" location="3350,2850" dimension="195,53" />
+  <StrutsActivity path="/jsp/club/clubintroduction.jsp" location="1550,3050" dimension="202,53" />
+  <StrutsActivity path="/jsp/club/addgreenchannel.jsp" location="1850,3050" dimension="209,53" />
+  <StrutsActivity path="/jsp/club/modgreenchannel.jsp" location="2150,3050" dimension="213,53" />
+  <StrutsActivity path="/jsp/club/greenchannellist.jsp" location="2450,3050" dimension="202,53" />
+  <StrutsActivity path="/jsp/club/weekdata.jsp" location="2750,3050" dimension="164,53" />
+  <StrutsActivity path="/jsp/club/data.jsp" location="3050,3050" dimension="134,53" />
+  <StrutsActivity path="/jsp/club/statistics.jsp" location="3350,3050" dimension="157,53" />
+  <StrutsActivity path="/jsp/rec/busrec_mod.jsp" location="1550,3250" dimension="173,53" />
+  <StrutsActivity path="/jsp/rec/busrec_share.jsp" location="1850,3250" dimension="178,53" />
+  <StrutsActivity path="/jsp/rec/busrec_list.jsp" location="2150,3250" dimension="162,53" />
+  <StrutsActivity path="/jsp/rec/busrec_show.jsp" location="2450,3250" dimension="176,53" />
+  <StrutsActivity path="/jsp/rec/present_add.jsp" location="2750,3250" dimension="174,53" />
+  <StrutsActivity path="/jsp/rec/present_mod.jsp" location="3050,3250" dimension="178,53" />
+  <StrutsActivity path="/jsp/rec/present_list.jsp" location="3350,3250" dimension="167,53" />
+  <StrutsActivity path="/jsp/rec/birthday_show.jsp" location="1550,3450" dimension="185,53" />
+  <StrutsActivity path="/jsp/club/addstartPage.jsp" location="1850,3450" dimension="186,53" />
+  <StrutsActivity path="/jsp/club/modstartpage.jsp" location="2150,3450" dimension="191,53" />
+  <StrutsActivity path="/jsp/club/startpagelist.jsp" location="2450,3450" dimension="180,53" />
+  <StrutsActivity path="/jsp/communicat_CDR_list.jsp" location="1250,1250" dimension="200,53" />
+  <StrutsActivity path="/jsp/zydc/zydc_user_a.jsp" location="3050,1350" dimension="178,53" />
+  <StrutsActivity path="/jsp/dc3g/operator_search.jsp" location="2450,2050" dimension="208,53" />
+  <StrutsActivity path="/jsp/club/msg_recommend.jsp" location="2150,2050" dimension="208,53" />
+  <StrutsActivity path="/jsp/club/msg_share.jsp" location="1850,2050" dimension="170,53" />
+  <StrutsActivity path="/jsp/club/msg_modify.jsp" location="1550,2050" dimension="178,53" />
+  <StrutsActivity path="/jsp/club/addmagazine.jsp" location="2750,2450" dimension="187,53" />
+  <StrutsActivity path="/jsp/club/giftexchange.jsp" location="2750,2250" dimension="182,53" />
+  <StrutsActivity path="/jsp/club/moddiscount.jsp" location="2450,2850" dimension="184,53" />
+  <StrutsActivity path="/jsp/club/addquestion.jsp" location="2750,2650" dimension="181,53" />
+  <StrutsActivity path="/jsp/club/memberservice_mod.jsp" location="1550,2650" dimension="229,53" />
+  <StrutsActivity path="/jsp/club/memberservice_list.jsp" location="2150,2650" dimension="218,53" />
+  <StrutsActivity path="/jsp/club/memberservice_show.jsp" location="1850,2650" dimension="232,53" />
+  <StrutsActivity path="/jsp/club/groupuserlist.jsp" location="1850,2850" dimension="185,53" />
+  <StrutsActivity path="/jsp/club/carservice_list.jsp" location="2450,2650" dimension="187,53" />
+  <StrutsActivity path="/jsp/club/showgroupuser.jsp" location="1550,2850" dimension="199,53" />
+  <StrutsActivity path="/jsp/club/adddiscount.jsp" location="2150,2850" dimension="180,53" />
+  <StrutsActivity path="/jsp/club/discountlist.jsp" location="2750,2850" dimension="173,53" />
+  <StrutsActivity path="/jsp/club/addmerchant.jsp" location="1550,2450" dimension="185,53" />
+  <StrutsActivity path="/jsp/club/merchant_category.jsp" location="2450,2450" dimension="218,53" />
+  <StrutsActivity path="/jsp/club/modmerchant.jsp" location="1850,2450" dimension="189,53" />
+  <StrutsActivity path="/jsp/club/addgift.jsp" location="2450,2250" dimension="150,53" />
+  <StrutsActivity path="/jsp/club/merchantlist.jsp" location="2150,2450" dimension="178,53" />
+  <StrutsActivity path="/jsp/club/applylist.jsp" location="350,2450" dimension="156,53" />
+  <StrutsActivity path="/jsp/club/businesshall.jsp" location="1250,2450" dimension="178,53" />
+  <StrutsActivity path="/jsp/club/addbusinesshall.jsp" location="650,2450" dimension="201,53" />
+  <StrutsActivity path="/jsp/club/modgift.jsp" location="50,2450" dimension="154,53" />
+  <StrutsActivity path="/jsp/club/modbusinesshall.jsp" location="950,2450" dimension="205,53" />
+  <StrutsActivity path="/jsp/club/promotionlist.jsp" location="950,2850" dimension="186,53" />
+  <StrutsActivity path="/jsp/club/addpromotion.jsp" location="50,2850" dimension="193,53" />
+  <StrutsActivity path="/jsp/club/addimage.jsp" location="50,2650" dimension="167,53" />
+  <StrutsActivity path="/jsp/club/memberservice_add.jsp" location="1250,2650" dimension="225,53" />
+  <StrutsActivity path="/jsp/club/vipcardintroduction.jsp" location="1250,3050" dimension="221,53" />
+  <StrutsActivity path="/jsp/club/addgroupuser.jsp" location="1250,2850" dimension="192,53" />
+  <StrutsActivity path="/jsp/club/imagelist.jsp" location="950,2650" dimension="160,53" />
+  <StrutsActivity path="/jsp/club/modpromotion.jsp" location="350,2850" dimension="197,53" />
+  <StrutsActivity path="/jsp/club/modimage.jsp" location="350,2650" dimension="171,53" />
+  <StrutsActivity path="/jsp/club/showpromotion.jsp" location="650,2850" dimension="200,53" />
+  <StrutsActivity path="/jsp/rec/apprec_list.jsp" location="650,3250" dimension="164,53" />
+  <StrutsActivity path="/jsp/club/showpastactivity.jsp" location="350,3050" dimension="202,53" />
+  <StrutsActivity path="/jsp/rec/apprec_add.jsp" location="50,3250" dimension="171,53" />
+  <StrutsActivity path="/jsp/club/modpastactivity.jsp" location="50,3050" dimension="199,53" />
+  <StrutsActivity path="/jsp/club/pastactivitylist.jsp" location="650,3050" dimension="188,53" />
+  <StrutsActivity path="/jsp/rec/apprec_mod.jsp" location="350,3250" dimension="175,53" />
+  <StrutsActivity path="/jsp/rec/apprec_show.jsp" location="950,3250" dimension="178,53" />
+  <StrutsActivity path="/jsp/rec/busrec_add.jsp" location="1250,3250" dimension="169,53" />
+  <StrutsActivity path="/jsp/club/feedbacklist.jsp" location="950,3050" dimension="178,53" />
+  <StrutsActivity path="/jsp/rec/birthdayorder_list.jsp" location="950,3450" dimension="204,53" />
+  <StrutsActivity path="/jsp/rec/birthday_mod.jsp" location="650,3450" dimension="182,53" />
+  <StrutsActivity path="/jsp/rec/birthday_list.jsp" location="1250,3450" dimension="171,53" />
+  <StrutsActivity path="/jsp/rec/birthday_add.jsp" location="350,3450" dimension="178,53" />
+  <StrutsActivity path="/jsp/rec/present_show.jsp" location="50,3450" dimension="181,53" />
+  <StrutsActivity path="/jsp/club/msg_add.jsp" location="1250,2050" dimension="161,53" />
+  <StrutsActivity path="/jsp/club/showmsg.jsp" location="950,2050" dimension="163,53" />
+  <StrutsActivity path="/jsp/club/msg_search.jsp" location="650,2050" dimension="176,53" />
+  <StrutsActivity path="/jsp/club/showsignup.jsp" location="350,2050" dimension="177,53" />
+  <StrutsActivity path="/jsp/frame/leftmain_vip_club.jsp" location="50,2050" dimension="215,53" />
+  <StrutsActivity path="/jsp/operator/_search.jsp" location="1550,1550" dimension="179,53" />
+  <StrutsActivity path="/callmanage.do" />
+  <StrutsActivity path="/jsp/zydc/call_list.jsp" />
+  <StrutsTransition id="/myexportFile.do,formview,/jsp/operator/mylog.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="882,954" />
+      <AbsolutePoint location="882,2118" />
+      <AbsolutePoint location="1336,2118" />
+      <AbsolutePoint location="1336,2250" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/operatorAdd.do,successView,/operatorSearch.do,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="0,0" />
+      <AbsolutePoint location="0,0" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/searchfeedback.do,formView,/jsp/zydc/zydc_feedback_list.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3462,1554" />
+      <AbsolutePoint location="3462,1738" />
+      <AbsolutePoint location="158,1738" />
+      <AbsolutePoint location="158,1603" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/modifyoperatorinfo.do,formPasswordView,/jsp/zydc/zydc_modiOperator.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3204,50" />
+      <AbsolutePoint location="3204,-75" />
+      <AbsolutePoint location="1076,-75" />
+      <AbsolutePoint location="1076,1250" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/levelmanage.do,formView,/jsp/zydc/level_list.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2583,302" />
+      <AbsolutePoint location="128,1076" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/queryinfo.do,formView,/jsp/zydc/communicat_list.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2880,1150" />
+      <AbsolutePoint location="2880,1059" />
+      <AbsolutePoint location="150,1059" />
+      <AbsolutePoint location="150,1250" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/logSearch.do,formView,/jsp/operator/log_search.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2696,754" />
+      <AbsolutePoint location="2696,1469" />
+      <AbsolutePoint location="1744,1469" />
+      <AbsolutePoint location="1744,2250" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/OPgroupModify.do,formView,/jsp/operator/group_modify.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="50,702" />
+      <AbsolutePoint location="-75,702" />
+      <AbsolutePoint location="-75,2118" />
+      <AbsolutePoint location="758,2118" />
+      <AbsolutePoint location="758,2250" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/queryssmninfo.do,formSMSView,/jsp/zydc/zydc_sms_list.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2592,102" />
+      <AbsolutePoint location="0,0" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/modifyoperatorinfo.do,formResetPasswordView,/jsp/zydc/zydc_resetpassword.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3204,102" />
+      <AbsolutePoint location="0,0" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/queryssmninfo.do,formCDRView,/jsp/zydc/zydc_CDR_list.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2592,102" />
+      <AbsolutePoint location="0,0" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/OPgroupAdd.do,formView,/jsp/operator/group_add.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3360,502" />
+      <AbsolutePoint location="3740,502" />
+      <AbsolutePoint location="3740,2148" />
+      <AbsolutePoint location="450,2148" />
+      <AbsolutePoint location="450,2250" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/reginfoModify.do,formView,/jsp/operator/reginfomod.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3311,754" />
+      <AbsolutePoint location="3311,2178" />
+      <AbsolutePoint location="1982,2178" />
+      <AbsolutePoint location="1982,2250" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/searchfeedback.do,formAddView,/jsp/zydc/zydc_feedback_add.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3492,1554" />
+      <AbsolutePoint location="3492,1798" />
+      <AbsolutePoint location="431,1798" />
+      <AbsolutePoint location="431,1603" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/addblackcallnumber.do,formView,/jsp/zydc/backcallnumber_add.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2607,1602" />
+      <AbsolutePoint location="0,0" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/queryssmn.do,formView,/jsp/zydc/zydc_user_list.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2192,1188" />
+      <AbsolutePoint location="2450,1188" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/manageagent.do,addView,/jsp/zydc/zydc_agent_add.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1874,1418" />
+      <AbsolutePoint location="2551,1418" />
+      <AbsolutePoint location="2551,1403" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/OPgroupModify.do,successView,/OPgroupSearch.do,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="0,0" />
+      <AbsolutePoint location="0,0" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/operatorLogin.do,loginView,/jsp/login.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="0,0" />
+      <AbsolutePoint location="0,0" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/frameBottom.do,null,/jsp/frame/botton-main.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="0,0" />
+      <AbsolutePoint location="0,0" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/operatorSearch.do,formView,/jsp/operator/operator_search.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3050,302" />
+      <AbsolutePoint location="3026,302" />
+      <AbsolutePoint location="3026,2076" />
+      <AbsolutePoint location="2981,2076" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/levelmanage.do,addFormView,/jsp/zydc/level_add.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2583,302" />
+      <AbsolutePoint location="0,0" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/operatorModify.do,successView,/operatorSearch.do,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="0,0" />
+      <AbsolutePoint location="3221,302" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/downloadCDRinfo.do,formView,/jsp/zydc/communicat_CDR_list.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="486,1350" />
+      <AbsolutePoint location="486,999" />
+      <AbsolutePoint location="2565,999" />
+      <AbsolutePoint location="2565,903" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/selectlevel.do,formView,/jsp/zydc/zydc_user_add.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1211,1502" />
+      <AbsolutePoint location="2847,1502" />
+      <AbsolutePoint location="2847,1403" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/modifyssmnnumber.do,formOwnerRelationView,/jsp/zydc/zydc_owner_relation_list.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3507,1302" />
+      <AbsolutePoint location="0,0" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/leftMenu.do,leftmenu_dc3g,/jsp/frame/leftmain_ssmn_dc.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1691,154" />
+      <AbsolutePoint location="1691,1150" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/operatorLogin.do,frameView,/jsp/frame/frameCover.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="985,702" />
+      <AbsolutePoint location="1226,702" />
+      <AbsolutePoint location="1226,1532" />
+      <AbsolutePoint location="3143,1532" />
+      <AbsolutePoint location="3143,1550" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="autherrorView;6,null,/jsp/error.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="0,0" />
+      <AbsolutePoint location="0,0" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/operatorAdd.do,formView,/jsp/operator/operator_add.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="0,0" />
+      <AbsolutePoint location="0,0" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/manageagent.do,formView,/jsp/zydc/zydc_agent_list.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1874,1388" />
+      <AbsolutePoint location="2150,1388" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/operatorModify.do,formView,/jsp/operator/operator_modify.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="50,302" />
+      <AbsolutePoint location="-15,302" />
+      <AbsolutePoint location="-15,1982" />
+      <AbsolutePoint location="3466,1982" />
+      <AbsolutePoint location="3466,2050" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="timeOutView;6,null,/jsp/timeout.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="0,0" />
+      <AbsolutePoint location="0,0" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/version.do,version,/jsp/version.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1505,918" />
+      <AbsolutePoint location="2413,918" />
+      <AbsolutePoint location="2413,2276" />
+      <AbsolutePoint location="2271,2276" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/reginfoModify.do,successView,/jsp/operator/reginfomod.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3281,754" />
+      <AbsolutePoint location="3281,2118" />
+      <AbsolutePoint location="1952,2118" />
+      <AbsolutePoint location="1952,2250" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/operatorDelete.do,formView,/operatorSearch.do,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="0,0" />
+      <AbsolutePoint location="0,0" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/operatorLogin.do,frameView1,/jsp/frame/frame.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="985,672" />
+      <AbsolutePoint location="1136,672" />
+      <AbsolutePoint location="1136,1178" />
+      <AbsolutePoint location="926,1178" />
+      <AbsolutePoint location="926,2276" />
+      <AbsolutePoint location="950,2276" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="indexView;6,null,/jsp/login.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="0,0" />
+      <AbsolutePoint location="0,0" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/OPgroupDelete.do,formView,/OPgroupSearch.do,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="0,0" />
+      <AbsolutePoint location="0,0" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/OPgroupSearch.do,formView,/jsp/operator/group_search.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2012,554" />
+      <AbsolutePoint location="2012,599" />
+      <AbsolutePoint location="-150,599" />
+      <AbsolutePoint location="-150,2276" />
+      <AbsolutePoint location="50,2276" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/index.do,null,/jsp/login.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="0,0" />
+      <AbsolutePoint location="0,0" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/statchannelcallin.do,formView,/jsp/zydc/zydc_statChannelCallIn_list.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="0,0" />
+      <AbsolutePoint location="0,0" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/frameMain.do,null,/jsp/frame/main.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="0,0" />
+      <AbsolutePoint location="0,0" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/OperatorLoginSearch.do,formView,/jsp/operator/opLog_search.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1850,1618" />
+      <AbsolutePoint location="758,1618" />
+      <AbsolutePoint location="758,1603" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/OPexportFile.do,formview,/jsp/operator/log_search.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="280,954" />
+      <AbsolutePoint location="280,2208" />
+      <AbsolutePoint location="1649,2208" />
+      <AbsolutePoint location="1649,2250" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/frameMainTop.do,null,/jsp/frame/mainTop.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="0,0" />
+      <AbsolutePoint location="0,0" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/operatorLogout.do,loginView,/operatorLogin.do,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="0,0" />
+      <AbsolutePoint location="0,0" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/OperatorLoginSearch.do,formDetailView,/jsp/operator/opLog_search_detail.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2019,1654" />
+      <AbsolutePoint location="2019,1676" />
+      <AbsolutePoint location="1204,1676" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/frame.do,null,/jsp/frame/frame.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="0,0" />
+      <AbsolutePoint location="1026,2276" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/OPgroupAdd.do,successView,/OPgroupSearch.do,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="0,0" />
+      <AbsolutePoint location="0,0" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/modifyssmnnumber.do,formView,/jsp/zydc/zydc_number_list.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3507,1250" />
+      <AbsolutePoint location="3507,876" />
+      <AbsolutePoint location="3257,876" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/callmanage.do,formView,/jsp/zydc/call_list.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="0,0" />
+      <AbsolutePoint location="0,0" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/frameTop.do,null,/jsp/frame/top-main.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="0,0" />
+      <AbsolutePoint location="0,0" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/mylogSearch.do,formView,/jsp/operator/mylog.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2014,754" />
+      <AbsolutePoint location="2014,799" />
+      <AbsolutePoint location="1520,799" />
+      <AbsolutePoint location="1520,2276" />
+      <AbsolutePoint location="1422,2276" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+</FlowViewLayout>
+

@@ -1,0 +1,281 @@
+
+
+创建权限组sql：
+insert into TYADMIN_GROUPS (ID, GROUP_NAME, DESCRIPTION, SERVICEKEY, CREATE_DATE, OPERATOR_ID, RANK) values (SEQ_TYAdmin_GROUP.Nextval, '超级管理员_珠海', '具有全部系统权限', '50', sysdate,'system', 0);
+
+
+----1.创建行动组和账号
+
+insert into ssmn_zy_level values (SEQ_SSMN_ZY_LEVEL.NEXTVAL,'北京','中原','东北区事业部','太阳宫部','太阳宫片区','国际村二店分行B组' );
+
+insert into tyadmin_operators t (t.openo, t.servicekey,t.opepwd, t.group_id ,t.create_user, t.create_time, t.agent_info, t.note,  t.levelid) values ('gjcedfhB','50','b53ce8fa3ddc5cd198b993318e3787ad',(select g.id from tyadmin_groups g where g.servicekey='50' and g.group_name='分行行动组'), 'system',sysdate,'admin','', (select id from ssmn_zy_level l where l.branchactiongroup='国际村二店分行B组') ); 
+
+
+-----2.创建片区及账号
+insert into ssmn_zy_level values (SEQ_SSMN_ZY_LEVEL.NEXTVAL,'北京','中原','北区事业部','上地部','上地片区','') ;
+
+insert into tyadmin_operators t (t.openo, t.servicekey,t.opepwd, t.group_id ,t.create_user, t.create_time,t.agent_info, t.note,  t.levelid)  values ('sdpq','50','b53ce8fa3ddc5cd198b993318e3787ad',(select g.id from tyadmin_groups g where g.servicekey='50' and g.group_name='片区组'), 'system',sysdate,'admin', '', ( select id from ssmn_zy_level l where l.area='上地片区' and l.branchactiongroup is null) ); 
+
+
+-----3.创建战区及账号
+insert into ssmn_zy_level values (SEQ_SSMN_ZY_LEVEL.NEXTVAL,'北京','中原','北区事业部','上地部','','');
+
+insert into tyadmin_operators t (t.openo, t.servicekey,t.opepwd, t.group_id ,t.create_user, t.create_time,t.agent_info, t.note,  t.levelid)  values ('sdzq','50','b53ce8fa3ddc5cd198b993318e3787ad',(select g.id from tyadmin_groups g where g.servicekey='50' and g.group_name='战区组'), 'system',sysdate,'admin', '',  ( select id from ssmn_zy_level l where l.warzone='上地部' and l.area is null  and l.branchactiongroup is null) );
+
+
+-----4.创建事业部及账号
+
+insert into ssmn_zy_level values (SEQ_SSMN_ZY_LEVEL.NEXTVAL,'北京','中原','北区事业部','','','');
+
+insert into tyadmin_operators t (t.openo, t.servicekey,t.opepwd, t.group_id ,t.create_user, t.create_time,t.agent_info, t.note,  t.levelid)  values ('bqsyb','50','b53ce8fa3ddc5cd198b993318e3787ad',(select g.id from tyadmin_groups g where g.servicekey='50' and g.group_name='事业部组'), 'system',sysdate,'admin', '',  ( select id from ssmn_zy_level l where l.businessdepartment='北区事业部' and l.warzone is null  and l.area is null  and l.branchactiongroup is null) );
+
+
+
+------5.取消行动组：　三环新城分行C组 取消
+
+delete from ssmn_zy_level t where t.branchactiongroup='三环新城分行C组';
+
+
+-----6.行动组 换到　指定片区： 三环新城分行A组 换到　花乡片区
+
+update ssmn_zy_level t set t.area='花乡片区' where t.branchactiongroup='三环新城分行A组';
+
+
+-----7.片区　换到　指定战区  : 鲁谷片区 换到　西南区一部 
+update ssmn_zy_level t set t.warzone='西南区一部' where t.area='鲁谷片区';
+
+
+-----8.给事业部添加密码重置权限
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='事业部组' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='resetpassword'   and t.servicekey=50 ) ) ;
+
+
+
+-----9. 副号码导入的sql，将副号码13366491243导入到北京中原公司下面
+
+insert into ssmn_zy_enablenumber t (t.enablenumber,t.status,t.area_id,t.levelid) values ('13366491243',0,'010',(select id from ssmn_zy_level t where t.provincecity='北京' and t.company='中原' and t.businessdepartment is null));
+
+
+---------10.查询 24日，业主绑定的副号码的个数
+
+select count(*) from ssmn_dc_relation t ,ssmn_zy_enablenumber e where t.ssmnnumber=e.enablenumber and e.type=1 and to_char(t.crateline,'yyyy-mm-dd')='2016-04-24' ;
+select count(*) from ssmn_dc_delrelation t ,ssmn_zy_enablenumber e where t.ssmnnumber=e.enablenumber and e.type=1 and to_char(t.crateline,'yyyy-mm-dd')='2016-04-24' ;
+
+------查连续几天的
+select count(t.id),to_char(t.crateline,'yyyy-mm-dd') from ssmn_dc_delrelation t ,ssmn_zy_enablenumber e where t.ssmnnumber=e.enablenumber and e.type=1 and 
+to_char(t.crateline,'yyyy-mm-dd')>='2016-04-20'  and to_char(t.crateline,'yyyy-mm-dd')<='2016-05-02' group by  to_char(t.crateline,'yyyy-mm-dd')
+ order by  to_char(t.crateline,'yyyy-mm-dd') ;
+
+
+-------11.创建超级管理员(dascom)一样权限的账号
+
+insert into tyadmin_operators t (t.openo, t.servicekey,t.opepwd, t.group_id ,t.create_user, t.create_time,t.agent_info, t.note,  t.levelid) 
+ values ('zhongyuandichan','50','b53ce8fa3ddc5cd198b993318e3787ad',(select g.id from tyadmin_groups g where g.servicekey='50' and 
+ g.group_name='超级管理员'), 'system',sysdate,'admin', '',  
+ ( select id from ssmn_zy_level l where l.provincecity='天津' and l.company='中原' and l.businessdepartment is null and l.warzone is null  and l.area is null  and l.branchactiongroup is null) );
+
+
+-----创建测试账号
+ insert into tyadmin_operators t (t.openo, t.servicekey,t.opepwd, t.group_id ,t.create_user, t.create_time,t.agent_info, t.note,  t.levelid)  values ('test','50','b53ce8fa3ddc5cd198b993318e3787ad',(select g.id from tyadmin_groups g where g.servicekey='50' and g.group_name='超级管理员'), 'system',sysdate,'admin', '',  ( select id from ssmn_zy_level l where l.provincecity='测试' and l.company='测试' and l.businessdepartment is null and   l.warzone is null  and l.area is null  and l.branchactiongroup is null) );
+
+
+
+---------12.战区改名
+update   ssmn_zy_level t set t.warzone='西南区一部' where t.warzone='西南一部';
+
+-------13.片区改名
+update   ssmn_zy_level t set t.area='新的名' where t.area='旧的名';
+
+-------14.行动组改名
+update   ssmn_zy_level t set t.branchactiongroup='新的名' where t.branchactiongroup='旧的名';
+
+
+---------15.事业部改名
+update   ssmn_zy_level t set t.businessdepartment='新的名' where t.businessdepartment='旧的名';
+
+-------16.公司改名
+update   ssmn_zy_level t set t.company='新的名' where t.company='旧的名';
+
+
+----------17.调整　序列值，删除旧的，重新创建新的　
+drop sequence SEQ_SSMN_ZY_USER;
+
+create sequence SEQ_SSMN_ZY_USER
+minvalue 1
+maxvalue 9999999998
+start with 1000044536
+increment by 2
+cache 10
+cycle;
+
+-----18.删除战区
+
+delete from tyadmin_operators t where t.levelid=(select id from ssmn_zy_level t where t.provincecity='南京' and t.company='中原'   and  t.businessdepartment='鼓楼区' and  t.warzone='' and  t.area is null and t.branchactiongroup is null ) and t.servicekey=50 ;
+
+delete from ssmn_zy_level t where t.provincecity='南京' and t.company='中原' and  t.warzone='' and t.businessdepartment='鼓楼区' and  t.area is null and t.branchactiongroup is null ; 
+
+-----19.删除片区,先删除账号,再删除片区
+
+delete from tyadmin_operators t where t.levelid=(select id from ssmn_zy_level t where t.provincecity='南京'
+  and t.company='中原' and t.businessdepartment='鼓楼区' and  t.warzone='' and 
+t.area='鼓楼二区' and t.branchactiongroup is null   ) and t.servicekey=50;
+
+delete from ssmn_zy_level t where t.provincecity='南京' and t.company='中原' and t.businessdepartment='鼓楼区' and  t.warzone='' and  t.area='鼓楼二区' and t.branchactiongroup is null ; 
+
+
+-----20.删除行动组
+
+delete from tyadmin_operators t where t.levelid=(select id from ssmn_zy_level t where t.provincecity='南京' and t.company='中原' and t.businessdepartment='鼓楼区' and  t.area='鼓楼二区' and t.branchactiongroup='aa'  )  and t.servicekey=50  ;
+
+delete from ssmn_zy_level t where t.provincecity='南京' and t.company='中原' and t.businessdepartment='鼓楼区' and  t.area='鼓楼二区' and t.branchactiongroup='aa' ; 
+
+
+-----21添加渠道
+
+--1)先查询是否有渠道存在
+select * from ssmn_zy_channel t where t.name='搜房' ;
+
+如果1)没有查出结果，执行下面创建sql:
+insert into ssmn_zy_channel t (t.id,t.name,t.createtime) values(seq_ssmn_zy_channel.nextval,'搜房',sysdate); 
+
+
+如果1)中有结果，直接执行如下sql:
+
+ insert into ssmn_zy_level_channel (id,channelid,levelid) values( seq_ssmn_zy_level_channel.nextval, 
+ (select id from ssmn_zy_channel t where t.name='搜房') ,(select id from ssmn_zy_level where provincecity='测试' 
+and company='测试' and businessdepartment is null ) )  ;
+
+
+----22 操作员管理权限下面变更
+
+----变更sql:
+delete from TYADMIN_GROUP_AUTHS where GROUP_ID =(select id from tyadmin_groups t where t.group_name='战区组' and t.servicekey=50  )
+and AUTH_ID =(select id from tyadmin_authorities t where t.auth_method='queryssmn'   and t.servicekey=50) ;
+
+---组别名称:
+ 超级管理员 ,分行行动组,片区组,战区组,事业部组  
+ 
+ ------变更组名字对应:
+ 1.操作员管理 下面:
+ 
+ 1) 登录详情查询 : operatorloginsearch
+ 2) 操作员管理:  operatorSearchManage
+ 3) 架构管理: levelManage
+ 4)密码重置: resetpassword
+ 5) 添加黑名单: addblacthod='operatorloginsearch'   and t.servicekey=50 ) ) ;
+
+
+----------23添加登录详情查询权限
+
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='事业部组' and t.servicekey=50  ), 
+(select id from tyadmin_authorities t where t.auth_method='operatorSearch'   and t.servicekey=50 ) ) ;
+
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='战区组' and t.servicekey=50  ), 
+(select id from tyadmin_authorities t where t.auth_method='operatorSearch'   and t.servicekey=50 ) ) ;
+
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='片区组' and t.servicekey=50  ), 
+(select id from tyadmin_authorities t where t.auth_method='operatorSearch'   and t.servicekey=50 ) ) ;
+
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='事业部组' and t.servicekey=50  ), 
+(select id from tyadmin_authorities t where t.auth_method='operatorloginsearch'   and t.servicekey=50 ) ) ;
+
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='战区组' and t.servicekey=50  ), 
+(select id from tyadmin_authorities t where t.auth_method='operatorloginsearch'   and t.servicekey=50 ) ) ;
+
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='片区组' and t.servicekey=50  ), 
+(select id from tyadmin_authorities t where t.auth_method='operatorloginsearch'   and t.servicekey=50 ) ) ;
+
+
+
+-------------------------------------------------------------------------------------------------
+
+ssmn_cdr 语音记录统一到 ssmn_zy_cdr表中,初始化sql:
+
+--------------------------------
+select count(*),streamnumber from ssmn_zy_cdr1111 t  group by streamnumber having count(*)>1
+
+-------------------------------
+insert into  ssmn_zy_cdr t (t.streamnumber,t.msisdn,t.ssmnnumber,t.username,t.empno,t.calltype,t.callstarttime,t.callstoptime,t.callduration,t.endreason,t.incoming_cin,t.outgoing_cpn
+,t.manner,t.usertype,t.agentid,t.ownerd,t.dc_calltype,t.levelid,t.channelid )   
+select  distinct( a.streamnumber),(case when a.dc_calltype =5 then a.callingaddress else b.msisdn end) as msisdn ,  a.ssmnNumber ,b.name ,b.empno,a.calltype,
+to_number(a.callstarttime  - TO_DATE('1970-01-01 8:0:0', 'YYYY-MM-DD HH24:MI:SS')) * 24 * 60 * 60 * 1000 ,
+to_number(a.callstoptime  - TO_DATE('1970-01-01 8:0:0', 'YYYY-MM-DD HH24:MI:SS')) * 24 * 60 * 60 * 1000,a.callduration,a.endreason,
+ a.callingaddress ,(case when a.dc_calltype in(3,4) then a.calledaddress when a.dc_calltype=5 then a.outgoing_cpn  end ) as inout,
+a.manner,a.usertype,a.agentid,a.ownerid,a.dc_calltype, b.levelid,b.channelid 
+ from  Ssmn_Zy_User b,Ssmn_CDR a,ssmn_zy_cdrsms_user u, Ssmn_Zy_Channel c , Ssmn_zy_level l 
+where a.streamnumber=u.cdrsms_id and u.user_id=b.id  and b.levelid=l.id  and b.channelid = c.id   
+and a.dc_calltype in(1,2,3,4,5)  and u.type=0 
+and to_char(a.callStartTime,'yyyy-mm-dd') >='2016-02-01'  
+and to_char(a.callStartTime,'yyyy-mm-dd') <='2016-02-31'   and a.endreason in (1,2,3,4)
+
+--------
+select count(*)
+ from  Ssmn_Zy_User b,Ssmn_CDR a,ssmn_zy_cdrsms_user u, Ssmn_Zy_Channel c , Ssmn_zy_level l 
+where a.streamnumber=u.cdrsms_id and u.user_id=b.id  and b.levelid=l.id  and b.channelid = c.id   
+and a.dc_calltype in(1,2,3,4,5)  and u.type=0  
+and to_char(a.callStartTime,'yyyy-mm-dd') >='2016-07-20'  
+and to_char(a.callStartTime,'yyyy-mm-dd') <='2016-07-31'  and a.endreason in (1,2,3,4)
+
+--------------------------------------------
+insert into  ssmn_zy_cdr t (t.streamnumber,t.msisdn,t.ssmnnumber,t.username,t.empno,t.calltype,t.callstarttime,t.callstoptime,t.callduration,t.endreason,t.incoming_cin,t.outgoing_cpn
+,t.manner,t.usertype,t.agentid,t.ownerd,t.dc_calltype,t.levelid,t.channelid )   
+select   distinct(a.streamnumber),(case when a.dc_calltype =5 then a.callingaddress else b.msisdn end) as msisdn ,  a.ssmnNumber ,b.name ,b.empno,a.calltype,
+to_number(a.callstarttime  - TO_DATE('1970-01-01 8:0:0', 'YYYY-MM-DD HH24:MI:SS')) * 24 * 60 * 60 * 1000 ,
+to_number(a.callstoptime  - TO_DATE('1970-01-01 8:0:0', 'YYYY-MM-DD HH24:MI:SS')) * 24 * 60 * 60 * 1000,a.callduration,a.endreason,
+ a.callingaddress ,(case when a.dc_calltype in(3,4) then a.calledaddress when a.dc_calltype=5 then a.outgoing_cpn  end ) as inout,
+a.manner,a.usertype,a.agentid,a.ownerid,a.dc_calltype, b.levelid,b.channelid 
+ from  Ssmn_Zy_cancel_User b,Ssmn_CDR a,ssmn_zy_cdrsms_user u, Ssmn_Zy_Channel c , Ssmn_zy_level l 
+where a.streamnumber=u.cdrsms_id and u.user_id=b.userid  and b.levelid=l.id  and b.channelid = c.id   
+and a.dc_calltype in(1,2,3,4,5)  and u.type=0 
+and to_char(a.callStartTime,'yyyy-mm-dd') >='2016-02-01'  
+and to_char(a.callStartTime,'yyyy-mm-dd') <='2016-02-31'   and a.endreason in (1,2,3,4)
+-------------------------------------------------------------------------------------------------
+
+select count(*)
+ from  Ssmn_Zy_cancel_User b,Ssmn_CDR a,ssmn_zy_cdrsms_user u, Ssmn_Zy_Channel c , Ssmn_zy_level l 
+where a.streamnumber=u.cdrsms_id and u.user_id=b.userid  and b.levelid=l.id  and b.channelid = c.id   
+and a.dc_calltype in(1,2,3,4,5)  and u.type=0  
+and to_char(a.callStartTime,'yyyy-mm-dd') >='2016-07-01'  
+and to_char(a.callStartTime,'yyyy-mm-dd') <='2016-08-01'  and a.endreason in (1,2,3,4)
+
+----------------------------------------
+
+
+----按每个行动组 分组，通话次数                                                                                                 
+select l.branchactiongroup, count(t.streamnumber) from SSMN_ZY_CDR t,ssmn_zy_channel c,ssmn_zy_level l  where t.channelid=c.id  
+ and t.levelid=l.id and c.type=1 and l.branchactiongroup is not null                                                            
+ and l.provincecity='广州' and l.company='中原' and t.callstarttime>=20170601000000                                             
+ and t.callstarttime<=20170605235959  group by l.branchactiongroup;                                                             
+                                                                                                                                
+ -------已接次数                                                                                                                
+ select l.branchactiongroup, count(t.streamnumber) from SSMN_ZY_CDR t,ssmn_zy_channel c,ssmn_zy_level l  where t.channelid=c.id 
+  and t.levelid=l.id and c.type=1 and l.branchactiongroup is not null                                                           
+ and l.provincecity='广州' and l.company='中原' and t.callstarttime>=20170601000000                                             
+ and t.callstarttime<=20170605235959  and t.callduration >0 group by l.branchactiongroup;                                       
+                                                                                                                                
+  -------已接分钟数                                                                                                             
+ select l.branchactiongroup, sum(t.callduration)/60 from SSMN_ZY_CDR t,ssmn_zy_channel c,ssmn_zy_level l  where t.channelid=c.id
+  and t.levelid=l.id and c.type=1 and l.branchactiongroup is not null                                                           
+ and l.provincecity='广州' and l.company='中原' and t.callstarttime>=20170601000000                                             
+ and t.callstarttime<=20170605235959  and t.callduration >0 group by l.branchactiongroup;                                       
+
+
+---- 操作员管理里，听录音次数分 A+和渠道  后，恢复之前的log记录
+update TYADMIN_LOGS t set t.log_type =t.log_type ||'A+' where 
+ t.log_des like '%听录音%' and to_char(t.log_time,'yyyy-mm-dd') <='2017-05-16' and t.log_type ='听录音次数'
+
+
+
+
+
+
+
+
+
+

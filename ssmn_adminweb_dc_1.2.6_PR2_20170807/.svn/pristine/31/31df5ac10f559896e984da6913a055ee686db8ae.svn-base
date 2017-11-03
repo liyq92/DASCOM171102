@@ -1,0 +1,218 @@
+--1. 系统用户信息记录表
+-- drop table SSMN_USER;
+create table SSMN_USER
+(
+	MSISDN			Varchar2(20)		NOT NULL,
+	PIN			Varchar2(6)		NOT NULL,
+	Sub_Manner		Number(1)		NOT NULL,
+	ServiceStatus		Char(1)			NOT NULL,
+	Temp_Pin		Char(6),
+	CRBT_Flag		Char(1),
+	UserName		Varchar2(20),
+	UserID			Varchar2(20),
+	CallingType		Number(1)			NOT NULL,
+	CallingNumber		Varchar2(18),
+	Sub_Date		Date				NOT NULL,
+	Question		Varchar2(30),
+	Answer			Varchar2(30),
+	Agent_ID		Varchar2(16),
+	Cancel_Manner		Number(1),
+	usertype		Varchar2(10)	default NULL,
+	DeviceToken	Varchar2(64)	default NULL,
+	Logintime		Date	default NULL,
+	PHONE_SYSTEM  VARCHAR2(20),
+	VALIDITY      DATE,
+	PAYMENT       NUMBER(1) default 0,
+	 TYPE          NUMBER(1) default 1 not null ,
+	 UserUSSDFlag	 Number(1) default 1 not null ,
+	 Remind_Flag	 Number(1) default 1 not null 
+) tablespace SSMN_DATA;
+alter table SSMN_USER add constraint PK_SSMN_USER primary key(MSISDN)
+using index tablespace SSMN_IDX;
+Create index IDX1_SSMN_USER on SSMN_USER (MSISDN, ServiceStatus) tablespace SSMN_IDX;
+Create index IDX2_SSMN_USER on SSMN_USER (UserName) tablespace SSMN_IDX;
+Create index IDX3_SSMN_USER on SSMN_USER (ServiceStatus,Sub_Date) tablespace SSMN_IDX;
+create index IDX4_SSMN_USER on SSMN_USER (MSISDN,SUB_DATE) tablespace SSMN_IDX;
+commit;
+
+
+--1. 系统用户信息记录表
+-- drop table SSMN_CANCEL_USER;
+create table SSMN_CANCEL_USER
+(
+	MSISDN			Varchar2(20)		NOT NULL,
+	PIN			Varchar2(6)		NOT NULL,
+	Sub_Manner		Number(2)		NOT NULL,
+	ServiceStatus		Char(1)			NOT NULL,
+	Temp_Pin		Char(6),
+	CRBT_Flag		Char(1),
+	UserName		Varchar2(20),
+	UserID			Varchar2(20),
+	CallingType		Number(1)			NOT NULL,
+	CallingNumber		Varchar2(18),
+	Sub_Date		Date				NOT NULL,
+	Question		Varchar2(30),
+	Answer			Varchar2(30),
+	Agent_ID		Varchar2(16),
+	Cancel_Manner		Number(2),
+	Cancel_Date		Date,
+	usertype		Varchar2(10)	default NULL,
+	DeviceToken	Varchar2(64)	default NULL,
+	Logintime		Date	default NULL,
+	type	Number(1)
+) tablespace SSMN_DATA;
+alter table SSMN_CANCEL_USER add constraint PK_SSMN_CANCEL_USER primary key(MSISDN, Cancel_Date)
+using index tablespace SSMN_IDX;
+
+Create Index IDX1_SSMN_CANCEL_USER ON SSMN_CANCEL_USER (Sub_Date) tablespace SSMN_IDX;
+Create Index IDX2_SSMN_CANCEL_USER ON SSMN_CANCEL_USER (Cancel_Date) tablespace SSMN_IDX;
+create index IDX3_SSMN_CANCEL_USER on SSMN_CANCEL_USER (MSISDN,SUB_DATE) tablespace SSMN_IDX;
+commit;
+
+
+--3. 系统虚号码记录表
+-- drop table SSMN_NUMBER;
+create table SSMN_NUMBER
+(
+	SSMNNumber		Varchar2(18)		NOT NULL,
+	Type				Number(1)	 default 0	NOT NULL,
+	Number_Type		Number(1)		NOT NULL,
+	MSISDN			Varchar2(20),      
+	Called_Type		Number(1)		NOT NULL,       
+	Restriction_Type	Char(1),
+	Status			Number(1),
+	Prompt_Type		Number(1),
+	Initiate_Date		Date,
+	Cancel_Date		Date,
+	Sub_Manner		Number(2),
+	Cancel_Manner		Number(1),
+	ServiceStatus		Char(1)	default 'N'		NOT NULL,
+	OrderID		Number(2)	 default 0		NOT NULL,
+        CFStatus	Number(2)	 default 0		NOT NULL,
+        SFStatus	Number(2)	 default 0		NOT NULL,
+        FTStatus	Number(2)	 default 1		NOT NULL,
+	PACKAGEID      NUMBER(10) NOT NULL
+) tablespace SSMN_DATA;
+alter table SSMN_NUMBER add constraint PK_SSMN_NUMBER primary key(SSMNNumber)
+using index tablespace SSMN_IDX;
+
+Create Index IDX1_SSMN_NUMBER ON SSMN_NUMBER (Number_Type) tablespace SSMN_IDX;
+Create Index IDX2_SSMN_NUMBER ON SSMN_NUMBER (SSMNNumber, Status) tablespace SSMN_IDX;
+Create Index IDX3_SSMN_NUMBER ON SSMN_NUMBER (SSMNNumber, Number_Type) tablespace SSMN_IDX;
+Create Index IDX4_SSMN_NUMBER ON SSMN_NUMBER (MSISDN,Number_Type,Initiate_date) tablespace SSMN_IDX;
+Create Index IDX5_SSMN_NUMBER ON SSMN_NUMBER (Cancel_Date) tablespace SSMN_IDX;
+Create Index IDX6_SSMN_NUMBER ON SSMN_NUMBER (length(msisdn)) tablespace SSMN_IDX;
+Create Index IDX7_SSMN_NUMBER ON SSMN_NUMBER (sub_manner) tablespace SSMN_IDX;
+
+commit;
+
+--4. 系统话单表
+-- drop table SSMN_CDR;
+create table SSMN_CDR
+(
+	Streamnumber		Number(10)		NOT NULL,
+	CallingAddress		Varchar2(18),
+	CalledAddress		Varchar2(32),
+	OriginalCalled		Varchar2(18),
+	RedirectPartyID		Varchar2(18),
+	MSISDN			Varchar2(20),
+	SSMNNumber		Varchar2(18),
+	CallType		Number(1)			NOT NULL,
+	CallStartTime		Date,
+	CallStopTime		Date,
+	ChargeClass		Number(6),
+	Call_Cost		Number(6),
+	Change_Pin		Char(1),
+	Apply_Number		Char(1),
+	Set_CLI			Char(1),
+	Cancel_Number		Char(1),
+	Apply_Service		Char(1),
+	Cancel_Service		Char(1),
+	CallDuration	Number(6)	default NULL,
+	Readstatus	Number(1)	default 0,
+	EndReason	Number(2)	default NULL,
+	Incoming_CIN	Varchar2(32)	default NULL,
+	Outgoing_CPN Varchar2(32) default NULL,
+	CIN Varchar2(32),
+	Manner NUMBER(1),
+	Usertype NUMBER(1),
+	Agentid NUMBER(1),
+	Ownerd NUMBER(1),
+	dc_calltype  NUMBER(1) default 2
+) tablespace SSMN_DATA;
+
+alter table SSMN_CDR add constraint PK_SSMN_CDR primary key(Streamnumber) using index tablespace SSMN_IDX;
+
+Create index IDX1_SSMN_CDR on SSMN_CDR (MSISDN, CallStartTime, Apply_Service) tablespace SSMN_IDX;
+Create index IDX2_SSMN_CDR on SSMN_CDR(MSISDN, CallStartTime, Cancel_Service) tablespace SSMN_IDX;
+Create index IDX3_SSMN_CDR on SSMN_CDR (CallingAddress) tablespace SSMN_IDX;
+Create index IDX4_SSMN_CDR on SSMN_CDR (CalledAddress) tablespace SSMN_IDX;
+Create index IDX5_SSMN_CDR on SSMN_CDR (CallType,CallStopTime) tablespace SSMN_IDX;
+Create index IDX6_SSMN_CDR on SSMN_CDR (CallType,CallStopTime,calledaddress,callingaddress) tablespace SSMN_IDX; 
+Create index IDX7_SSMN_CDR on SSMN_CDR(MSISDN, CallType) tablespace SSMN_IDX;
+
+commit;
+
+--创建序列
+-- Create sequence 
+create sequence SEQ_SSMN_CDR
+minvalue 1
+maxvalue 9999999998
+start with 1001042650
+increment by 2
+cache 10
+cycle;
+commit;
+
+
+--5. 系统注销号码列表
+-- drop table SSMN_CANCEL_NUM;
+create table SSMN_CANCEL_NUM
+(
+	SSMNNumber		Varchar2(18)		NOT NULL,
+	Type				Number(1)	 default 0	NOT NULL,
+	MSISDN			Varchar2(20)		NOT NULL,
+	Initiate_Date		Date				NOT NULL,
+	Cancel_Date		Date				NOT NULL,
+	Number_Type		Number(1)			NOT NULL,
+	Sub_Manner		Number(1),
+	Cancel_Manner		Number(1),
+	ServiceStatus		Char(1)	default 'N'			NOT NULL,
+	OrderID		Number(2)	 default 0		NOT NULL,
+        CFStatus	Number(2)	 default 0		NOT NULL,
+        SFStatus	Number(2)	 default 0		NOT NULL,
+        FTStatus	Number(2)	 default 1		NOT NULL,
+	Packageid	Number(10)
+) tablespace SSMN_DATA;
+
+alter table SSMN_CANCEL_NUM add constraint PK_SSMN_CANCEL_NUM primary key(SSMNNumber,MSISDN,Initiate_Date)
+using index tablespace SSMN_IDX;
+
+Create Index IDX1_SSMN_CANCEL_NUM ON SSMN_CANCEL_NUM (Cancel_Date) tablespace SSMN_IDX;
+Create Index IDX2_SSMN_CANCEL_NUM ON SSMN_CANCEL_NUM (Initiate_Date,Cancel_Date,Number_Type,MSISDN) tablespace SSMN_IDX;  
+
+Create Index IDX3_SSMN_CANCEL_NUM ON SSMN_CANCEL_NUM (Length(msisdn)) tablespace SSMN_IDX;
+commit;
+
+
+-- 6.转移中央发送短信记录表
+-- drop table SSMN_SMS_toMI;
+create table SSMN_SMS_toMI
+( id		          Number(10)			NOT NULL,
+	srcNo		        Varchar2(25)		NOT NULL,
+	DestNo          Varchar2(25)		NOT NULL,
+	Ssmnnumber      Varchar2(25)		NOT NULL,
+	MsgContent      Varchar2(200)		NOT NULL,
+	inTime		      Date			      NOT NULL,
+	state           Number(10)			default 0,
+	Transfer_Flag		Char(2)					NOT NULL,
+	Handle_Time			Date
+ ) tablespace SSMN_DATA;
+ 
+alter table SSMN_SMS_toMI add constraint PK_SSMN_SMS_toMI primary key(id)
+using index tablespace SSMN_IDX;
+
+create index idx_SMStoMI_idx1 on SSMN_SMS_toMI(Ssmnnumber);
+create index idx_SMStoMI_idx2 on SSMN_SMS_toMI(DestNo);
+commit;
+

@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<quartz>
+  <!-- TimingJob：每天上午1点开始统计前一天的报表和打包通话录音文件-->
+ <job>
+  <job-detail>
+   <name>TimingJob</name>
+   <group>job</group>
+   <job-class>com.dascom.ssmn.quartz.TimingJob</job-class>
+  </job-detail>
+  <trigger>
+   <cron>
+   <name>t1</name>
+   <group>job</group>
+   <job-name>TimingJob</job-name>
+   <job-group>job</job-group>
+ <!--   <cron-expression>00 20 16 ? * *</cron-expression> -->
+  <cron-expression>00 42 17 ? * *</cron-expression>
+   </cron>
+  </trigger>
+ </job>
+ 
+</quartz>

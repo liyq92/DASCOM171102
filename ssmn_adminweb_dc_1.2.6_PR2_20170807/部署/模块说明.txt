@@ -1,0 +1,31 @@
+AddBlackCallNumber.java : 添加黑名单
+
+DownloadCDRInfo.java: 通话统计页面功能
+
+LevelManage.java :架构管理
+
+ManageAgent.java :经纪人管理 
+
+ModifyOperatorInfo.java : 密码修改,密码重置
+
+ModifySSMNNumber.java :副号码管理
+
+QueryInfo.java :  统计报表下载
+
+QuerySSMN.java : 经纪人管理->经纪人详情
+
+QuerySSMNInfo.java : 语音查询
+
+SearchFeedback.java : 信息反馈
+
+StatChannelCallIn.java :渠道统计
+
+OperatorLoginSearchAction.java :登录详情查询
+
+OperatorSearchAction.java :操作员管理
+
+GroupSearchAction.java :权限管理
+
+OperatorLoginAction.java :登录
+
+OperatorLogoutAction.java :退出

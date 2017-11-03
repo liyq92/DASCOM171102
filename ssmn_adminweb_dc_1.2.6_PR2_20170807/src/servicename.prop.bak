@@ -1,0 +1,38 @@
+servicename=\u53f7\u76fe\uff08\u5730\u4ea7\u7248\uff09
+groupname=
+#分配副号码的级别: 1:省市 2:公司 3:事业部 4:战区 5:片区 6:行动组
+matchNumberLevel=5
+#语音文件映射路径
+#cdrurl=http://192.168.21.35:8080/ssmn_adminweb_dc/voice
+cdrurl=http://192.168.21.37:8080
+#是否记录用户信息的变化情况(往ssmn_zy_useroperation表中写),此配置只在北京开
+# 0:关闭  1：打开  通过接口同步到其他数据库
+recordUserChange=0
+#小于65536行的数据，生成xls(2003)格式 0:关闭 1打开
+isExcel2003=1
+#属于该配置的渠道的用户，编辑，新建用户的时候，将ssmn_zy_user表中的#ssmnnumber_type配置成1,可配置多个，用“,”分隔
+channelNames=焦点,赶集
+#配置呼入呼出的显示名称，另配置几个呼出，通话统计中显示几种呼出类型,
+#多个值以"|"分隔，格式为数值:名称,数值与名称之间以":"分隔，
+#如：1:业主呼入|2:客户呼入|3:PC呼出|4:APP呼出|5:直接呼出
+dc_calltypes=1:业主呼入|2:客户呼入|3:PC呼出|4:APP呼出|5:直接呼出
+#是否是双呼 0:关闭 1:打开
+isDoubleCall=1
+#地区级别的显示（可以限制到公司级别）,多个公司之间用“|”分开，每个级别之间#用“,”分开,如果不指定，默认 事业部,战区,片区,行动组,注：如果不指定，这样##配置： levelShow=
+levelShow=天津,中原,事业部T,战区T,片区T,行动组T|天津,链家,事业部A,战区A,片区A,行动组A
+#飞语录音地址
+cdrurlfy=http://114.112.65.194:9090/voice0
+#是否添加第二联系人 0:不添加  1：添加 (针对广州)
+isAddSecondMsisdn=0
+#添加是否分配副号码的开关（针对重庆)
+isHaveSsmnNum=0
+#定时任务生成报表，按配置的省市,多个省市间用 “｜”分隔
+timingTask_provincecity =天津|广州|测试
+##针对江苏，语音查询页面，是否添加备注 0:不添加, 1:添加
+addRemark=1
+##(登录详情里)听录音次数，是否 区分 A+和渠道   0:不区分, 1:区分
+distChannel=1
+#呼叫管理里面，接口的地址,如果没有该地址，填空
+callurl=http://192.168.92.244/dczh/doubleCall
+#
+time_job_showclientnum =0;

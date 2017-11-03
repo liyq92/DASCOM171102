@@ -1,0 +1,24 @@
+#MyEclipse Hibernate Properties
+#Wed Apr 12 14:59:55 CST 2017
+sessionFactoryName=com.dascom.ssmn.util.HibernateSessionFactory
+genBasicCompId=false
+profile=
+daoSFId=
+version=3.2
+jndiPath=
+detectM2M=false
+reStrategyClass=
+detectO2O=false
+springDaoFile=
+useJavaTypes=false
+keyGenerator=assigned
+libInstallFolder=WebRoot/WEB-INF/lib
+addLibs2Project=true
+genVersionTag=false
+sessionFactoryId=
+basePersistenceClass=
+genAnnotations=false
+reSettingsFile=/ssmn_adminweb_dc/hibernate.reveng.xml
+configFile=/ssmn_adminweb_dc/src/hibernate.cfg.xml
+createConfigFile=true
+addLibs2Classpath=true

@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" "http://struts.apache.org/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+  <data-sources />
+  <form-beans />
+  <global-exceptions />
+  <global-forwards >
+    <forward name="indexView" path="/jsp/login.jsp"  />
+	<forward name="timeOutView" path="/jsp/timeout.jsp" />
+	<forward name="autherrorView" path="/jsp/error.jsp" />
+  </global-forwards>
+
+  <action-mappings >
+    <action forward="/jsp/login.jsp" path="/index" />
+  	<action forward="/jsp/frame/top-main.jsp" path="/frameTop" />
+  	<action forward="/jsp/frame/botton-main.jsp" path="/frameBottom" />
+  	<action forward="/jsp/frame/main.jsp" path="/frameMain" />
+  	<action forward="/jsp/frame/mainTop.jsp" path="/frameMainTop" />
+  	<action forward="/jsp/frame/frame.jsp" path="/frame" />
+  	
+  	<action path="/leftMenu" type="com.dascom.OPadmin.action.MenuAction" >
+      <forward name="leftmenu_dc3g" path="/jsp/frame/leftmain_ssmn_dc.jsp" />
+    </action>
+     <!--=====================================中原地产业务管理=================================================-->    
+ 
+
+    <action path="/queryssmn" type="com.dascom.ssmn.action.QuerySSMN">
+      <forward name="formView" path="/jsp/zydc/zydc_user_list.jsp" />
+    </action>
+    <action path="/selectlevel" type="com.dascom.ssmn.action.SelectLevel">
+      <forward name="formView" path="/jsp/zydc/zydc_user_add.jsp" />
+    </action>
+    
+     <action path="/manageagent" type="com.dascom.ssmn.action.ManageAgent">
+      <forward name="formView"   path="/jsp/zydc/zydc_agent_list.jsp" />
+       <forward name="addView"   path="/jsp/zydc/zydc_agent_add.jsp" />
+     </action>
+     
+     <action path="/modifyssmnnumber" type="com.dascom.ssmn.action.ModifySSMNNumber">
+      <forward name="formView"   path="/jsp/zydc/zydc_number_list.jsp" />
+      <forward name="formOwnerRelationView"   path="/jsp/zydc/zydc_owner_relation_list.jsp" />
+     </action>
+     
+    <action path="/queryinfo" type="com.dascom.ssmn.action.QueryInfo">
+      <forward name="formView" path="/jsp/zydc/communicat_list.jsp" />
+    </action>
+    
+    <action path="/queryssmninfo" type="com.dascom.ssmn.action.QuerySSMNInfo">
+      <forward name="formSMSView" path="/jsp/zydc/zydc_sms_list.jsp" />
+      <forward name="formCDRView" path="/jsp/zydc/zydc_CDR_list.jsp" />
+    </action>
+    
+    <action path="/downloadCDRinfo" type="com.dascom.ssmn.action.DownloadCDRInfo">
+      <forward name="formView" path="/jsp/zydc/communicat_CDR_list.jsp" />
+    </action>
+    
+    <action path="/callmanage" type="com.dascom.ssmn.action.CallManage">
+      <forward name="formView" path="/jsp/zydc/call_list.jsp" />
+    </action>
+    
+     <action path="/modifyoperatorinfo" type="com.dascom.ssmn.action.ModifyOperatorInfo">
+      <forward name="formPasswordView" path="/jsp/zydc/zydc_modiOperator.jsp" />
+      <forward name="formResetPasswordView" path="/jsp/zydc/zydc_resetpassword.jsp" />
+    </action>
+    
+    <action path="/searchfeedback" type="com.dascom.ssmn.action.SearchFeedback">
+      <forward name="formView" path="/jsp/zydc/zydc_feedback_list.jsp" />
+      <forward name="formAddView" path="/jsp/zydc/zydc_feedback_add.jsp" />
+    </action>
+    
+    <action path="/addblackcallnumber" type="com.dascom.ssmn.action.AddBlackCallNumber">
+      <forward name="formView" path="/jsp/zydc/backcallnumber_add.jsp" />
+    </action>
+    
+    <action path="/statchannelcallin" type="com.dascom.ssmn.action.StatChannelCallIn">
+      <forward name="formView" path="/jsp/zydc/zydc_statChannelCallIn_list.jsp" />
+    </action>
+    
+    
+    <!--======================================操作员管理=================================================-->    
+    
+	<action path="/operatorSearch" type="com.dascom.OPadmin.action.OperatorSearchAction">
+      <forward name="formView" path="/jsp/operator/operator_search.jsp" />
+      
+    </action>
+    
+    <action path="/operatorAdd" type="com.dascom.OPadmin.action.OperatorAddAction">
+      <forward name="formView" path="/jsp/operator/operator_add.jsp"  />
+      <forward name="successView" path="/operatorSearch.do?openo=" />      
+    </action>
+       
+    <action path="/operatorModify" type="com.dascom.OPadmin.action.OperatorModAction" >
+      <forward name="formView" path="/jsp/operator/operator_modify.jsp" />
+      <forward name="successView" path="/operatorSearch.do" />  
+    </action>
+
+    <action path="/operatorDelete" type="com.dascom.OPadmin.action.OperatorDelAction" >  
+      <forward name="formView" path="/operatorSearch.do?openo="/> 
+    </action>
+
+    <action path="/OPgroupSearch" type="com.dascom.OPadmin.action.GroupSearchAction">
+      <forward name="formView" path="/jsp/operator/group_search.jsp" />
+      
+    </action>
+    
+    <action path="/OperatorLoginSearch" type="com.dascom.OPadmin.action.OperatorLoginSearchAction">
+      <forward name="formView" path="/jsp/operator/opLog_search.jsp" />
+      <forward name="formDetailView" path="/jsp/operator/opLog_search_detail.jsp" />
+    </action>
+    
+    <action path="/OPgroupDelete" type="com.dascom.OPadmin.action.GroupDelAction">
+      <forward name="formView" path="/OPgroupSearch.do?groupName=" />
+    </action>
+    
+    <action path="/OPgroupAdd" type="com.dascom.OPadmin.action.GroupAddAction">
+      <forward name="successView" path="/OPgroupSearch.do?groupName=" />
+      <forward name="formView" path="/jsp/operator/group_add.jsp" />
+    </action>
+    
+    <action path="/OPgroupModify" type="com.dascom.OPadmin.action.GroupModAction">
+      <forward name="successView" path="/OPgroupSearch.do?groupName=" />
+      <forward name="formView" path="/jsp/operator/group_modify.jsp" />
+    </action>
+    
+    <action path="/operatorLogin" type="com.dascom.OPadmin.action.OperatorLoginAction">
+      <forward name="loginView" path="/jsp/login.jsp" />
+      <forward name="frameView" path="/jsp/frame/frameCover.jsp" />
+      <forward name="frameView1" path="/jsp/frame/frame.jsp" />
+    </action>
+
+    <action path="/operatorLogout" type="com.dascom.OPadmin.action.OperatorLogoutAction" >
+    	<forward name="loginView" path="/operatorLogin.do" />
+    </action>
+    
+    <action path="/mylogSearch" type="com.dascom.OPadmin.action.MyLogSearchAction">
+      <forward name="formView" path="/jsp/operator/mylog.jsp" />
+    </action>
+    
+    <action path="/logSearch" type="com.dascom.OPadmin.action.LogSearchAction">
+      <forward name="formView" path="/jsp/operator/log_search.jsp" />
+    </action>
+
+    <action path="/reginfoModify" type="com.dascom.OPadmin.action.ReginfoModAction">
+      <forward name="successView" path="/jsp/operator/reginfomod.jsp" />
+      <forward name="formView" path="/jsp/operator/reginfomod.jsp" />
+    </action>
+
+     <action path="/OPexportFile" type="com.dascom.OPadmin.action.ExportFileAction">
+      <forward name="formview" path="/jsp/operator/log_search.jsp" />
+  	 </action>
+  	 
+  	 <action path="/myexportFile" type="com.dascom.OPadmin.action.ExportMyFileAction">
+      <forward name="formview" path="/jsp/operator/mylog.jsp" />
+     </action>
+     
+     <action path="/levelmanage" type="com.dascom.ssmn.action.LevelManage">
+      <forward name="formView" path="/jsp/zydc/level_list.jsp" />
+      <forward name="addFormView" path="/jsp/zydc/level_add.jsp" />
+     </action>
+    
+
+  <!--======================================版本信息=================================================-->    
+   <action path="/version" type="com.dascom.OPadmin.action.version">
+      <forward name="version" path="/jsp/version.jsp" />
+       
+	</action>
+
+  </action-mappings>
+  
+	<controller nocache="true" ></controller>
+  	<message-resources parameter="ApplicationResources" />    
+  
+</struts-config>
+

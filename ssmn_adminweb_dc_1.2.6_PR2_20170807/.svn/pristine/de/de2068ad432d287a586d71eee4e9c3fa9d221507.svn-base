@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.4" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee   http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+
+ <session-config>
+ 	<session-timeout>-1</session-timeout>
+</session-config>
+<servlet>
+  <servlet-name>QuartzInitializer</servlet-name>
+  <servlet-class>org.quartz.ee.servlet.QuartzInitializerServlet</servlet-class>
+  <init-param>
+   <param-name>config-file</param-name>
+   <param-value>/quartz.properties</param-value>
+  </init-param>
+  <init-param>
+   <param-name>shutdown-on-unload</param-name>
+   <param-value>true</param-value>
+  </init-param>
+  <load-on-startup>1</load-on-startup>
+ </servlet>
+ 
+	<filter>
+		<filter-name>SetCharacterEncoding</filter-name>
+		<filter-class>com.dascom.OPadmin.util.SetCharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>SetCharacterEncoding</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<error-page>
+	 <exception-type>java.lang.Exception</exception-type>  
+	<location>/jsp/error.jsp</location>
+	</error-page>
+	
+	<servlet>
+	  <servlet-name>action</servlet-name>
+	  <servlet-class>org.apache.struts.action.ActionServlet</servlet-class>
+	  <init-param>
+	    <param-name>config</param-name>
+	    <param-value>/WEB-INF/struts-config.xml</param-value>
+	  </init-param>
+	  <init-param>
+	    <param-name>debug</param-name>
+	    <param-value>3</param-value>
+	  </init-param>
+	  <init-param>
+	    <param-name>detail</param-name>
+	    <param-value>3</param-value>
+	  </init-param>
+	  <load-on-startup>0</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+	  <servlet-name>action</servlet-name>
+	  <url-pattern>*.do</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>loadAuth</servlet-name>
+		<servlet-class>com.dascom.OPadmin.action.LoadAuthAciton</servlet-class>
+	</servlet>
+  	<servlet-mapping>
+		<servlet-name>loadAuth</servlet-name>
+		<url-pattern>/loadAuth</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>UploadFileServlet</servlet-name>
+		<servlet-class>com.dascom.servlet.UploadFileServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UploadFileServlet</servlet-name>
+		<url-pattern>/UploadFileServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+	  <servlet-name>GetUploadStatus</servlet-name>
+	  <servlet-class>com.dascom.club.service.GetUploadStatus</servlet-class>
+	</servlet>
+	<servlet-mapping>
+	  <servlet-name>GetUploadStatus</servlet-name>
+	  <url-pattern>/GetUploadStatus</url-pattern>
+	</servlet-mapping>
+	
+ 	<servlet>
+		<servlet-name>DisplayChart</servlet-name>
+		<servlet-class>org.jfree.chart.servlet.DisplayChart</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DisplayChart</servlet-name>
+		<url-pattern>/servlet/DisplayChart</url-pattern>
+	</servlet-mapping>
+	 <servlet>
+		<servlet-name>selectlevel</servlet-name>
+		<servlet-class>com.dascom.ssmn.action.SelectLevel</servlet-class>
+	</servlet>
+  	<servlet-mapping>
+		<servlet-name>selectlevel</servlet-name>
+		<url-pattern>/selectlevel</url-pattern>
+	</servlet-mapping>
+	 <servlet>
+		<servlet-name>selectenablenumber</servlet-name>
+		<servlet-class>com.dascom.ssmn.action.SelectEnableNumber</servlet-class>
+	</servlet>
+  	<servlet-mapping>
+		<servlet-name>selectenablenumber</servlet-name>
+		<url-pattern>/selectenablenumber</url-pattern>
+	</servlet-mapping>
+	 <servlet>
+		<servlet-name>selectcdrsmsinfo</servlet-name>
+		<servlet-class>com.dascom.ssmn.action.SelectCDRSMSInfo</servlet-class>
+	</servlet>
+  	<servlet-mapping>
+		<servlet-name>selectcdrsmsinfo</servlet-name>
+		<url-pattern>/selectcdrsmsinfo</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>exportoperatorinfo</servlet-name>
+		<servlet-class>com.dascom.OPadmin.action.ExportOperatorInfo</servlet-class>
+	</servlet>
+  	<servlet-mapping>
+		<servlet-name>exportoperatorinfo</servlet-name>
+		<url-pattern>/exportoperatorinfo</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>desencrypt</servlet-name>
+		<servlet-class>com.dascom.OPadmin.action.DesEncrypt</servlet-class>
+	</servlet>
+  	<servlet-mapping>
+		<servlet-name>desencrypt</servlet-name>
+		<url-pattern>/desencrypt</url-pattern>
+	</servlet-mapping>
+	
+	<listener>
+		<listener-class>com.dascom.OPadmin.util.TySessionListener</listener-class>
+	</listener>
+	
+	<servlet>
+  		<servlet-name>Initialization</servlet-name>
+  		<servlet-class>com.dascom.init.Initialization</servlet-class>
+  		<load-on-startup>0</load-on-startup>
+  	</servlet>
+ 	
+	<mime-mapping>
+	  <extension>xls</extension>
+	  <mime-type>application/msexcel</mime-type>
+	</mime-mapping>
+	<mime-mapping>  
+    	<extension>xlsx</extension>  
+   	 	<mime-type>application/vnd.openxmlformats-officedocument.spreadsheetml.sheet</mime-type>  
+	</mime-mapping>  	
+	<mime-mapping>
+	  <extension>pdf</extension>
+	  <mime-type>application/pdf</mime-type>
+	</mime-mapping>
+		
+  	<jsp-config>
+		<taglib>
+			<taglib-uri>/custom/common</taglib-uri>
+			<taglib-location>/WEB-INF/common.tld</taglib-location>
+		</taglib>
+	</jsp-config>
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+</web-app>
+

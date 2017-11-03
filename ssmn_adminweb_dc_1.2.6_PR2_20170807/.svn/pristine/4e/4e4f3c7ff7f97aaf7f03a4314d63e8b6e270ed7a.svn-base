@@ -1,0 +1,82 @@
+1.  cfg.properties 文件
+
+	1)download_interval 此值不变
+	2)audiopath : 配置语音文件所在的目录，该目录下面的文件为　"以年月日命名的文件夹"，如20151224　
+	2)zipdirpath: 存放语音文件包的路径
+注：audiopath 、zipdirpath　这两个路径，如果在其他机器上，需要做映射
+
+
+2. servicename.prop 文件
+	
+	1)servicename: 此值不变
+	2)groupname :不需要填写
+	3)matchNumberLevel: 值为5就可以
+	4)cdrurl: 路径为映射后的录音文件所在路径，可以通过浏览器该问到，该目录下面的文件为　"以年月日命名的文件夹"，如20151224　
+	5)recordUserChange: 值为1，打开状态
+
+
+3.quartz_job.xml 文件配置定时任务的生成时间:
+
+	如：下面表示　凌晨1点1分开始执行
+
+	 <cron-expression>00 01 01 ? * *</cron-expression>
+
+
+
+4.把模板文件考到目录下
+
+exportExcelTemp
+
+
+5. apache-tomcat-6.0.32\conf 下面的 server.xml 要加编码配置   URIEncoding="utf-8"
+
+ <Connector port="8080" URIEncoding="utf-8" protocol="HTTP/1.1" 
+               connectionTimeout="20000" 
+               redirectPort="8443" /> 
+
+6.批量修改报表名
+
+1.修改 statexecl 文件夹下面的文件
+	rename 中原地产一卡多号语音短信统计 号盾（地产版）语音统计 中原地产一卡多号语音短信统计*
+2.修改 statexecl  文件夹下面 2016-05-01至2016-05-31 文件夹下面文件：
+	rename 中原地产一卡多号语音短信统计 号盾（地产版）语音统计 中原地产一卡多号语音短信统计*
+
+3.修改zipdownload文件夹下面压缩文件：
+	rename 中原地产一卡多号 号盾（地产版） 中原地产一卡多号通话录音*
+------------------------------------------------------------------------------------------------
+---学习与举例
+批量改名命令格式:
+
+rename from to file
+这个命令有三个参数，分别是 from ： 修改什么名字， to：改成什么名字， file 需要修改的文件是哪些。
+
+比如，有一批文件，都是以 log开头的， log001.txt,  log002.txt ……. 一直到 log100.txt
+现在想要把这批文件的log全部替换为 history
+rename  log history log*
+---------------------------------------------------------------------------------------------------
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

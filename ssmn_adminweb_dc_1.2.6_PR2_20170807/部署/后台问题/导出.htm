@@ -1,0 +1,2709 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset='GBK'>
+  
+  <title>Responsive Table</title>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  
+  <style>
+  * { 
+    margin: 0; 
+    padding: 0; 
+  }
+  body { 
+    font: 14px/1.4 Georgia, Serif; 
+  }
+  
+  /* 
+  Generic Styling, for Desktops/Laptops 
+  */
+  table { 
+    width: 100%; 
+    border-collapse: collapse; 
+  }
+  /* Zebra striping */
+  tr:nth-of-type(odd) { 
+    background: #eee; 
+  }
+  th { 
+    background: #333; 
+    color: white; 
+    font-weight: bold; 
+  }
+  td, th { 
+    padding: 6px; 
+    border: 1px solid #9B9B9B; 
+    text-align: left; 
+  }
+  @media 
+  only screen and (max-width: 760px),
+  (min-device-width: 768px) and (max-device-width: 1024px)  {
+    table, thead, tbody, th, td, tr { display: block; }
+    thead tr { position: absolute;top: -9999px;left: -9999px;}
+    tr { border: 1px solid #9B9B9B; }
+    td { border: none;border-bottom: 1px solid #9B9B9B; position: relative;padding-left: 50%; }
+    
+    td:before { position: absolute;top: 6px;left: 6px;width: 45%; padding-right: 10px; white-space: nowrap;}
+    
+    /*
+    Label the data
+    */
+td:nth-of-type(0):before { content: "STREAMNUMBER"; }
+td:nth-of-type(1):before { content: "CALLINGADDRESS"; }
+td:nth-of-type(2):before { content: "CALLEDADDRESS"; }
+td:nth-of-type(3):before { content: "ORIGINALCALLED"; }
+td:nth-of-type(4):before { content: "REDIRECTPARTYID"; }
+td:nth-of-type(5):before { content: "MSISDN"; }
+td:nth-of-type(6):before { content: "SSMNNUMBER"; }
+td:nth-of-type(7):before { content: "CALLTYPE"; }
+td:nth-of-type(8):before { content: "CALLSTARTTIME"; }
+td:nth-of-type(9):before { content: "CALLSTOPTIME"; }
+td:nth-of-type(10):before { content: "CHARGECLASS"; }
+td:nth-of-type(11):before { content: "CALL_COST"; }
+td:nth-of-type(12):before { content: "CHANGE_PIN"; }
+td:nth-of-type(13):before { content: "APPLY_NUMBER"; }
+td:nth-of-type(14):before { content: "SET_CLI"; }
+td:nth-of-type(15):before { content: "CANCEL_NUMBER"; }
+td:nth-of-type(16):before { content: "APPLY_SERVICE"; }
+td:nth-of-type(17):before { content: "CANCEL_SERVICE"; }
+td:nth-of-type(18):before { content: "CALLDURATION"; }
+td:nth-of-type(19):before { content: "READSTATUS"; }
+td:nth-of-type(20):before { content: "ENDREASON"; }
+td:nth-of-type(21):before { content: "INCOMING_CIN"; }
+td:nth-of-type(22):before { content: "OUTGOING_CPN"; }
+td:nth-of-type(23):before { content: "DC_CALLTYPE"; }
+td:nth-of-type(24):before { content: "MANNER"; }
+td:nth-of-type(25):before { content: "USERTYPE"; }
+td:nth-of-type(26):before { content: "AGENTID"; }
+td:nth-of-type(27):before { content: "OWNERID"; }
+  }
+  
+  /* Smartphones (portrait and landscape) ----------- */
+  @media only screen
+  and (min-device-width : 320px)
+  and (max-device-width : 480px) {
+    body { 
+      padding: 0; 
+      margin: 0; 
+      width: 320px; }
+    }
+  
+  /* iPads (portrait and landscape) ----------- */
+  @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+    body { 
+      width: 495px; 
+    }
+  }
+  
+  </style>
+  <!--<![endif]-->
+<script type="text/javascript">
+
+lsearch = function(){
+  //this.term = document.getElementById('S').value.toUpperCase();
+  var s = document.getElementById('search').value.toLowerCase();
+  rows = document.getElementById('data').getElementsByTagName('TR');
+  for(var i=0;i<rows.length;i++){
+    if (s =="" ){
+      rows[i].style.display ='';
+    } else if ( rows[i].innerText.toLowerCase().indexOf(s) != -1 ) {
+      rows[i].style.display ='';
+    } else {
+      rows[i].style.display ='none';
+    }
+  }
+  this.time = false;
+}
+
+</script>
+</head>
+
+<body>
+<div><input type="text" size="30" maxlength="1000" value="" id="search" onkeyup="lsearch();" /><input type="button" value="Go" onclick="lsearch();"/> </div>
+<table><thead><tr>	<th>STREAMNUMBER</th>
+	<th>CALLINGADDRESS</th>
+	<th>CALLEDADDRESS</th>
+	<th>ORIGINALCALLED</th>
+	<th>REDIRECTPARTYID</th>
+	<th>MSISDN</th>
+	<th>SSMNNUMBER</th>
+	<th>CALLTYPE</th>
+	<th>CALLSTARTTIME</th>
+	<th>CALLSTOPTIME</th>
+	<th>CHARGECLASS</th>
+	<th>CALL_COST</th>
+	<th>CHANGE_PIN</th>
+	<th>APPLY_NUMBER</th>
+	<th>SET_CLI</th>
+	<th>CANCEL_NUMBER</th>
+	<th>APPLY_SERVICE</th>
+	<th>CANCEL_SERVICE</th>
+	<th>CALLDURATION</th>
+	<th>READSTATUS</th>
+	<th>ENDREASON</th>
+	<th>INCOMING_CIN</th>
+	<th>OUTGOING_CPN</th>
+	<th>DC_CALLTYPE</th>
+	<th>MANNER</th>
+	<th>USERTYPE</th>
+	<th>AGENTID</th>
+	<th>OWNERID</th>
+</tr></thead>
+<tbody id="data">
+
+	<tr>
+<td align="right">1001234322</td>
+<td>01056543290</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>03-8月 -16</td>
+<td>03-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">44</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>01056543290</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001236324</td>
+<td>01056973510</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>05-8月 -16</td>
+<td>05-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">1033</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>01056973510</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001236360</td>
+<td>01056973522</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>05-8月 -16</td>
+<td>05-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">6</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>01056973522</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001235222</td>
+<td>13366464074</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>04-8月 -16</td>
+<td>04-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">10</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>13366464074</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001235442</td>
+<td>18519746216</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>04-8月 -16</td>
+<td>04-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">5</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>18519746216</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001235516</td>
+<td>13366408736</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>04-8月 -16</td>
+<td>04-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">14</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>13366408736</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001236414</td>
+<td>01050862582</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>05-8月 -16</td>
+<td>05-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">0</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>01050862582</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001240140</td>
+<td>01081375882</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>09-8月 -16</td>
+<td>09-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">12</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>01081375882</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001236942</td>
+<td>13381494554</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>05-8月 -16</td>
+<td>05-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">0</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>13381494554</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001237966</td>
+<td>01081376094</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>07-8月 -16</td>
+<td>07-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">13</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>01081376094</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001240188</td>
+<td>15340085867</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>09-8月 -16</td>
+<td>09-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">75</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>15340085867</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001238274</td>
+<td>01050862583</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>07-8月 -16</td>
+<td>07-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">0</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>01050862583</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001231316</td>
+<td>13552453792</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>01-8月 -16</td>
+<td>01-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">183</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>13552453792</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001232512</td>
+<td>01056614596</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>02-8月 -16</td>
+<td>02-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">10</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>01056614596</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001238630</td>
+<td>01056117427</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>08-8月 -16</td>
+<td>08-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">0</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>01056117427</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001238712</td>
+<td>01081376479</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>08-8月 -16</td>
+<td>08-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">6</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>01081376479</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001233806</td>
+<td>15010365385</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>02-8月 -16</td>
+<td>02-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">0</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>15010365385</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001238762</td>
+<td>18910269475</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>08-8月 -16</td>
+<td>08-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">0</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>18910269475</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001238798</td>
+<td>01085932861</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>08-8月 -16</td>
+<td>08-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">4</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>01085932861</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001249454</td>
+<td>13220147265</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>16-8月 -16</td>
+<td>16-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">6</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>13220147265</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001244204</td>
+<td>18910817307</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>12-8月 -16</td>
+<td>12-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">9</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>18910817307</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001247550</td>
+<td>01062825727</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>14-8月 -16</td>
+<td>14-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">0</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>01062825727</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001247950</td>
+<td>13911267527</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>15-8月 -16</td>
+<td>15-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">35</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>13911267527</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001249882</td>
+<td>13341005877</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>16-8月 -16</td>
+<td>16-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">6</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>13341005877</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001246484</td>
+<td>01050862597</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>13-8月 -16</td>
+<td>13-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">0</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>01050862597</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001248226</td>
+<td>01057089453</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>15-8月 -16</td>
+<td>15-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">0</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>01057089453</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001247024</td>
+<td>18600700480</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>14-8月 -16</td>
+<td>14-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">12</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>18600700480</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001248730</td>
+<td>01056118249</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>15-8月 -16</td>
+<td>15-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">0</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>01056118249</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001247406</td>
+<td>01050862598</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>14-8月 -16</td>
+<td>14-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">12</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>01050862598</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001248954</td>
+<td>15313206908</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>15-8月 -16</td>
+<td>15-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">9</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>15313206908</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001250904</td>
+<td>18501991530</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>17-8月 -16</td>
+<td>17-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">5</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>18501991530</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001251158</td>
+<td>01056117487</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>17-8月 -16</td>
+<td>17-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">0</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>01056117487</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001249262</td>
+<td>18612686553</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>15-8月 -16</td>
+<td>15-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">0</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>18612686553</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001250794</td>
+<td>15313947361</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>17-8月 -16</td>
+<td>17-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">5</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>15313947361</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001251204</td>
+<td>01056118220</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>17-8月 -16</td>
+<td>17-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">0</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>01056118220</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001247272</td>
+<td>15301167219</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>14-8月 -16</td>
+<td>14-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">0</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>15301167219</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001251342</td>
+<td>15313947361</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>17-8月 -16</td>
+<td>17-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">0</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>15313947361</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001247580</td>
+<td>01062825727</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>14-8月 -16</td>
+<td>14-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">15</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>01062825727</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001241402</td>
+<td>01050862591</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>10-8月 -16</td>
+<td>10-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">0</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>01050862591</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001245270</td>
+<td>18612959957</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>12-8月 -16</td>
+<td>12-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">69</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>18612959957</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001245444</td>
+<td>15600381008</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>12-8月 -16</td>
+<td>12-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">20</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>15600381008</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001240868</td>
+<td>01059936388</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>10-8月 -16</td>
+<td>10-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">9</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>01059936388</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001242314</td>
+<td>13968433396</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>11-8月 -16</td>
+<td>11-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">81</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>13968433396</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001241092</td>
+<td>15340075485</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>10-8月 -16</td>
+<td>10-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">0</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>15340075485</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001243482</td>
+<td>18701073031</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>12-8月 -16</td>
+<td>12-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">0</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>18701073031</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001246538</td>
+<td>01056840350</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>13-8月 -16</td>
+<td>13-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">0</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>01056840350</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001246716</td>
+<td>18600700480</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>13-8月 -16</td>
+<td>13-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">1887</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>18600700480</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001243602</td>
+<td>01056973531</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>12-8月 -16</td>
+<td>12-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">0</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>01056973531</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001244034</td>
+<td>01056118249</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>12-8月 -16</td>
+<td>12-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">0</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>01056118249</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001260182</td>
+<td>13581720158</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>21-8月 -16</td>
+<td>21-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">150</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>13581720158</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001262460</td>
+<td>01056443030</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>22-8月 -16</td>
+<td>22-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">15</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>01056443030</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001258588</td>
+<td>13371777984</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>19-8月 -16</td>
+<td>19-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">7</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>13371777984</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001262864</td>
+<td>15340075485</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>22-8月 -16</td>
+<td>22-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">0</td>
+<td align="right">&nbsp;</td>
+<td align="right">2</td>
+<td>15340075485</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001262720</td>
+<td>13701075963</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>22-8月 -16</td>
+<td>22-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">0</td>
+<td align="right">&nbsp;</td>
+<td align="right">2</td>
+<td>13701075963</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001260226</td>
+<td>13581720158</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>21-8月 -16</td>
+<td>21-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">72</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>13581720158</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001257888</td>
+<td>18611761084</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>19-8月 -16</td>
+<td>19-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">8</td>
+<td align="right">&nbsp;</td>
+<td align="right">0</td>
+<td>18611761084</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001260972</td>
+<td>13371787107</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>21-8月 -16</td>
+<td>21-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">10</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>13371787107</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001263142</td>
+<td>01059048013</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>22-8月 -16</td>
+<td>22-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">13</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>01059048013</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001251592</td>
+<td>01050862513</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>17-8月 -16</td>
+<td>17-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">0</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>01050862513</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001251454</td>
+<td>13366746065</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>17-8月 -16</td>
+<td>17-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">17</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>13366746065</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001252268</td>
+<td>01059792894</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>18-8月 -16</td>
+<td>18-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">17</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>01059792894</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001252650</td>
+<td>01058364456</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>18-8月 -16</td>
+<td>18-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">0</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>01058364456</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001253066</td>
+<td>01088631515</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>18-8月 -16</td>
+<td>18-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">17</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>01088631515</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001253474</td>
+<td>01056340488</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>18-8月 -16</td>
+<td>18-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">56</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>01056340488</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001258876</td>
+<td>18600700480</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>19-8月 -16</td>
+<td>19-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">9</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>18600700480</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001259006</td>
+<td>01050862524</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>20-8月 -16</td>
+<td>20-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">12</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>01050862524</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001259504</td>
+<td>01059514401</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>20-8月 -16</td>
+<td>20-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">9</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>01059514401</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001270300</td>
+<td>13521066018</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>25-8月 -16</td>
+<td>25-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">265</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>13521066018</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001269070</td>
+<td>17319419856</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>24-8月 -16</td>
+<td>24-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">31</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>17319419856</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001271870</td>
+<td>01064924152</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>25-8月 -16</td>
+<td>25-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">0</td>
+<td align="right">&nbsp;</td>
+<td align="right">2</td>
+<td>01064924152</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001272256</td>
+<td>15116910960</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>26-8月 -16</td>
+<td>26-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">124</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>15116910960</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001275650</td>
+<td>17301101512</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>27-8月 -16</td>
+<td>27-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">65</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>17301101512</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001264644</td>
+<td>01056840353</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>23-8月 -16</td>
+<td>23-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">0</td>
+<td align="right">&nbsp;</td>
+<td align="right">2</td>
+<td>01056840353</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001265230</td>
+<td>18801020017</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>23-8月 -16</td>
+<td>23-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>18801020017</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001285058</td>
+<td>01056117450</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>31-8月 -16</td>
+<td>31-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">0</td>
+<td align="right">&nbsp;</td>
+<td align="right">2</td>
+<td>01056117450</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001276084</td>
+<td>01058364378</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>27-8月 -16</td>
+<td>27-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">69</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>01058364378</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001276496</td>
+<td>15313030269</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>28-8月 -16</td>
+<td>28-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">0</td>
+<td align="right">&nbsp;</td>
+<td align="right">2</td>
+<td>15313030269</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001281388</td>
+<td>15313677357</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>30-8月 -16</td>
+<td>30-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">0</td>
+<td align="right">&nbsp;</td>
+<td align="right">2</td>
+<td>15313677357</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001276518</td>
+<td>15313030269</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>28-8月 -16</td>
+<td>28-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">0</td>
+<td align="right">&nbsp;</td>
+<td align="right">2</td>
+<td>15313030269</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001277812</td>
+<td>18401442048</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>28-8月 -16</td>
+<td>28-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">0</td>
+<td align="right">&nbsp;</td>
+<td align="right">2</td>
+<td>18401442048</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001279184</td>
+<td>01056340019</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>29-8月 -16</td>
+<td>29-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">0</td>
+<td align="right">&nbsp;</td>
+<td align="right">2</td>
+<td>01056340019</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001246984</td>
+<td>13833488796</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>14-8月 -16</td>
+<td>14-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">351</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>13833488796</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001238900</td>
+<td>15340087552</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>08-8月 -16</td>
+<td>08-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">9</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>15340087552</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001241688</td>
+<td>01052405727</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>11-8月 -16</td>
+<td>11-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">345</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>01052405727</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+	<tr>
+<td align="right">1001241852</td>
+<td>01056973509</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>15711187911</td>
+<td>13366500324</td>
+<td align="right">1</td>
+<td>11-8月 -16</td>
+<td>11-8月 -16</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td align="right">8</td>
+<td align="right">&nbsp;</td>
+<td align="right">1</td>
+<td>01056973509</td>
+<td>&nbsp;</td>
+<td align="right">2</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+	</tr>
+</tbody></table><!-- SQL:
+select * from ssmn_cdr where ssmnnumber = '13366500324' and trunc(callstarttime,'mm') = to_date('20160801','yyyymmdd')--></body></html>

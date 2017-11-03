@@ -1,0 +1,1860 @@
+﻿Release Notes vip_club
+************************************************************************
+
+0.   概述：
+===========
+		中原地产副号码管理系统
+
+
+1.   安装步骤：
+================
+        1) 安装jdk（版本在1.5.0以上）；
+        2) 安装tomcat（版本号：5.0.28以上）；
+        3) 配置jdk和tomcat的系统路径；
+        4) 把应用打包文件放在tomcat下的webapps目录下；
+        5) 启动tomcat，修改webapps目录下的WEB-INF\classes\hibernate.properties里面的关于数据库的配置。
+               修改hibernate.properties里面的数据库连接配置，如下：
+               hibernate.connection.username yanfa         //数据库用户名称
+               hibernate.connection.password yanfa        //数据库密码
+               hibernate.connection.url jdbc:oracle:thin:@192.168.30.222:1521:orcl   //@后是DB SERVER IP:端口号：SID	 
+         6）查询版本号：        http://ip:端口/ssmn_adminweb_dc/version.do 
+
+2.   版本历史：
+--------------------------------------------------------------------------------------
+【版本号】1.2.6_PR2      【发布时间】2017-06-27    【发布人】李艳
+
+	
+(1)	主要功能说明   
+
+			1. 语音查询中的备注，如果有内容，按钮红色显示
+			2.登录详情中 添加 备注次数
+
+(2)	Bug修复说明
+		修改bug: 当隐藏客户电话权限开启时候，定时任务中的报表客户电话还没有隐藏，添加了配置项，强制隐藏
+
+(3)	兼容性
+    	jdk 1.5以上；
+    	tomcat 5.5.20以上；
+			
+
+(4)	程序更新：
+	
+    
+(5)	文档更新 数据库文档：
+
+
+(6)  servicename.prop文件，添加
+		#定时任务强制将该地区的客户电话隐藏，开关只控制定时任务中的通话记录，0：不隐藏 ，1：隐藏，注：当一个地区生成多个地区报表的时候，当配置成1时候，也会把其他地区的报表也都强制隐藏
+		time_job_showclientnum =0
+
+--------------------------------------------------------------------------------------
+【版本号】1.2.6_PR1      【发布时间】2017-06-05    【发布人】李艳
+
+	
+(1)	主要功能说明   
+
+			1. 呼叫管理页面，添加“呼叫”按钮
+
+(2)	Bug修复说明
+	
+
+(3)	兼容性
+    	jdk 1.5以上；
+    	tomcat 5.5.20以上；
+			
+
+(4)	程序更新：
+	
+    
+(5)	文档更新 数据库文档：
+
+
+(6)  servicename.prop文件，添加呼叫的接口地址配置项：
+			callurl=http://192.168.92.244/dczh/doubleCall
+		
+		
+--------------------------------------------------------------------------------------
+【版本号】1.2.5_PR9      【发布时间】2017-05-22    【发布人】李艳
+
+	
+(1)	主要功能说明   
+
+			1.将账号分为，A+账号和渠道账号 （添加权限：显示A+数据、显示渠道数据）
+				
+			注：  如果显示所有，两个全选中,如果两个全不选中，也显示所有数据
+
+(2)	Bug修复说明
+		1.修改，通话统计中，添加“地区_管家APP”后，统计出错的问题
+		2.优化 区域下拉框，按升序排序显示
+
+(3)	兼容性
+    	jdk 1.5以上；
+    	tomcat 5.5.20以上；
+			
+
+(4)	程序更新：
+	
+    
+(5)	文档更新 数据库文档：
+
+
+(6)   -----	1) 添加权限： 显示A+数据、显示渠道数据
+		insert into tyadmin_authorities (id,authority, auth_method, servicekey, rank ,orderid,sectionid) values( SEQ_TYADMIN_AUTH.NEXTVAL,'显示A+数据', 'showAChannel','50',1,1,15);
+
+		insert into tyadmin_authorities (id,authority, auth_method, servicekey, rank ,orderid,sectionid) values( SEQ_TYADMIN_AUTH.NEXTVAL,'显示渠道数据', 'showChannel','50',1,2,15);
+		
+		创建账号，给账号分配权限，可以通过管理平台操作。
+		
+		
+
+--------------------------------------------------------------------------------------
+【版本号】1.2.5_PR8      【发布时间】2017-05-16    【发布人】李艳
+
+	
+(1)	主要功能说明   
+
+			1.针对江苏，语音查询里，添加备注
+			2.针对江苏，登录详情查询中，听录音次数，分为 A+和渠道
+
+(2)	Bug修复说明
+		
+
+(3)	兼容性
+    	jdk 1.5以上；
+    	tomcat 5.5.20以上；
+			
+
+(4)	程序更新：
+	
+    
+(5)	文档更新 数据库文档：
+
+
+(6)   	1. 添加 ssmn_zy_cdr表，添加备注字段
+				alter table SSMN_ZY_CDR add (REMARK  Varchar2 (256)) ;
+
+				2. servicename.prop 文件，添加项： 
+				##针对江苏，语音查询页面，是否添加备注 0:不添加, 1:添加
+				addRemark=1
+
+			---3.servicename.prop 文件，添加项： 
+			##(登录详情里)听录音次数，是否 区分 A+和渠道   0:不区分, 1:区分
+			distChannel=1
+
+		---------注： 如果distChannel 值是0，则不需要操作 4
+    -------4 操作员管理里，听录音次数分 A+和渠道  后，之前的log记录记录为A+的  
+			update TYADMIN_LOGS t set t.log_type =t.log_type ||'A+' where 
+			 t.log_des like '%听录音%' and  t.log_type ='听录音次数'
+	
+--------------------------------------------------------------------------------------
+【版本号】1.2.5_PR7      【发布时间】2017-04-12    【发布人】李艳
+
+	
+(1)	主要功能说明   
+
+			1.添加呼叫管理页面
+
+(2)	Bug修复说明
+		
+			1.选择副号码的时候，加上区分省市，公司.
+			2.编辑经纪人的时候，加上省市，公司，（当一个库中存着多个地区的时候，会有问题)
+
+(3)	兼容性
+    	jdk 1.5以上；
+    	tomcat 5.5.20以上；
+			
+
+(4)	程序更新：
+	
+    
+(5)	文档更新 数据库文档：
+
+
+(6)   ---1)-添加呼叫管理权限
+			insert into tyadmin_authorities (id,authority, auth_method, servicekey, rank,parentid,orderid,sectionid ) 
+        values( SEQ_TYADMIN_AUTH.NEXTVAL,'呼叫管理(通讯管理)', 'callManage','50',1,null,9,(select sectionid from TYADMIN_AUTHORITIES
+         where auth_method ='queryssmninfo' and servicekey =50));
+				
+		-----2)创建珠海超级管理员组（珠海和其他地方超级管理员组不一样,所以单独创建)
+		insert into TYADMIN_GROUPS (ID, GROUP_NAME, DESCRIPTION, SERVICEKEY, CREATE_DATE, OPERATOR_ID, RANK) values (SEQ_TYAdmin_GROUP.Nextval, '超级管理员_珠海', '具有全部系统权限', '50', sysdate,'system', 0);
+		
+		
+		 ----3)给超级管理员添加呼叫权限:	 
+		-------.添加 呼叫管理（通讯管理[以前叫副号码通讯信息]）权限
+			insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+			(select id from tyadmin_groups t where t.group_name='超级管理员_珠海' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='callManage'   and t.servicekey=50 ) ) ;
+		
+		------4.给 珠海超级管理员组，添加权限
+		
+		insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) select SEQ_TYAdmin_GROUP_AUTH.Nextval,
+     (select id from tyadmin_groups t where t.group_name='超级管理员_珠海' and t.servicekey=50  ), 
+     auth_id from TYADMIN_GROUP_AUTHS where group_id =(select id from tyadmin_groups t
+     where t.group_name='超级管理员' and t.servicekey=50 ) ;
+			
+			
+		----3)创建客户电话表 SSMN_ZY_CLIENTNUM
+		-- Create table
+create table SSMN_ZY_CLIENTNUM
+(
+  id         NUMBER(10) not null,
+  clientnum  VARCHAR2(20) not null,
+  clientname VARCHAR2(20),
+  intime     DATE not null,
+  calltime   DATE not null,
+  remark     VARCHAR2(512),
+  usermsisdn VARCHAR2(20) not null,
+  username   VARCHAR2(20) not null,
+  status     NUMBER(1) default 0 not null,
+  updatetime DATE
+)
+tablespace TEST_DATA
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 512K
+    next 512K
+    minextents 1
+    maxextents unlimited
+    pctincrease 0
+  );
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table SSMN_ZY_CLIENTNUM
+  add constraint PK_SSMN_ZY_CLIENTNUM primary key (ID)
+  using index 
+  tablespace TEST_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 512K
+    next 512K
+    minextents 1
+    maxextents unlimited
+    pctincrease 0
+  );
+	
+	-----创建序列
+	-- Create sequence 
+create sequence SEQ_SSMN_ZY_CLIENTNUM
+minvalue 1
+maxvalue 9999999998
+start with 101
+increment by 1
+cache 10;		
+			
+--------------------------------------------------------------------------------------
+【版本号】1.2.5_PR6      【发布时间】2017-03-03    【发布人】李艳
+
+	
+(1)	主要功能说明   
+
+			1.针对重在，注册经纪人时候不分配副号码，由开关控制
+			2.渠道如果有 '_',只显示后面名称，例如： 天津_管家APP，平台上只显示管家APP
+			3.定时任务生成报表，按配置的省市
+
+(2)	Bug修复说明
+		
+
+(3)	兼容性
+    	jdk 1.5以上；
+    	tomcat 5.5.20以上；
+			
+
+(4)	程序更新：
+	
+    
+(5)	文档更新 数据库文档： SSMN数据库设计_PC60
+
+
+(6)     servicename.prop文件添加配置项：
+				 1) #是否添加是否分配副号码的开关：  0:关闭  1：打开
+					  isHaveSsmnNum=1
+				 2)#定时任务生成报表，按配置的省市,多个省市间用 “｜”分隔		 
+					  timingTask_provincecity =天津|广州				
+				
+
+--------------------------------------------------------------------------------------
+【版本号】1.2.5_PR5      【发布时间】2017-02-20    【发布人】李艳
+
+	
+(1)	主要功能说明   
+
+			1.针对广州，添加第二联系人，加开关控制
+
+(2)	Bug修复说明
+		
+
+(3)	兼容性
+    	jdk 1.5以上；
+    	tomcat 5.5.20以上；
+			
+
+(4)	程序更新：
+	
+    
+(5)	文档更新 数据库文档： SSMN数据库设计_PC60
+
+(6) 	数据库修改
+			1) ssmn_zy_user表添加第二联系人字段：
+					alter table ssmn_zy_user add secondMsisdn varchar2(20); 
+			2) ssmn_zy_cancel_user表添加第二联系人字段：
+					alter table ssmn_zy_cancel_user add secondMsisdn varchar2(20); 
+			3)ssmn_zy_cdr表添加第一联系人字段：
+					alter table ssmn_zy_cdr add firstMsisdn varchar2(20);
+
+(7)     servicename.prop文件添加配置项：
+				#是否添加第二联系人 0:不添加  1：添加
+				isAddSecondMsisdn=1
+				
+(8) 只有广州换模板： 批量绑定也加了第二联系人，模板文件bindbatchtemp最后一列添加 第二联系人
+
+--------------------------------------------------------------------------------------
+【版本号】1.2.5_PR4      【发布时间】2016-11-22    【发布人】李艳
+
+	
+(1)	主要功能说明   
+
+	1、黑名单增加时间（现在导出的数据仅一项号码）；
+	2、黑名单添加页面增加黑名单查询功能，查出数据包含时间和号码（查询条件：时间、号码）；
+	3、增加黑名单导出功能，导出数据包含：时间、号码
+	4、黑名单功能优化还需要有一个删除的功能
+
+(2)	Bug修复说明
+		
+
+(3)	兼容性
+    	jdk 1.5以上；
+    	tomcat 5.5.20以上；
+			
+
+(4)	程序更新：
+	
+    
+(5)	文档更新
+
+(6) 	数据库字INTIME 
+
+	alter table blackcallnumber add INTIME date;
+
+(7)     servicename.prop文件添加配置飞语的录音配置项：
+
+	#飞语录音地址
+	cdrurlfy=http://114.112.65.194:9090/voice0
+
+	注：如果没有该配置项，则写
+	cdrurlfy=
+
+--------------------------------------------------------------------------------------
+【版本号】1.2.5_PR3      【发布时间】2016-11-22    【发布人】李艳
+
+	
+(1)	主要功能说明   
+
+	  1)语音查询中通话录音导出,统计报表导出功能，添加字段：是否标记为黑名单
+	　2)修改bug: 语音查询当选择时间时，查询报错的问题。
+
+(2)	Bug修复说明
+	
+
+(3)	兼容性
+    	jdk 1.5以上；
+    	tomcat 5.5.20以上；
+			
+
+(4)	程序更新：
+	
+    
+(5)	文档更新
+
+(6) 	配置文件
+
+--------------------------------------------------------------------------------------
+【版本号】1.2.5_PR2      【发布时间】2016-11-09    【发布人】李艳
+
+	
+(1)	主要功能说明   
+
+	  1)针对语音查询、通话统计、报表导出做了性能优化
+
+
+(2)	Bug修复说明
+	
+
+(3)	兼容性
+    	jdk 1.5以上；
+    	tomcat 5.5.20以上；
+			
+
+(4)	程序更新：
+	1.2.5_PR1
+    
+(5)	文档更新
+
+(6) 	配置文件
+
+(7)     执行的sql:
+
+--1)创建ssmn_zy_cdr表
+----SSMN_ZY_CDR表（把ssmn_cdr信息集合到该表）
+-- Create table
+create table SSMN_ZY_CDR
+(
+  STREAMNUMBER  NUMBER(10) not null,
+  MSISDN        VARCHAR2(20),
+  SSMNNUMBER    VARCHAR2(18),
+  USERNAME      VARCHAR2(20),
+  EMPNO         VARCHAR2(32),
+  CALLTYPE      NUMBER(1),
+  CALLSTARTTIME NUMBER,
+  CALLSTOPTIME  NUMBER,
+  CALLDURATION  NUMBER(6),
+  ENDREASON     NUMBER(2),
+  INCOMING_CIN  VARCHAR2(32),
+  OUTGOING_CPN  VARCHAR2(32),
+  MANNER        NUMBER(1),
+  USERTYPE      NUMBER(1),
+  AGENTID       NUMBER(10),
+  OWNERD        NUMBER(10),
+  DC_CALLTYPE   NUMBER(1),
+  LEVELID       NUMBER(10),
+  CHANNELID     NUMBER(10),
+  USERID        NUMBER(10),
+  CLIENTNUMBER  VARCHAR2(32)
+
+)
+tablespace TEST_DATA
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 512K
+    next 512K
+    minextents 1
+    maxextents unlimited
+    pctincrease 0
+  );
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table SSMN_ZY_CDR
+  add constraint PK_SSMN_ZY_CDR primary key (STREAMNUMBER)
+  using index 
+  tablespace TEST_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 512K
+    next 256K
+    minextents 1
+    maxextents unlimited
+    pctincrease 0
+  );
+-- Create/Recreate indexes 
+create index IDX1_SSMN_ZY_CDR on SSMN_ZY_CDR (CALLSTARTTIME)
+  tablespace TEST_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 512K
+    next 512K
+    minextents 1
+    maxextents unlimited
+    pctincrease 0
+  );
+create index IDX2_SSMN_ZY_CDR on SSMN_ZY_CDR (LEVELID)
+  tablespace TEST_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 512K
+    next 512K
+    minextents 1
+    maxextents unlimited
+    pctincrease 0
+  );
+
+---2) 往SSMN_ZY_CDR表中跑数据，使用程序SSMN_Import_Cdr 
+	----flag字段说明： 8:处理成功　　5:有问题的数据（一般指ssmn_zy_cancel_user表userid重复了）
+---添加字段： 
+	alter table ssmn_zy_user add flag number(1);
+	alter table ssmn_zy_cancel_user add flag number(1);
+
+---注：此次升级业务逻辑必须先升级(业务逻辑会往新添加的表ssmn_zy_cdr表中写)
+
+--------------------------------------------------------------------------------------
+【版本号】1.2.5_PR1      【发布时间】2016-09-25    【发布人】李艳
+
+	
+(1)	主要功能说明   
+
+	  1)修改换绑没写ssmn_zy_cancel_user表的问题，该问题导致换绑后通话录音查不到了。
+	  2)换UI
+
+
+(2)	Bug修复说明
+	
+
+(3)	兼容性
+    	jdk 1.5以上；
+    	tomcat 5.5.20以上；
+			
+
+(4)	程序更新：
+	1.2.5_PR1
+    
+(5)	文档更新
+
+(6) 	配置文件
+
+(7)     执行的sql:
+
+
+--------------------------------------------------------------------------------------
+【版本号】1.2.4_PR3      【发布时间】2016-10-25    【发布人】李艳
+
+	
+(1)	主要功能说明   
+
+	  1)修改黑名单功能：黑名单输入框，可最多输入10个号码，以分号隔开.
+
+(2)	Bug修复说明
+	
+
+(3)	兼容性
+    	jdk 1.5以上；
+    	tomcat 5.5.20以上；
+			
+
+(4)	程序更新：
+	1.2.4_PR3
+    
+(5)	文档更新
+
+(6) 	配置文件
+	注：如果从 1.2.4_PR2基础上升级，直接替换以下3个文件：
+	AddBlackCallNumber.class ,backcallnumber_add.jsp,version.jsp
+--------------------------------------------------------------------------------------
+【版本号】1.2.4_PR2      【发布时间】2016-08-31    【发布人】李艳
+
+	
+(1)	主要功能说明   
+
+	  1)注册、编辑 管家APP用户时候，同步时，ssmn_zy_useroperation表中的opetype字段写7
+	  2)一个经纪人，只能绑定一个A+副号码，绑定时候做判断，如果存在其他A+副号，不处理，给提示
+	  3)添加权限　隐藏业主号码，语音查询页面，只有 A+的渠道(目前是管家APP)　客户电话隐藏　,隐藏时候，只显示前3位，后面的用*表示
+	  4)副号码查询页面，类型中，列出有副号的类型，有的类型没有副号码，则这里不下拉,编辑副号码，时候，列出所有的副号码类型
+	
+
+(2)	Bug修复说明
+	
+
+(3)	兼容性
+    	jdk 1.5以上；
+    	tomcat 5.5.20以上；
+			
+
+(4)	程序更新：
+	1.2.4_PR2
+    
+(5)	文档更新
+
+(6) 	配置文件
+
+(7)     执行的sql:
+
+---1..添加　隐藏业主号码(语音查询)权限
+insert into tyadmin_authorities (id,authority, auth_method, servicekey, rank ) values(SEQ_TYADMIN_AUTH.NEXTVAL,'隐藏业主号码(语音查询)', 'hideOwnerNumber','50',1);
+
+---2.
+update tyadmin_authorities t set t.authority='隐藏业主号码(语音查询)',t.sectionid=3,t.rank=2 ,T.PARENTID=(select id from tyadmin_authorities  where auth_method='queryssmninfo' and servicekey=50 ) where t.auth_method='hideOwnerNumber' and t.servicekey=50;
+
+--------------------------------------------------------------------------------------
+【版本号】1.2.4_PR1      【发布时间】2016-08-20    【发布人】李艳
+
+	
+(1)	主要功能说明   
+	  1)控制根据渠道选择副号码（比如经纪人渠道，选择渠道副号码，A+渠道选择A+副号码）
+	  2)优化：所有涉及到号码的地方，限制只要数字，其他字符都提示不让操作
+	  3)注册客家APP用户时候，同步时，ssmn_zy_useroperation表中的opetype字段写7
+	
+(2)	Bug修复说明
+	
+
+(3)	兼容性
+    	jdk 1.5以上；
+    	tomcat 5.5.20以上；
+			
+
+(4)	程序更新：
+	1.2.4_PR1
+    
+(5)	文档更新
+
+(6) 	配置文件
+
+(7)     执行的sql:
+
+---1. ssmn_zy_channel渠道表添加type字段，0:业务员渠道类 ,1:业务员A+渠道类 ,目前"管家APP"是A+渠道类型，其他都是业务员渠道类
+	alter table ssmn_zy_channel add  type NUMBER(1) default 0;
+	update ssmn_zy_channel t set t.type=1 where t.name='管家APP' ;
+
+--------------------------------------------------------------------------------------
+【版本号】1.2.3_PR1      【发布时间】2016-08-9    【发布人】李艳
+
+	
+(1)	主要功能说明   
+	  1)修改经纪人编辑功能
+	  2)语音查询中，添加查询条件：已接/未接
+	  3)语音查询下面 加 “在线收听”“录音下载” 权限
+	  4)统计报表下载下面加“录音下载”“报表下载”
+	  5)我的信息 改名 来电统计
+
+	
+(2)	Bug修复说明
+	
+
+(3)	兼容性
+    	jdk 1.5以上；
+    	tomcat 5.5.20以上；
+			
+
+(4)	程序更新：
+	1.2.3_PR1
+    
+(5)	文档更新
+
+(6) 	配置文件
+
+------------------------------------------------------------
+-----1)添加权限：
+insert into tyadmin_authorities (id,authority, auth_method, servicekey, rank ) values(SEQ_TYADMIN_AUTH.NEXTVAL,'在线收听(语音查询)', 'listenOnline','50',1);
+ insert into tyadmin_authorities (id,authority, auth_method, servicekey, rank ) values(SEQ_TYADMIN_AUTH.NEXTVAL,'录音下载(语音查询)', 'cdrDownload','50',1);
+
+--2.添加　在线收听（语音查询）权限
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='超级管理员' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='listenOnline'   and  t.servicekey=50 ) ) ;
+
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='分行行动组' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='listenOnline'   and t.servicekey=50 ) ) ;
+
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='片区组' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='listenOnline'   and t.servicekey=50 ) ) ;
+
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='战区组' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='listenOnline'   and t.servicekey=50 ) ) ;
+
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='事业部组' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='listenOnline'   and t.servicekey=50 ) ) ;
+
+--3.添加　录音下载（语音查询）权限
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='超级管理员' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='cdrDownload'   and t.servicekey=50 ) ) ;
+
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='分行行动组' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='cdrDownload'   and t.servicekey=50 ) ) ;
+
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='片区组' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='cdrDownload'   and t.servicekey=50 ) ) ;
+
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='战区组' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='cdrDownload'   and t.servicekey=50 ) ) ;
+
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='事业部组' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='cdrDownload'   and t.servicekey=50 ) ) ;
+
+-----4)修改名字：　将语音部分下载（统计报表下载）　改名：录音下载
+ update tyadmin_authorities t set t.authority='录音下载(统计报表下载)' ,t.auth_method='downloadCDRStatis' where t.servicekey=50 and t.auth_method='downloadCDR' ;
+
+-----5)添加　报表下载(统计报表下载)
+insert into tyadmin_authorities (id,authority, auth_method, servicekey, rank ) values(SEQ_TYADMIN_AUTH.NEXTVAL,'报表下载(统计报表下载)', 'reportDownloadStatis','50',1);
+
+----6) 添加 报表下载(统计报表下载) 权限关系
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='超级管理员' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='reportDownloadStatis'  and t.servicekey=50 ) ) ;
+
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='片区组' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='reportDownloadStatis'  and t.servicekey=50 ) ) ;
+
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='战区组' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='reportDownloadStatis'   and t.servicekey=50 ) ) ;
+
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='事业部组' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='reportDownloadStatis'   and t.servicekey=50 ) ) ;
+
+---7).修改权限关系
+update tyadmin_authorities t set t.authority='在线收听(语音查询)',t.sectionid=3,t.rank=2 ,T.PARENTID=(select id from tyadmin_authorities  where auth_method='queryssmninfo' and servicekey=50 ) where t.auth_method='listenOnline' and t.servicekey=50;
+ update tyadmin_authorities t set t.authority='录音下载(语音查询)',t.sectionid=3,t.rank=2 ,T.PARENTID=(select id from tyadmin_authorities  where auth_method='queryssmninfo' and servicekey=50 ) where t.auth_method='cdrDownload' and t.servicekey=50;
+ 
+ update tyadmin_authorities t set t.authority='录音下载(统计报表下载)',t.sectionid=5,t.rank=2 ,T.PARENTID=(select id from tyadmin_authorities  where auth_method='queryinfo' and servicekey=50 ) where t.auth_method='downloadCDRStatis' and t.servicekey=50;
+ update tyadmin_authorities t set t.authority='报表下载(统计报表下载)',t.sectionid=5,t.rank=2 ,T.PARENTID=(select id from tyadmin_authorities  where auth_method='queryinfo' and servicekey=50 ) where t.auth_method='reportDownloadStatis' and t.servicekey=50;
+ 
+	
+--------------------------------------------------------------------------------------
+【版本号】1.2.2_PR1      【发布时间】2016-07-19    【发布人】李艳
+
+	
+(1)	主要功能说明   
+	 1. 新增权限管理，可对不同账号进行权限配置
+	 2. 新增来电统计，可用图表的形式进行数据展示
+	
+(2)	Bug修复说明
+	
+
+(3)	兼容性
+    	jdk 1.5以上；
+    	tomcat 5.5.20以上；
+			
+
+(4)	程序更新：
+	1.2.2_PR1
+    
+(5)	文档更新
+
+(6) 	配置文件
+
+------------------------------------------------------------
+1)添加字段：
+ --------2016-07-19 添加群组管理功能，需要给表：　TYADMIN_AUTHORITIES　添加字段：PARENTID,ORDERID,SECTIONID (三个字段代表级联关系，排序)
+alter table tyadmin_authorities add PARENTID NUMBER(11);
+alter table tyadmin_authorities add ORDERID NUMBER(11);
+alter table tyadmin_authorities add SECTIONID NUMBER(11);
+--------------------------------------------------------------
+
+2)添加 权限管理、渠道统计权限sql:
+--.添加 渠道统计(副号码通讯信息) 权限
+insert into tyadmin_authorities (id,authority, auth_method, servicekey, rank ) values(SEQ_TYADMIN_AUTH.NEXTVAL,'渠道统计(副号码通讯信息)', 'statchannelcallin','50',1);
+
+--添加 权限组管理(操作员管理) 权限
+insert into tyadmin_authorities (id,authority, auth_method, servicekey, rank ) values( SEQ_TYADMIN_AUTH.NEXTVAL,'权限组管理(操作员管理)', 'OPgroupSearch','50',1);
+
+--添加 权限组添加(权限组管理) 权限
+insert into tyadmin_authorities (id,authority, auth_method, servicekey, rank ) values( SEQ_TYADMIN_AUTH.NEXTVAL,'权限组添加(权限组管理)', 'OPgroupAdd','50',1);
+ 
+--添加 权限组修改(权限组管理) 权限
+insert into tyadmin_authorities (id,authority, auth_method, servicekey, rank ) values( SEQ_TYADMIN_AUTH.NEXTVAL,'权限组修改(权限组管理)', 'OPgroupModify','50',1);
+
+--添加 权限组删除(权限组管理) 权限
+insert into tyadmin_authorities (id,authority, auth_method, servicekey, rank ) values( SEQ_TYADMIN_AUTH.NEXTVAL,'权限组删除(权限组管理)', 'OPgroupDelete','50',1);
+
+------------------------------------------------------------
+3) 添加关系：
+
+--.添加 渠道统计(副号码通讯信息) 权限
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='超级管理员' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='statchannelcallin'  and t.servicekey=50 ) ) ;
+
+
+--添加 权限组管理(操作员管理) 权限
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='超级管理员' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='OPgroupSearch'   and t.servicekey=50 ) ) ;
+
+--添加 权限组添加(权限组管理) 权限
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='超级管理员' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='OPgroupAdd'   and t.servicekey=50 ) ) ;
+
+--添加 权限组修改(权限组管理) 权限
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='超级管理员' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='OPgroupModify'   and t.servicekey=50 ) ) ;
+
+--添加 权限组删除(权限组管理) 权限
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='超级管理员' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='OPgroupDelete'   and t.servicekey=50 ) ) ;
+
+
+-----------------------------------------------------------------
+4) 删除不用的组：
+
+delete from TYADMIN_GROUP_AUTHS t where t.auth_id =(select id from tyadmin_authorities t where t.servicekey=50   and t.auth_method='managessmnnumbers');
+
+delete from TYADMIN_GROUP_AUTHS t where t.auth_id =(select id from tyadmin_authorities t where t.servicekey=50   and t.auth_method='operatorSearchManage');
+
+delete from TYADMIN_GROUP_AUTHS t where t.auth_id =(select id from tyadmin_authorities t where t.servicekey=50   and t.auth_method='downloadinfo');
+
+delete from TYADMIN_GROUP_AUTHS t where t.auth_id =(select id from tyadmin_authorities t where t.servicekey=50   and t.auth_method='downloadSMS');
+
+delete from tyadmin_authorities t where t.servicekey=50   and t.auth_method='managessmnnumbers';
+ 
+delete from tyadmin_authorities t where t.servicekey=50   and t.auth_method='operatorSearchManage' ; 
+
+delete from tyadmin_authorities t where t.servicekey=50   and t.auth_method='downloadinfo';
+
+delete from tyadmin_authorities t where t.servicekey=50   and t.auth_method='downloadSMS';
+------------------------------------------------------------
+5)给组名统一改名，方便权限管理功能显示：
+
+---权限改名sql:
+--1
+update tyadmin_authorities t set t.authority='经纪人管理(信息管理)',t.sectionid=1 ,t.rank=1 ,T.ORDERID=1  where t.auth_method='manageagent' and t.servicekey=50 ;
+--2
+update tyadmin_authorities t set t.authority='经纪人管理(编辑,绑定)' , t.sectionid=1, t.rank=2, T.PARENTID=(select id from tyadmin_authorities  where auth_method='manageagent' and servicekey=50) where t.auth_method='manageUsers' and t.servicekey=50 ;
+----3
+update tyadmin_authorities t set t.authority='经纪人管理(换绑、查看用户详情)',t.sectionid=1,t.rank=2 ,T.PARENTID=(select id from tyadmin_authorities  where auth_method='manageagent' and servicekey=50 ) where t.auth_method='queryssmn' and t.servicekey=50;
+--4
+update tyadmin_authorities t set t.authority='副号码管理(信息管理)' ,t.sectionid=1, t.rank=1 ,T.ORDERID=3 where t.auth_method='modifyssmnnumber' and t.servicekey=50;
+
+---5
+update tyadmin_authorities t set t.authority='语音查询(副号码通讯信息)' ,t.sectionid=3,t.rank=1 ,T.ORDERID=5 where t.auth_method='queryssmninfo' and t.servicekey=50;
+---6
+update tyadmin_authorities t set t.authority='渠道统计(副号码通讯信息)',t.sectionid=3,t.rank=1 ,T.ORDERID=7 where t.auth_method= 'statchannelcallin' and t.servicekey=50;
+
+----7
+update tyadmin_authorities t set t.authority='统计报表下载' ,t.sectionid=5,t.rank=1 ,T.ORDERID=9 where t.auth_method='queryinfo' and t.servicekey=50;
+----8
+update tyadmin_authorities t set t.authority='语音部分下载(统计报表下载)',t.sectionid=5,t.rank=2,T.PARENTID=(select id from tyadmin_authorities  where auth_method='queryinfo' and servicekey=50) where t.auth_method='downloadCDR' and t.servicekey=50;
+
+----9
+update tyadmin_authorities t set t.authority='通话统计' ,t.sectionid=7,t.rank=1,T.ORDERID=11 where t.auth_method='downloadCDRinfo' and t.servicekey=50 ;
+
+----10
+update tyadmin_authorities t set t.authority='密码修改(我的信息)' ,t.sectionid=9,t.rank=1,T.ORDERID=13 where t.auth_method='modifyoperatorinfo' and t.servicekey=50 ;
+----11
+update tyadmin_authorities t set t.authority='信息反馈(我的信息)',t.sectionid=9,t.rank=1, T.ORDERID=15 where t.auth_method='searchfeedback' and t.servicekey=50 ;
+
+----12
+update tyadmin_authorities t set t.authority='登录详情查询(操作员管理)' ,t.sectionid=11,t.rank=1,T.ORDERID=17  where t.auth_method='operatorloginsearch' and t.servicekey=50 ;
+---13
+update tyadmin_authorities t set t.authority='操作员管理(操作员管理)' ,t.sectionid=11,t.rank=1,T.ORDERID=19 where t.auth_method='operatorSearch' and t.servicekey=50 ;
+---14
+update tyadmin_authorities t set t.authority='架构管理(操作员管理)' ,t.sectionid=11,t.rank=1,T.ORDERID=21 where t.auth_method='levelManage' and t.servicekey=50 ;
+----15
+update tyadmin_authorities t set t.authority='密码重置(操作员管理)' ,t.sectionid=11,t.rank=1,T.ORDERID=23 where t.auth_method='resetpassword' and t.servicekey=50 ;
+----16
+update tyadmin_authorities t set t.authority='添加黑名单(操作员管理)' ,t.sectionid=11,t.rank=1,T.ORDERID=25 where t.auth_method='addblackcallnumber' and t.servicekey=50 ;
+---17
+update tyadmin_authorities t set t.authority='添加操作员(操作员管理)' ,t.sectionid=11,t.rank=2, T.PARENTID=(select id from tyadmin_authorities  where auth_method='operatorSearch' and servicekey=50 ) where t.auth_method='operatorAdd' and t.servicekey=50 ;
+---18
+update tyadmin_authorities t set t.authority='修改操作员(操作员管理)' ,t.sectionid=11,t.rank=2, T.PARENTID=(select id from tyadmin_authorities  where auth_method='operatorSearch' and  servicekey=50 )  where t.auth_method='operatorModify' and t.servicekey=50 ;
+----19
+update tyadmin_authorities t set t.authority='删除操作员(操作员管理)' ,t.sectionid=11,t.rank=2 ,T.PARENTID=(select id from tyadmin_authorities  where auth_method='operatorSearch' and  servicekey=50 ) where t.auth_method='operatorDelete' and t.servicekey=50 ;
+----20
+update tyadmin_authorities t set t.authority='权限组管理(操作员管理)' ,t.sectionid=11 ,t.rank=1 ,T.ORDERID=27 where t.auth_method='OPgroupSearch' and t.servicekey=50 ;
+----21
+update tyadmin_authorities t set t.authority='权限组添加(权限组管理)' ,t.sectionid=11 ,t.rank=2 ,T.PARENTID=(select id from tyadmin_authorities  where auth_method='OPgroupSearch' and servicekey=50 ) where t.auth_method='OPgroupAdd' and t.servicekey=50 ;
+----22
+update tyadmin_authorities t set t.authority='权限组修改(权限组管理)',t.sectionid=11,t.rank=2 ,T.PARENTID=(select id from tyadmin_authorities  where auth_method='OPgroupSearch' and servicekey=50 )  where t.auth_method='OPgroupModify' and t.servicekey=50 ;
+--23
+update tyadmin_authorities t set t.authority='权限组删除(权限组管理)',t.sectionid=11 ,t.rank=2 ,T.PARENTID=(select id from tyadmin_authorities  where auth_method='OPgroupSearch' and servicekey=50 )  where t.auth_method='OPgroupDelete' and t.servicekey=50 ;
+
+6)做个定时脚本，最好晚上执行一下，定时清理一下文件：
+	a) tomcat根目录下面的：temp文件夹
+	b)webapps\ssmn_adminweb_dc\exportOperatorFiles
+	c)webapps\ssmn_adminweb_dc\exportrecordFiles
+	c)webapps\ssmn_adminweb_dc\charImgs
+	
+--------------------------------------------------------------------------------------
+【版本号】1.2.1_PR2      【发布时间】2016-06-27    【发布人】李艳
+
+	
+(1)	主要功能说明   
+	区域级别，根据配置文件中的配置进行显示
+		
+(2)	Bug修复说明
+	
+
+(3)	兼容性
+    	jdk 1.5以上；
+    	tomcat 5.5.20以上；
+			
+
+(4)	程序更新：
+	1.2.1_PR2
+    
+(5)	文档更新
+
+(6) 	配置文件:servicename.prop文件添加项:
+	
+	#地区级别的显示（可以限制到公司级别）,多个公司之间用“|”分开，每个级别之间#用“,”分开,如果不指定，默认 事业部,战区	,片区,行动组,注：如果不指定，这样##配置： levelShow=
+
+	levelShow=天津,中原,事业部T,战区T,片区T,行动组T|天津,链家,事业部A,战区A,片区A,行动组A
+--------------------------------------------------------------------------------------
+【版本号】1.2.1_PR1      【发布时间】2016-05-31    【发布人】李艳
+
+	
+(1)	主要功能说明   
+	
+		
+(2)	Bug修复说明
+	1.修改在没有双呼的地方,客户呼入和APP呼出类型显示问题.
+
+(3)	兼容性
+    	jdk 1.5以上；
+    	tomcat 5.5.20以上；
+			
+
+(4)	程序更新：
+	1.2.1_PR1
+    
+(5)	文档更新
+
+(6) 	配置文件:servicename.prop文件添加项:
+	
+	#是否是双呼 0:关闭 1:打开
+	isDoubleCall=0
+--------------------------------------------------------------------------------------
+【版本号】1.2.1      【发布时间】2016-05-27    【发布人】李艳
+
+	
+(1)	主要功能说明   
+	1.信息反馈 其他公司管理账号可看到中原反馈的信息 修改为公司账号只可看本公司反馈信息
+
+	2.操作员管理账号可修改账号
+
+	3.语音统计查询 报表下取消翻页按钮
+
+	4.登录详情查询按钮位置修改
+
+		
+(2)	Bug修复说明
+	1.南京后台无法生成报表
+
+	2.登录详情问题，无登录次数，但是有听录音次数，不符合常规；登录详情点击进去无法显示详细听录音次数
+
+(3)	兼容性
+    	jdk 1.5以上；
+    	tomcat 5.5.20以上；
+			
+
+(4)	程序更新：
+	1.2.1
+    
+(5)	文档更新
+
+(6) 
+--------------------------------------------------------------------------------------
+【版本号】1.2.0      【发布时间】2016-05-09    【发布人】李艳
+
+	
+(1)	主要功能说明   
+	1. 新增架构管理
+	2. 操作员管理-登录详情查询，根据账号权限进行查询；查询条件增加战区 片区 分行
+	3. 统一后台版本，通话查询显示问题优化
+
+
+
+		
+(2)	Bug修复说明
+	1.添加架构管理功能
+
+			
+
+(3)	兼容性
+    	jdk 1.5以上；
+    	tomcat 5.5.20以上；
+			
+
+(4)	程序更新：
+	1.2.0
+    
+(5)	文档更新
+
+(6)  1.   给超级管理员 添加架构管理权限,执行sql:
+	1)
+	insert into tyadmin_authorities (id,authority, auth_method, servicekey, rank ) values( SEQ_TYADMIN_AUTH.NEXTVAL,'架构管理', 'levelManage','50',1);
+	2)
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='超级管理员' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='levelManage'   and t.servicekey=50 ) ) ;
+
+2.把操作员管理独立出来(可控制显示与不显示),执行下面的sql
+insert into tyadmin_authorities (id,authority, auth_method, servicekey, rank ) values( SEQ_TYADMIN_AUTH.NEXTVAL,'操作员管理', 'operatorSearchManage','50',1);
+
+
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select id from tyadmin_groups t where t.group_name='超级管理员' and t.servicekey=50  ), (select id from tyadmin_authorities t where t.auth_method='operatorSearchManage'   and t.servicekey=50 ) ) ;
+
+
+--------------------------------------------------------------------------------------
+【版本号】1.1.9_pr2         【发布时间】2016-04-25    【发布人】李艳
+
+	
+(1)	主要功能说明   
+
+		
+(2)	Bug修复说明
+	1. 登录详情查询未登录账号导出时数据不正确BUG
+	2. 天津移动平台语音查询数据异常BUG
+	3. 天津移动平台导出3天数据，通话类型不正确
+
+			
+
+(3)	兼容性
+    	jdk 1.5以上；
+    	tomcat 5.5.20以上；
+			
+
+(4)	程序更新：
+	1.1.9_pr2
+    
+(5)	文档更新
+	
+
+--------------------------------------------------------------------------------------
+【版本号】1.1.9          【发布时间】2016-04-05    【发布人】李艳
+
+	
+(1)	主要功能说明   
+	
+	1. 取消所有涉及短信的内容，包括统计，报表内容
+	2. 可查询到业主副号码
+	3. 通话统计功能，呼出标签显示优化
+
+		
+(2)	Bug修复说明
+			
+
+(3)	兼容性
+    	jdk 1.5以上；
+    	tomcat 5.5.20以上；
+			
+
+(4)	程序更新：
+	1.1.9
+    
+(5)	文档更新
+
+(6)	配置文件servicename.prop中添加配置项 dc_calltypes:
+
+	配置说明：　配置呼入呼出的显示名称，另配置几个呼出，通话统计中显示几种呼出类型,
+		　　多个值以"|"分隔，格式为数值:名称,数值与名称之间以":"分隔，
+　　　　　　　　　　如：1:业主呼入|2:客户呼入|3:PC呼出|4:APP呼出|5:直接呼出
+
+		　　dc_calltypes=1:业主呼入|2:客户呼入|3:PC呼出|4:APP呼出|5:直接呼出
+注：如果不需要则配置空,如下：
+	dc_calltypes=
+
+--------------------------------------------------------------------------------------
+【版本号】1.1.8          【发布时间】2016-03-29    【发布人】李艳
+
+	
+(1)	主要功能说明   
+	
+	1)配置文件中添加一项，配置渠道，渠道名字和ssmn_zy_channel表中的名字一样时候，ssmn_zy_user表中的ssmnnumber_type添加成1，
+
+	2) 双呼，呼入呼出类型判断 dc_calltype值来判断
+		1:业主呼入 2:客户呼入 3:PC呼出 4:APP呼出 5:直接呼出，,上面呼出统计的数，也要列出呼出类型
+		如果 dc_type =5时候，客户电话的取值： 需要去ssmn_dc_relation表中查询客户电话originalcalled和ownerid作为条件
+		
+(2)	Bug修复说明
+			
+
+(3)	兼容性
+    	jdk 1.5以上；
+    	tomcat 5.5.20以上；
+			
+
+(4)	程序更新：
+	1.1.8
+    
+(5)	文档更新
+
+(6)	1)检查ssmn_cdr表中是否存在 dc_calltype 字段，如果没有，执行下面语句:
+		alter table ssmn_cdr add (dc_calltype  NUMBER(1) default 2);
+
+	2)ssmn_zy_user 表中是否存在 ssmnnumber_type 字段,如果没有，执行下面语句:
+		alter table ssmn_zy_user add (ssmnnumber_type  NUMBER(1) default 0);
+	3)ssmn_zy_cancel_user 表中是否存在 ssmnnumber_type 字段,如果没有，执行下面语句:
+		alter table ssmn_zy_cancel_user add (ssmnnumber_type  NUMBER(1) default 0);
+
+	4)配置文件servicename.prop中添加配置项 channelNames,
+	说明：配置渠道名字，可配置多个，以“,”分隔，例：焦点,赶集，在此配置的渠道，对经纪人操作的时候，将ssmnnumber_type值置为1
+	如果不需要则配置空，如下：
+	channelNames=
+
+	5)检查 ssmn_zy_enablenumber表中是否有type字段,如果没有添加: 
+	alter table ssmn_zy_enablenumber t add (type NUMBER(1) default 0);
+
+--------------------------------------------------------------------------------------
+【版本号】1.1.7          【发布时间】2016-03-22    【发布人】李艳
+
+	
+(1)	主要功能说明   
+	
+	1. 解决刷新添加登录次数问题
+	2. 解决地址复制即可登录的BUG
+	3. 新增语音查询序号查询
+	4. 经纪人详情操作栏新增备注，可填写备注内容
+	5. 经纪人信息导出时，新增经纪人详情添加的备注内容
+
+
+		
+(2)	Bug修复说明
+			
+
+(3)	兼容性
+    	jdk 1.5以上；
+    	tomcat 5.5.20以上；
+			
+
+(4)	程序更新：
+	1.1.7
+    
+(5)	文档更新
+
+(6)	1)检查ssmn_zy_cancel_user表中是否存在modeid字段，如果没有，执行下面语句:
+		alter table ssmn_zy_cancel_user add (modeid NUMBER(10));
+
+	2)ssmn_zy_user 表添加 remark备注字段
+		alter table ssmn_zy_user add (remark VARCHAR2(512));
+	3)ssmn_zy_cancel_user 表添加 remark备注字段
+		alter table ssmn_zy_cancel_user add (remark VARCHAR2(512));
+
+--------------------------------------------------------------------------------------
+【版本号】1.1.6          【发布时间】2016-03-05    【发布人】李艳
+
+	
+(1)	主要功能说明   
+	
+	1. 报表导出时候如果isExcel2003开启（值为1），小于限制条数时，生成xls(2003)格式的excel，大于限制条数时，生成xlsx(2007)格式的excel; 
+
+		
+(2)	Bug修复说明
+			
+
+(3)	兼容性
+    	jdk 1.5以上；
+    	tomcat 5.5.20以上；
+			
+
+(4)	程序更新：
+	1.1.6
+    
+(5)	文档更新
+
+(6)	系统配置修改说明
+	servicename.prop文件中添加配置项开关：#说明：小于65536行的数据，生成xls(2003)格式 0:关闭 1打开
+	isExcel2003=1
+	
+	
+
+--------------------------------------------------------------------------------------
+【版本号】1.1.5          【发布时间】2016-02-18    【发布人】李艳
+
+	
+(1)	主要功能说明   
+	
+	1. 优化语音查询显示内容
+	2. 已听录音按钮颜色变化
+	3. 管理员账号登录详情，每次登录时间、听录音次数
+
+		
+(2)	Bug修复说明
+			
+
+(3)	兼容性
+    	jdk 1.5以上；
+    	tomcat 5.5.20以上；
+			
+
+(4)	程序更新：
+	1.1.3
+    
+(5)	文档更新
+
+(6)	系统配置修改说明
+
+	1)创建表ssmn_zy_level_channel
+------------------------sql---------------------------------
+-- Create table
+create table SSMN_ZY_LEVEL_CHANNEL
+(
+  ID        NUMBER(10) not null,
+  CHANNELID NUMBER(10),
+  LEVELID   NUMBER(10)
+)
+tablespace DASCOM_DATA
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 512K
+    next 512K
+    minextents 1
+    maxextents unlimited
+    pctincrease 0
+  );
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table SSMN_ZY_LEVEL_CHANNEL
+  add constraint PK_SSMN_ZY_LEVEL_CHANNEL primary key (ID)
+  using index 
+  tablespace DASCOM_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 512K
+    next 512K
+    minextents 1
+    maxextents unlimited
+    pctincrease 0
+  );
+ --序列
+ -- Create sequence 
+create sequence SEQ_SSMN_ZY_LEVEL_CHANNEL
+minvalue 1
+maxvalue 9999999998
+start with 1
+increment by 2
+cache 10;
+
+-----------------------------------------------------
+	做初始化(江苏和北京需要把　“天津”修改一下)sql: 
+	insert into ssmn_zy_level_channel select seq_ssmn_zy_level_channel.nextval, id ,(select id from ssmn_zy_level where provincecity='天津' 
+		and company='中原' and businessdepartment is null ) from ssmn_zy_channel
+	
+
+	2)创建表 ssmn_zy_level_mode表
+----------------------sql------------------------------------
+create table SSMN_ZY_LEVEL_MODE
+(
+  ID      NUMBER(10) not null,
+  MODELOW NUMBER(10),
+  LEVELID NUMBER(10) default -1
+)
+tablespace DASCOM_DATA
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 512K
+    next 512K
+    minextents 1
+    maxextents unlimited
+    pctincrease 0
+  );
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table SSMN_ZY_LEVEL_MODE
+  add constraint PK_SSMN_ZY_LEVEL_MODE primary key (ID)
+  using index 
+  tablespace DASCOM_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 512K
+    next 512K
+    minextents 1
+    maxextents unlimited
+    pctincrease 0
+  );
+  
+--序列
+-- Create sequence 
+create sequence SEQ_SSMN_ZY_LEVEL_MODE
+minvalue 1
+maxvalue 9999999999
+start with 1
+increment by 1
+cache 10;
+-------------------------------------------------------------
+	注：　天津的做初始化,其他地方不需要初始化(江苏和北京需要把　“天津”修改一下)
+	insert into ssmn_zy_level_mode values(SEQ_ssmn_zy_level_mode.Nextval,9001,(select id from ssmn_zy_level where provincecity='天津' 
+		and company='中原' and businessdepartment is null ))
+
+	3)ssmn_zy_user表中添加一个字段modeid ,sql:
+	alter table ssmn_zy_user add MODEID NUMBER(10);
+	注：　天津的对modeid字段做初始化，其他地方不需要做初始化
+	 update ssmn_zy_user set modeid = (select id from ssmn_zy_level_mode where modelow=9001 )
+	
+(7)	已知BUG
+	- 无。
+--------------------------------------------------------------------------------------
+【版本号】1.1.4          【发布时间】2015-12-24    【发布人】李艳
+
+	
+(1)	主要功能说明   
+	
+	1. 当用户信息发生变化时，往其他数据库中同步(现只在北京使用)
+	2. 修改功能：操作员只查询登录账号区域内的账号。(2016-01-11日修改)
+		
+(2)	Bug修复说明
+			
+
+(3)	兼容性
+    	jdk 1.5以上；
+    	tomcat 5.5.20以上；
+			
+
+(4)	程序更新：
+	1.1.3
+    
+(5)	文档更新
+
+(6)	系统配置修改说明
+
+	1)servicename.prop文件添加开关项　：recordUserChange
+	 0:关闭
+	 1:打开
+	注：此配置项只在北京打开，打开状态时，当用户信息发生变化时候，会往ssmn_zy_useroperation中写数据，用于同步其他数据库
+	
+(7)	已知BUG
+	- 无。
+--------------------------------------------------------------------------------------
+【版本号】1.1.3          【发布时间】2015-11-24    【发布人】李艳
+
+	
+(1)	主要功能说明   
+	
+	1. 新增添加黑名单功能
+	2. 根据客户需求优化了经纪人变更行动组时，原通话记录行动组信息变更为新行动组
+
+		
+(2)	Bug修复说明
+			
+
+(3)	兼容性
+    	jdk 1.5以上；
+    	tomcat 5.5.20以上；
+			
+
+(4)	程序更新：
+	1.1.3
+    
+(5)	文档更新
+
+(6)	系统配置修改说明
+
+	1)需要添加黑名单的权限(详细请见tyadminweb_create.sql),执行sql: 
+	insert into tyadmin_authorities (id,authority, auth_method, servicekey, rank ) values(SEQ_TYADMIN_AUTH.NEXTVAL,'添加黑名单(操作员管理)', 'addblackcallnumber','50',1);
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, (select t.group_id from tyadmin_operators t where t.servicekey='50' and t.openo='0000000000' ), SEQ_TYAdmin_AUTH.Currval);
+	
+	2)模板文档中添加文件：blacknumdealbatchtemp.xls，添加路径：\webapps\ssmn_adminweb_dc\exportExcelTemp\
+	
+	
+(7)	已知BUG
+	- 无。
+--------------------------------------------------------------------------------------
+【版本号】1.1.2          【发布时间】2015-10-20    【发布人】李艳
+
+	
+(1)	主要功能说明   
+	1. 新增查看分行账号登录详情
+	2. 语音查询界面优化，新增呼出查询统计
+	3. 来电统计新增呼出标签，统计呼出记录，日周月报表新增呼出记录
+	4. 优化操作员管理界面
+
+		
+(2)	Bug修复说明
+			
+
+(3)	兼容性
+    	jdk 1.5以上；
+    	tomcat 5.5.20以上；
+			
+
+(4)	程序更新：
+	1.1.2
+    
+(5)	文档更新
+
+(6)	系统配置修改说明
+	 需要执行sql: 
+	insert into tyadmin_authorities (id,authority, auth_method, servicekey, rank ) values( SEQ_TYADMIN_AUTH.NEXTVAL,'登录详情查询', 'operatorloginsearch','50',1);
+
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval,
+ (select id from tyadmin_groups where group_name='超级管理员' ), 
+(select id from tyadmin_authorities t where t.auth_method='operatorloginsearch' ) ) ;
+
+-- Create/Recreate indexes 
+create index PK_TYADMIN_LOGS1 on TYADMIN_LOGS (OPENO)
+  tablespace DASCOM_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 512K
+    next 512K
+    minextents 1
+    maxextents unlimited
+    pctincrease 0
+  );
+
+	
+	
+(7)	已知BUG
+	- 无。
+--------------------------------------------------------------------------------------
+【版本号】1.1.1          【发布时间】2015-08-25    【发布人】李艳
+
+	
+(1)	主要功能说明   
+	1. 新增语音查询查询项：呼入/呼出
+	2. 报表生成优化，统一到web1进行报表生成
+	3. 解决同一主副号通话记录显示2次问题
+	4. 优化语音查询时，查询以前的通话记录所对应的信息为当时绑定的信息
+	5. 优化批量操作：批量操作及批量绑定时，如无本片区号码，则选择本战区号码，无本战区号码选择本事业部号码，最后再选择公司空闲副号码
+		
+(2)	Bug修复说明
+			
+
+(3)	兼容性
+    	jdk 1.5以上；
+    	tomcat 5.5.20以上；
+			
+
+(4)	程序更新：
+	1.1.1
+    
+(5)	文档更新
+
+(6)	系统配置修改说明
+	1)cfg.properties配置文件添加配置项：
+		语音打包文件生成路径：zipdirpath
+
+	2)创建表：ssmn_zy_cdrsms_user　,参考数据库设计文档《SSMN数据库设计_PC38.doc》
+
+	3)创建两个触发器：
+
+	4)5.初始ssmn_zy_cdrsms_user表
+	2),3),4)项，创建脚本在 SSMNTable_Create_dc_v4.0.SQL
+	
+	
+(7)	已知BUG
+	- 无。
+--------------------------------------------------------------------------------------
+【版本号】1.1.0          【发布时间】2015-07-16    【发布人】李艳
+
+	
+(1)	主要功能说明   
+	 1. 改造批量操作功能，支持客户每月提供的无副号码变更内容
+	2. 批量操作功能，上传报表内容中，手机号码规格限定，限定为11位数字，换行及空格自动删减
+	3. 优化编辑经纪人主号码后，信息记录及通话记录查询
+
+	
+		
+(2)	Bug修复说明
+			
+
+(3)	兼容性
+    	jdk 1.5以上；
+    	tomcat 5.5.20以上；
+			
+
+(4)	程序更新：
+	1.1.0
+    
+(5)	文档更新
+
+(6)	系统配置修改说明
+	
+(7)	已知BUG
+	- 无。
+--------------------------------------------------------------------------------------
+【版本号】1.0.9          【发布时间】2015-06-23    【发布人】李艳
+
+	
+(1)	主要功能说明   
+	 excel表格修改为2007版本，解决通话记录超过65536条记录无法生成报表问题
+
+	
+		
+(2)	Bug修复说明
+			
+
+(3)	兼容性
+    	jdk 1.5以上；
+    	tomcat 5.5.20以上；
+			
+
+(4)	程序更新：
+	1.0.9
+    
+(5)	文档更新
+
+(6)	系统配置修改说明
+	
+(7)	已知BUG
+	- 无。
+--------------------------------------------------------------------------------------
+【版本号】1.0.8          【发布时间】2015-06-04    【发布人】李艳
+
+	
+(1)	主要功能说明   
+	1. 优化批量绑定、批量解绑样式
+	2. 优化语音、短信导出报表样式
+	3. 新增用户反馈功能
+	4. 新增批量更换渠道功能
+	5. 统计报表显示优化
+	6. 其他操作优化
+	
+		
+(2)	Bug修复说明
+			
+
+(3)	兼容性
+    	jdk 1.5以上；
+    	tomcat 5.5.20以上；
+			
+
+(4)	程序更新：
+	1.0.8
+    
+(5)	文档更新
+
+(6)	系统配置修改说明
+	1)添加信息反馈表
+	2)添加用户反馈的权限
+
+	建表脚本在文档：　SSMNTable_Create_v5.24.SQL
+
+
+(7)	已知BUG
+	- 无。
+--------------------------------------------------------------------------------------
+【版本号】1.0.7          【发布时间】2015-05-21    【发布人】李艳
+
+	
+(1)	主要功能说明   
+	1.语音查询性能优化
+	2.统计报表模块增加月报表下载
+	3.经纪人管理页面新增员工编号序列
+		1)首页表格显示在姓名后面
+		2)新建经纪人，员工编号增加再经济人姓名下
+		3)编辑，经纪人姓名下增加员工编号
+		4)经纪人信息导出表格，经纪人姓名后增加员工编号
+		5)批量绑定，经纪人姓名后增加员工编号
+		6)查询条件，增加员工编号，放姓名后面
+	
+		
+(2)	Bug修复说明
+			
+
+(3)	兼容性
+    	jdk 1.5以上；
+    	tomcat 5.5.20以上；
+	
+	IE 6，7，8
+		
+
+(4)	程序更新：
+	1.0.7
+    
+(5)	文档更新
+
+(6)	系统配置修改说明
+	1)配置文件servicename.prop中添加语音文件映射路径配置项：
+
+	#语音文件映射路径
+	cdrurl=http://192.168.92.245/voice
+
+	2)由于ssmn_cdr表查询速度慢的，修改数据库配置,并重启数据库:
+	
+	alter system set workarea_size_policy=MANUAL scope=spfile;
+	
+	3)生成报表的时候，由于缓存不够，导致生成周报表和月报表时候失败,代码中添加释放内存的时间
+	
+	同时，修改tomcat配置文件,并重启动tomcat： (JAVA_OPTS最大值为总内在了的1/4，现内存为2G,所以JAVA_OPTS调成512是合理的）
+
+	JAVA_OPTS变量的最大值从128改为512
+	
+
+	4）给ssmn_zy_user表添加员工编号字段empno,修改文档《SSMN数据库设计_PC35.doc》
+	alter table ssmn_zy_user add empno varchar2(32) ;
+	alter table ssmn_zy_cancel_user add empno varchar2(32) ;
+	
+	5)并将初始化员工编号的sql导入，sql文件为: 副号码经纪人员工编号拼配sql.txt
+
+
+
+(7)	已知BUG
+	- 无。
+--------------------------------------------------------------------------------------
+【版本号】1.0.6          【发布时间】2015-04-23    【发布人】李艳
+
+	
+(1)	主要功能说明   
+	1.
+	
+		
+(2)	Bug修复说明
+		
+
+(3)	兼容性
+    	jdk 1.5以上；
+    	tomcat 5.5.20以上；
+	
+	IE 6，7，8
+		
+
+(4)	程序更新：
+	
+    
+(5)	文档更新
+
+(6)	系统配置修改说明
+	1)把批量绑定、批量解绑模板文件夹exportExcelTemp，添加到工程中，路径为：webapps/ssmn_adminweb_dc/
+	
+2)统一分组的名称：tyadmin_groups组，规定死，分为：分行行动组，片区组，　战区组（级别同片区组），事业部组（级别同片区组）
+
+
+
+3)添加操作员管理权限，sql如下：
+	insert into tyadmin_authorities (id,authority, auth_method, servicekey, rank ) values( SEQ_TYADMIN_AUTH.NEXTVAL,'操作员管理', 'operatorSearch','50',1);
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select group_id from tyadmin_operators where  openo  ='dascom' ), (select id from tyadmin_authorities t where t.auth_method='operatorSearch' ) ) ;
+
+
+insert into tyadmin_authorities (id,authority, auth_method, servicekey, rank ) values( SEQ_TYADMIN_AUTH.NEXTVAL,'添加操作员(操作员管理)', 'operatorAdd','50',1);
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select group_id from tyadmin_operators where  openo  ='dascom' ), (select id from tyadmin_authorities t where t.auth_method='operatorAdd' ) ) ;
+
+insert into tyadmin_authorities (id,authority, auth_method, servicekey, rank ) values( SEQ_TYADMIN_AUTH.NEXTVAL,'修改操作员(操作员管理)', 'operatorModify','50',1);
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select group_id from tyadmin_operators where  openo  ='dascom' ), (select id from tyadmin_authorities t where t.auth_method='operatorModify' ) ) ;
+
+insert into tyadmin_authorities (id,authority, auth_method, servicekey, rank ) values( SEQ_TYADMIN_AUTH.NEXTVAL,'删除操作员(操作员管理)', 'operatorDelete','50',1);
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, 
+(select group_id from tyadmin_operators where  openo  ='dascom' ), (select id from tyadmin_authorities t where t.auth_method='operatorDelete' ) ) ;
+
+4)把新的分组添加权限：分行行动组，片区组，　战区组（级别同片区组），事业部组（级别同片区组），sql如下，id为片区组的groupid
+
+insert into TYADMIN_GROUP_AUTHS  (id,GROUP_ID,AUTH_ID)  select SEQ_TYAdmin_GROUP_AUTH.Nextval,10000000042, g.auth_id  from tyadmin_group_auths g where g.group_id='10000000044' 
+
+
+
+(7)	已知BUG
+	- 无。
+--------------------------------------------------------------------------------------
+【版本号】1.0.5          【发布时间】2015-04-09    【发布人】李艳
+
+	
+(1)	主要功能说明   
+	1. 副号码管理功能：副号码以片区为单位进行划分，每个片区内副号码只能绑定给片区内的经纪人，无法绑定给另外某个片区的经纪人
+2. 新增副号码管理界面：显示副号码信息（副号码、所属事业部、战区、片区、分行、状态）；查询条件（事业部、战区、片区、分行、状态、副号码）；副号码信息编辑，可对已标识和未标识的未使用的副号码进行编辑，可编辑副号码所属事业部、战区、片区、分行
+3. 副号码绑定级别权限：根据不同的管理员账号登录，可针对不同所属级别的副号码进行分配
+4. 经纪人管理界面调整：点击经纪人信息可进入二级界面，显示经纪人当前信息及历史信息；仅运营中心账号可在二级界面对经纪人副号码进行解绑、换绑、变更渠道操作
+5. 针对经纪人可进行新增副号码操作，优先选取片区内副号码，并可对副号码进行编辑
+6. 优化进行新建经纪人副号码选择问题，优先选取片区内副号码，并可对副号码进行编辑
+	
+		
+(2)	Bug修复说明
+		1.优化登录后台后长时间不进行操作后，后台必须刷新才可进行操作
+
+(3)	兼容性
+    	jdk 1.5以上；
+    	tomcat 5.5.20以上；
+	
+	IE 6，7，8
+		
+
+(4)	程序更新：
+	
+    
+(5)	文档更新
+
+(6)	系统配置修改说明
+	 1) 经纪人管理编辑操作添加权限，只给管理员	
+	   insert into tyadmin_authorities (id,authority, auth_method, servicekey, rank ) values( SEQ_TYADMIN_AUTH.NEXTVAL,'经纪人管理(编辑,绑定等)', 'manageUsers','50',1);
+	   insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, (select t.group_id from tyadmin_operators t where t.servicekey='50' and t.openo='0000000000' ), SEQ_TYAdmin_AUTH.Currval);
+	2)副号码管理重新添加权限,只给管理员	
+	insert into tyadmin_authorities (id,authority, auth_method, servicekey, rank ) values( SEQ_TYADMIN_AUTH.NEXTVAL,'副号码管理', 'modifyssmnnumber','50',1);
+insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, (select group_id from tyadmin_operators where  openo  ='0000000000' ), (select id from tyadmin_authorities t where t.auth_method='modifyssmnnumber' ) ) ;
+	3)由于该模块与计费触发器有冲突，需要修改ssmn_user表中的触发器TRG_BILL_SSMN_USER
+	　加了一行判断， if ((:old.sub_manner != 0) or (:new.sub_manner != 0)) 
+	触发器代码存在文件：　TRG_BILL_SSMN_USER.txt
+	4)创建副号码池表：　ssmn_zy_enablenumber 
+	执行脚本存在文件：SSMN_ZY_ENABLENUMBER.txt
+	5)初始化号码池,执行sql:
+	insert into ssmn_zy_enablenumber  (select distinct(ssmnnumber),1,'022', levelid from ssmn_zy_user)
+	6)配置文件 servicename.prop，添加分配副号码的区域控制：
+		#分配副号码的级别: 1:省市 2:公司 3:事业部 4:战区 5:片区 6:行动组
+		matchNumberLevel=5
+
+(7)	已知BUG
+	- 无。
+--------------------------------------------------------------------------------------
+【版本号】1.0.4          【发布时间】2015-03-27    【发布人】李艳
+
+	
+(1)	主要功能说明   
+	1.经纪人解绑某副号码后，可查询到该经纪人绑定该副号码时的通话记录（通话日期、通话开始时间、通话结束时间、通话时长、来电号码、录音在线收听）
+	2.查询结果显示的渠道来电统计表格，新增未接来电及已接来电数据
+	3.针对运营中心账号新增重置密码，运营中心可给各账号重置密码
+	
+		
+(2)	Bug修复说明
+		1.优化登录后台后长时间不进行操作后，后台必须刷新才可进行操作
+
+(3)	兼容性
+    	jdk 1.5以上；
+    	tomcat 5.5.20以上；
+	
+	IE 6，7，8
+		
+
+(4)	程序更新：
+	
+    
+(5)	文档更新
+
+(6)	系统配置修改说明
+	  数据库先给(3)添加权限，只给管理员添加
+	   insert into tyadmin_authorities (id,authority, auth_method, servicekey, rank ) values(SEQ_TYADMIN_AUTH.NEXTVAL,'密码重置(我的信息)', 'resetpassword','50',1);
+	   insert into TYADMIN_GROUP_AUTHS (ID, GROUP_ID, AUTH_ID) values(SEQ_TYAdmin_GROUP_AUTH.Nextval, (select t.group_id from tyadmin_operators t where t.servicekey='50' and t.openo='0000000000' ), SEQ_TYAdmin_AUTH.Currval);
+	
+(7)	已知BUG
+	- 无。
+	--------------------------------------------------------------------------------------
+【版本号】1.0.5          【发布时间】2015-04-08    【发布人】李艳
+
+	
+(1)	主要功能说明   
+	1.添加号码池
+	2.修改副号码管理、经纪人管理功能。
+		
+(2)	Bug修复说明
+		-无
+
+(3)	兼容性
+    	jdk 1.5以上；
+    	tomcat 5.5.20以上；
+	
+	IE 6，7，8
+		
+
+(4)	程序更新：
+	
+    
+(5)	文档更新
+
+(6)	系统配置修改说明
+	 
+	
+(7)	已知BUG
+	- 无。
+	
+--------------------------------------------------------------------------------------
+【版本号】1.0.3          【发布时间】2015-03-10    【发布人】李艳
+
+	
+(1)	主要功能说明   
+	1.添加副号码信息导出功能。
+	2.来电统计添加“总计”字段，并降序排序，包括定时任务生成的报表，也添加“总计”字段
+		
+(2)	Bug修复说明
+		-无
+
+(3)	兼容性
+    	jdk 1.5以上；
+    	tomcat 5.5.20以上；
+	
+	IE 6，7，8
+		
+
+(4)	程序更新：
+	
+    
+(5)	文档更新
+
+(6)	系统配置修改说明
+	 
+	
+(7)	已知BUG
+	- 无。
+
+--------------------------------------------------------------------------------------
+【版本号】1.0.2          【发布时间】2015-02-27    【发布人】王枫颖
+
+	
+(1)	主要功能说明   
+	1.添加经纪人管理功能
+	2.将用户的等级单独使用一个表保存，修改程序中设计等级的查询方式
+		
+(2)	Bug修复说明
+		-无
+
+(3)	兼容性
+    	jdk 1.5以上；
+    	tomcat 5.5.20以上；
+	
+	IE 6，7，8
+		
+
+(4)	程序更新：
+	
+    
+(5)	文档更新
+
+(6)	系统配置修改说明
+	 
+	
+(7)	已知BUG
+	- 无。
+
+--------------------------------------------------------------------------------------
+【版本号】1.0.1_PR1          【发布时间】2014-10-22    【发布人】李艳
+
+	
+(1)	主要功能说明   
+	1.副号码信息管理
+	2.副号码通信信息管理
+		
+(2)	Bug修复说明
+		-无
+
+(3)	兼容性
+    	jdk 1.5以上；
+    	tomcat 5.5.20以上；
+	
+	IE 6，7，8
+		
+
+(4)	程序更新：
+	 1.用户分级别，查询功能，都是根据登录操作员的级别筛选用户信息的。
+	
+    
+(5)	文档更新
+
+(6)	系统配置修改说明
+	 
+	
+(7)	已知BUG
+	- 无。
+
+--------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------
+【版本号】1.0.0_PR1          【发布时间】2014-9-3    【发布人】王枫颖
+
+	
+(1)	主要功能说明   
+	1.副号码信息管理
+	2.副号码通信信息管理
+		
+(2)	Bug修复说明
+		-无
+
+(3)	兼容性
+    	jdk 1.5以上；
+    	tomcat 5.5.20以上；
+	
+	IE 6，7，8
+		
+
+(4)	程序更新：
+    
+(5)	文档更新
+
+(6)	系统配置修改说明
+	1.servicename.prop 用于配置系统名称、不用修改
+	2、cfg.properties文件
+         #页面可下载的统计报表和录音记录的天数。目前配置下载最近7天的文件
+         download_interval=7
+         #通话录音文件的存放路径，填写到每日文件夹的上一级
+         audiopath=D:/test/
+	3、quartz_job.xml  用于配置定时任务，每天凌晨1点开始统计生成前一天的报表和打包。已配置好不用修改
+	
+(7)	已知BUG
+	- 无。
+
+--------------------------------------------------------------------------------------

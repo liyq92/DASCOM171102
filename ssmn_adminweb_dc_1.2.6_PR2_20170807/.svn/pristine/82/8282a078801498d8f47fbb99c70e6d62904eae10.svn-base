@@ -1,0 +1,21 @@
+<style type="text/css">
+<!--body, table {font-size:9pt;LINE-HEIGHT: 14pt; font-family: ËÎÌו; 
+a {  color: #4C5780;TEXT-DECORATION: none; font-size:12px }
+a:link {COLOR: #FFFFFF;text-decoration: none;font-size:12px}
+a:visited { COLOR: #FFFFFF;TEXT-DECORATION: none;font-size:12px}
+a:hover { COLOR: #000000; background-color: #}
+BODY
+{scrollbar-face-color:CDD5D7; scrollbar-shadow-color:A0B8BA; 
+scrollbar-highlight-color:ffffff; scrollbar-3dlight-color:729B9F; 
+scrollbar-darkshadow-color:647E81; scrollbar-track-color:D8DDDD; 
+scrollbar-arrow-color:FFFFFF;}
+
+
+.td10 {	color:#FF0000; }
+
+select { background-color: #ffffff; border: 1px #C8C6BD solid}textarea  { background-color: #EDECE8 ; border: #B6B0A3; border-style: solid; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px}
+
+option { color: #504E43 }.td03 {  background-color: #EDECE8; border: #CBC9BC; border-style: solid; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px}
+.input{  border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; background-color: #E4E6EE}
+-->
+</style>

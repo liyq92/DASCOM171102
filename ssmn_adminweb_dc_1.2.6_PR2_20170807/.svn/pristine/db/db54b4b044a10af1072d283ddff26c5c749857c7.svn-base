@@ -1,0 +1,77 @@
+@CHARSET "utf-8";
+/*本CSS文件主要是为了控制列表的样式而写*/
+/*表头*/
+tr.bannerstyle {
+	height: 30px;;
+	font-size: 12px;
+	font-weight:bolder;
+	color: #575757;
+	background-color: #e3edf0;
+	text-align: center;
+}
+/*列表*/
+tr.liststyle {
+	height: 25px;
+	font-size: 12px;
+	text-align: center;
+}
+  tr.on{
+  background-color:#f5f5f5;
+  cursor:pointer;
+ }
+  tr.off{
+  background-color:#ffffff;
+ } 
+/*链接字体*/
+.txt {
+	font-size:12px;
+	color: #2e9fc3;
+	padding:6px 0px 6px 6px;
+}
+/*链接样式*/
+a:link {
+	font-size:12px;
+	text-decoration: none;
+}
+a:visited {
+	font-size:12px;
+	text-decoration: none;
+}
+a:hover {
+	font-size:12px;
+	color: #A5C8FC;
+}
+a:active {
+	font-size:12px;
+	text-decoration: none;
+}
+/*按钮样式*/
+.btnstyle {
+	background: url(../images/btnbg.png); 
+	border: 0px; 
+	width: 58px; 
+	height: 28px;
+	cursor: pointer;
+	padding:0px 0px 5px 0px; 
+}
+/*长按钮样式，6个字*/
+.btnstyle_6 {
+	background: url(../images/btnbg_6.png); 
+	border: 0px; 
+	width: 119px; 
+	height: 28px;
+	cursor: pointer;
+	padding:0px 0px 5px 0px; 
+}
+
+
+/*输入框样式*/
+.inputcss{
+ border: 1px solid;
+ border-left-color:#555555;
+ border-top-color:#555555;
+ border-bottom-color:#dddddd;
+ border-right-color:#dddddd;
+ width: 150px;
+ height: 15px;
+}
